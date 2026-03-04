@@ -1,16 +1,18 @@
-## Hi there 👋
+# 💫 About Me:
+# Hi, I'm Leomar 👋<br><br>IT Support Engineer based in New York City with 8+ years of experience in IT support, IT operations, and enterprise workplace technology. I specialize in endpoint management, SaaS administration, identity systems, and delivering high-quality technical support across macOS and Windows environments.<br><br>My work focuses on building reliable workplace technology environments, improving operational processes, and supporting modern collaboration tools that help teams stay productive.<br><br>---<br><br>## 🔧 Technical Skills<br><br>### Endpoint & Device Management<br>- macOS<br>- Windows 10/11<br>- Microsoft Intune<br>- Kandji<br>- JAMF<br>- Mobile Device Management (MDM)<br><br>### Identity & SaaS Administration<br>- Google Workspace<br>- Entra ID (Azure AD)<br>- Single Sign-On (SSO)<br>- Multi-Factor Authentication (MFA)<br>- SaaS lifecycle management<br><br>### IT Operations<br>- IT Service Management (ITSM)<br>- Ticket lifecycle management<br>- Incident response<br>- Asset lifecycle management<br>- New hire onboarding and provisioning<br><br>### Infrastructure & Networking<br>- Wired and wireless networking<br>- Network switches and firewalls<br>- MDF / IDF environments<br>- Rack and stack<br>- Patch panels and cabling<br>- Server hardware troubleshooting<br><br>### Collaboration & AV Systems<br>- Zoom Rooms<br>- Conference room AV systems<br>- Hybrid meeting infrastructure<br>- Executive meeting support<br>- Event technology support<br><br>---<br><br>## 📊 Areas of Focus<br><br>- IT Operations & Support Engineering<br>- Workplace Technology<br>- Endpoint Security & Device Management<br>- IT Automation & Process Improvement<br>- Technical Documentation<br>- Asset & Lifecycle Management<br><br>---<br><br>## 📁 Projects (In Progress)<br><br>I’m currently working on building repositories related to:<br><br>- IT onboarding automation<br>- Helpdesk documentation and runbooks<br>- Endpoint management scripts<br>- IT operations workflows<br>- Troubleshooting guides for AV and collaboration systems<br><br>---<br><br>## 📫 Connect With Me<br><br>LinkedIn  <br>linkedin.com/in/leomargrullon<br><br>Email  <br>leomar02@gmail.com<br><br>Location  <br>New York City
 
-<!--
-**leomar02/leomar02** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Here are some ideas to get you started:
+## 🌐 Socials:
+[![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:leomar02@gmail.com) 
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+# 💻 Tech Stack:
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Windows Terminal](https://img.shields.io/badge/Windows%20Terminal-%234D4D4D.svg?style=for-the-badge&logo=windows-terminal&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white) ![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white) ![Adobe](https://img.shields.io/badge/adobe-%23FF0000.svg?style=for-the-badge&logo=adobe&logoColor=white) ![Adobe Photoshop](https://img.shields.io/badge/adobe%20photoshop-%2331A8FF.svg?style=for-the-badge&logo=adobe%20photoshop&logoColor=white) ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white)
+# 📊 GitHub Stats:
+![](https://github-readme-stats.vercel.app/api?username=leomar02&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
+![](https://nirzak-streak-stats.vercel.app/?user=leomar02&theme=dark&hide_border=false)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=leomar02&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
+
+---
+[![](https://visitcount.itsvg.in/api?id=leomar02&icon=0&color=0)](https://visitcount.itsvg.in)
+
+<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
