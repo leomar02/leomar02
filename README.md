@@ -28,8 +28,12 @@ Hybrid meeting infrastructure, executive support
 
 📁 Projects
 ITSM Metrics Dashboard — paste a Jira/Freshservice/ServiceNow export, get SLA compliance, category breakdowns, and an AI-generated executive summary in seconds. Live demo →
-
 Currently building out more tools around IT automation and operational reporting.
+
+📫 Connect With Me
+LinkedIn: linkedin.com/in/leomargrullon
+Email: leomar02@gmail.com
+Location: Brooklyn, NY
 
 ## 🌐 Socials:
 [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:leomar02@gmail.com) 
