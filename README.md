@@ -1,6 +1,37 @@
-# 💫 About Me:
-# Hi, I'm Leo 👋<br><br>IT Support Engineer based in New York City with 8+ years of experience in IT support, IT operations, and enterprise workplace technology. I specialize in endpoint management, SaaS administration, identity systems, and delivering high-quality technical support across macOS and Windows environments.<br><br>My work focuses on building reliable workplace technology environments, improving operational processes, and supporting modern collaboration tools that help teams stay productive.<br><br>---<br><br>## 🔧 Technical Skills<br><br>### Endpoint & Device Management<br>- macOS<br>- Windows 10/11<br>- Microsoft Intune<br>- Kandji<br>- JAMF<br>- Mobile Device Management (MDM)<br><br>### Identity & SaaS Administration<br>- Google Workspace<br>- Entra ID (Azure AD)<br>- Single Sign-On (SSO)<br>- Multi-Factor Authentication (MFA)<br>- SaaS lifecycle management<br><br>### IT Operations<br>- IT Service Management (ITSM)<br>- Ticket lifecycle management<br>- Incident response<br>- Asset lifecycle management<br>- New hire onboarding and provisioning<br><br>### Infrastructure & Networking<br>- Wired and wireless networking<br>- Network switches and firewalls<br>- MDF / IDF environments<br>- Rack and stack<br>- Patch panels and cabling<br>- Server hardware troubleshooting<br><br>### Collaboration & AV Systems<br>- Zoom Rooms<br>- Conference room AV systems<br>- Hybrid meeting infrastructure<br>- Executive meeting support<br>- Event technology support<br><br>---<br><br>## 📊 Areas of Focus<br><br>- IT Operations & Support Engineering<br>- Workplace Technology<br>- Endpoint Security & Device Management<br>- IT Automation & Process Improvement<br>- Technical Documentation<br>- Asset & Lifecycle Management<br><br>---<br><br>## 📁 Projects (In Progress)<br><br>I’m currently working on building repositories related to:<br><br>- IT onboarding automation<br>- Helpdesk documentation and runbooks<br>- Endpoint management scripts<br>- IT operations workflows<br>- Troubleshooting guides for AV and collaboration systems<br><br>---<br><br>## 📫 Connect With Me<br><br>LinkedIn  <br>linkedin.com/in/leomargrullon<br><br>Email  <br>leomar02@gmail.com<br><br>Location  <br>New York City
+💫 About Me
+Hi, I'm Leo. IT Manager based in Brooklyn, NY with 10+ years in enterprise IT operations, infrastructure, and workplace technology. Most recently led a distributed IT team supporting 1,300+ employees across global offices, hitting 95%+ SLA attainment and cutting support tickets 25% by building out a Confluence knowledge base.
 
+I like fixing things that are actually broken, not just tickets. That's why I built the project below: a tool that turns raw ITSM ticket exports into an executive-ready report in seconds instead of the hour it usually takes someone to pull together manually.
+
+
+🔧 Technical Skills
+Endpoint & Device Management
+macOS / Windows 10/11
+Microsoft Intune, Kandji, Automox
+Mobile Device Management (MDM)
+Identity & SaaS Administration
+Active Directory, Entra ID (Azure AD)
+Google Workspace / Google SSO
+SSO, MFA, SaaS lifecycle management
+Okta (in progress: Certified Professional → Certified Administrator)
+IT Operations & Compliance
+ITSM: Jira, ServiceNow, Confluence
+SOC 2 and ISO 27001 audit management
+Incident response and root cause resolution
+Asset lifecycle management, onboarding/offboarding at scale
+Infrastructure & Networking
+Wired and wireless networking, switches, firewalls
+MDF / IDF environments, rack and stack
+Server hardware troubleshooting
+Collaboration & AV Systems
+Zoom Rooms, conference room AV
+Hybrid meeting infrastructure, executive support
+
+
+📁 Projects
+ITSM Metrics Dashboard — paste a Jira/Freshservice/ServiceNow export, get SLA compliance, category breakdowns, and an AI-generated executive summary in seconds. Live demo →
+
+Currently building out more tools around IT automation and operational reporting.
 
 ## 🌐 Socials:
 [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:leomar02@gmail.com) 
