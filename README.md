@@ -1,6 +1,9 @@
-💫 About Me
+# 💫 About Me
+
 Hi, I'm Leo. IT Manager based in Brooklyn, NY with 10+ years in enterprise IT operations, infrastructure, and workplace technology. 
 I like fixing things that are actually broken, not just tickets. 
+
+---
 
 ## 🔧 Technical Skills
 
