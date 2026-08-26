@@ -2,28 +2,33 @@
 Hi, I'm Leo. IT Manager based in Brooklyn, NY with 10+ years in enterprise IT operations, infrastructure, and workplace technology. 
 I like fixing things that are actually broken, not just tickets. 
 
-🔧 Technical Skills
-Endpoint & Device Management
-macOS / Windows 10/11
-Microsoft Intune, Kandji, Automox
-Mobile Device Management (MDM)
-Identity & SaaS Administration
-Active Directory, Entra ID (Azure AD)
-Google Workspace / Google SSO
-SSO, MFA, SaaS lifecycle management
-Okta (in progress: Certified Professional → Certified Administrator)
-IT Operations & Compliance
-ITSM: Jira, ServiceNow, Confluence
-SOC 2 and ISO 27001 audit management
-Incident response and root cause resolution
-Asset lifecycle management, onboarding/offboarding at scale
-Infrastructure & Networking
-Wired and wireless networking, switches, firewalls
-MDF / IDF environments, rack and stack
-Server hardware troubleshooting
-Collaboration & AV Systems
-Zoom Rooms, conference room AV
-Hybrid meeting infrastructure, executive support
+## 🔧 Technical Skills
+
+### Endpoint & Device Management
+- macOS / Windows 10/11
+- Microsoft Intune, Kandji, Automox
+- Mobile Device Management (MDM)
+
+### Identity & SaaS Administration
+- Active Directory, Entra ID (Azure AD)
+- Google Workspace / Google SSO
+- SSO, MFA, SaaS lifecycle management
+- Okta (in progress: Certified Professional → Certified Administrator)
+
+### IT Operations & Compliance
+- ITSM: Jira, ServiceNow, Confluence
+- SOC 2 and ISO 27001 audit management
+- Incident response and root cause resolution
+- Asset lifecycle management, onboarding/offboarding at scale
+
+### Infrastructure & Networking
+- Wired and wireless networking, switches, firewalls
+- MDF / IDF environments, rack and stack
+- Server hardware troubleshooting
+
+### Collaboration & AV Systems
+- Zoom Rooms, conference room AV
+- Hybrid meeting infrastructure, executive support
 
 
 📁 Projects
