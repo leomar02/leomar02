@@ -1,8 +1,6 @@
 💫 About Me
-Hi, I'm Leo. IT Manager based in Brooklyn, NY with 10+ years in enterprise IT operations, infrastructure, and workplace technology. Most recently led a distributed IT team supporting 1,300+ employees across global offices, hitting 95%+ SLA attainment and cutting support tickets 25% by building out a Confluence knowledge base.
-
-I like fixing things that are actually broken, not just tickets. That's why I built the project below: a tool that turns raw ITSM ticket exports into an executive-ready report in seconds instead of the hour it usually takes someone to pull together manually.
-
+Hi, I'm Leo. IT Manager based in Brooklyn, NY with 10+ years in enterprise IT operations, infrastructure, and workplace technology. 
+I like fixing things that are actually broken, not just tickets. 
 
 🔧 Technical Skills
 Endpoint & Device Management
