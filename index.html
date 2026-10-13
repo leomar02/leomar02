@@ -51,7 +51,9 @@ a { color: inherit; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .wrap { max-width: 1080px; margin-inline: auto; padding-inline: 20px; }
 section { padding-block: 96px; }
-.alt { background: var(--bg-alt); }
+.alt { background: linear-gradient(to bottom, var(--bg), var(--bg-alt) 22%, var(--bg-alt) 78%, var(--bg)); }
+/* scroll flow: JS sets opacity/transform on each section's content as it enters and leaves the viewport */
+.flow { will-change: opacity, transform; }
 .eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); margin: 0 0 14px; }
 h2 { font: 400 clamp(2.2rem, 5vw, 3.4rem)/1.05 var(--font-display); margin: 0 0 24px; text-wrap: balance; letter-spacing: -.01em; }
 p { margin: 0 0 1em; max-width: 62ch; }
@@ -236,7 +238,7 @@ html.locked { overflow: hidden; }
 </nav>
 
 <header class="hero" id="top">
-  <div class="wrap">
+  <div class="wrap flow" data-flow="out">
     <p class="eyebrow">We're getting married</p>
     <h1>Leo <em>&amp;</em><br>Vanessa</h1>
     <div class="hero-meta">
@@ -255,7 +257,7 @@ html.locked { overflow: hidden; }
 </header>
 
 <section class="alt" id="story">
-  <div class="wrap story">
+  <div class="flow wrap story">
     <div>
       <p class="eyebrow">Our story</p>
       <h2>Met on a rainy platform. Stayed for the coffee.</h2>
@@ -267,7 +269,7 @@ html.locked { overflow: hidden; }
 </section>
 
 <section id="day">
-  <div class="wrap">
+  <div class="flow wrap">
     <p class="eyebrow">The day</p>
     <h2>Saturday, June 19</h2>
     <ol class="timeline">
@@ -281,7 +283,7 @@ html.locked { overflow: hidden; }
 </section>
 
 <section class="alt" id="gallery">
-  <div class="wrap">
+  <div class="flow wrap">
     <p class="eyebrow">Photos</p>
     <h2>A few of our favorite moments</h2>
     <div class="gallery">
@@ -297,7 +299,7 @@ html.locked { overflow: hidden; }
 </section>
 
 <section id="details">
-  <div class="wrap">
+  <div class="flow wrap">
     <p class="eyebrow">Details</p>
     <h2>Good to know</h2>
     <div class="cards">
@@ -309,7 +311,7 @@ html.locked { overflow: hidden; }
 </section>
 
 <section class="alt" id="game">
-  <div class="wrap game">
+  <div class="flow wrap game">
     <div>
       <p class="eyebrow">A little game</p>
       <h2>Meet me in Lower Manhattan</h2>
@@ -358,7 +360,7 @@ html.locked { overflow: hidden; }
 <button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
 
 <footer>
-  <div class="wrap">
+  <div class="wrap flow" data-flow="in">
     <div class="mono">L<i>&amp;</i>V</div>
     <p class="muted" style="margin:8px auto 0">Questions? Reach us at hello@leoandvanessa.example</p>
     <button class="replay" id="replay" type="button">Close the envelope</button>
@@ -475,6 +477,29 @@ html.locked { overflow: hidden; }
     startBtn.addEventListener('click', start);
     reset();
   })();
+
+  // scroll flow: content eases up and in as a section arrives, and drifts up and out as it leaves
+  var flows = [].slice.call(document.querySelectorAll('.flow'));
+  var ticking = false;
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function ease(v) { return 1 - Math.pow(1 - v, 3); }
+  function flow() {
+    ticking = false;
+    var vh = innerHeight;
+    flows.forEach(function (el) {
+      var r = el.getBoundingClientRect(), mode = el.getAttribute('data-flow');
+      var enter = mode === 'out' ? 1 : ease(clamp((vh - r.top) / (vh * 0.45)));
+      var leave = mode === 'in' ? 1 : ease(clamp(r.bottom / (vh * 0.45)));
+      var y = enter < 1 ? (1 - enter) * 56 : -(1 - leave) * 40;
+      el.style.opacity = (0.08 + 0.92 * Math.min(enter, leave)).toFixed(3);
+      el.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0) scale(' + (0.97 + 0.03 * Math.min(enter, leave)).toFixed(4) + ')';
+    });
+  }
+  if (!still) {
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(flow); } }, { passive: true });
+    addEventListener('resize', flow);
+    flow();
+  }
 
   // back to top
   var totop = document.getElementById('totop');
