@@ -19,7 +19,9 @@
   --blue-soft: #dbe6ff;
   --on-blue: #ffffff;
   --card: #ffffff;
-  --van: #0b8fb0;
+  --d-line: #ff6319;
+  --r-line: #fccc0a;
+  --on-r: #111111;
   --water: #e1e9fb;
   --land: #ffffff;
   --land-line: #c3cfee;
@@ -31,14 +33,14 @@
   :root:not([data-theme="light"]) {
     --bg: #05070d; --bg-alt: #0a1022; --fg: #eef2ff; --muted: #94a0c2;
     --line: #1a2444; --blue: #4d7bff; --blue-soft: #14224f; --on-blue: #05070d; --card: #0c1226;
-    --van: #4fd8f5; --water: #070b18; --land: #111a38; --land-line: #24315e;
+    --water: #070b18; --land: #111a38; --land-line: #24315e;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #05070d; --bg-alt: #0a1022; --fg: #eef2ff; --muted: #94a0c2;
   --line: #1a2444; --blue: #4d7bff; --blue-soft: #14224f; --on-blue: #05070d; --card: #0c1226;
-  --van: #4fd8f5; --water: #070b18; --land: #111a38; --land-line: #24315e;
+  --water: #070b18; --land: #111a38; --land-line: #24315e;
   color-scheme: dark;
 }
 
@@ -148,11 +150,15 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0 14px; }
 .hold { padding: 18px 12px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--fg); font: 700 .95rem/1.3 var(--font-body); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: none; }
 .hold small { display: block; font-weight: 500; color: var(--muted); font-size: .75rem; margin-top: 2px; }
-.hold.leo { border-color: var(--blue); }
-.hold.van { border-color: var(--van); }
+.hold.leo { border-color: var(--d-line); }
+.hold.van { border-color: var(--r-line); }
 .hold.on { color: var(--on-blue); }
-.hold.leo.on { background: var(--blue); }
-.hold.van.on { background: var(--van); }
+.hold.leo.on { background: var(--d-line); color: #fff; }
+.hold.van.on { background: var(--r-line); color: var(--on-r); }
+.bullet { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%; font-weight: 700; font-size: .85em; margin-right: 6px; vertical-align: -.1em; }
+.bullet.d { background: var(--d-line); color: #fff; }
+.bullet.r { background: var(--r-line); color: var(--on-r); }
+.meet-name { font: italic 400 13px var(--font-display); fill: var(--fg); stroke: var(--water); stroke-width: 3; }
 .hold:disabled { opacity: .45; cursor: default; }
 .status { min-height: 3.2em; margin: 0 0 16px; font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .win .pulse { animation: none; } }
@@ -314,16 +320,16 @@ html.locked { overflow: hidden; }
   <div class="flow wrap game">
     <div>
       <p class="eyebrow">A little game</p>
-      <h2>Meet me in Lower Manhattan</h2>
-      <p>Leo is riding down from the Bronx. Vanessa is coming over from Brooklyn. Her ride is shorter, and both trains hit random slowdowns on the way. Hold a train in place to make sure they pull in together.</p>
+      <h2>Meet me at City Hall</h2>
+      <p>Leo takes the <span class="bullet d">D</span>down from the Bronx. Vanessa takes the <span class="bullet r">R</span>up from Brooklyn. Both trains hit random slowdowns on the way. Hold a train in the station to make sure they pull into City Hall together.</p>
       <div class="controls">
-        <button class="hold leo" id="hold-leo" type="button" disabled>Hold Leo's train<small>Bronx · key A</small></button>
-        <button class="hold van" id="hold-van" type="button" disabled>Hold Vanessa's train<small>Brooklyn · key L</small></button>
+        <button class="hold leo" id="hold-leo" type="button" disabled><span class="bullet d">D</span>Hold Leo's train<small>From the Bronx · key A</small></button>
+        <button class="hold van" id="hold-van" type="button" disabled><span class="bullet r">R</span>Hold Vanessa's train<small>From Brooklyn · key L</small></button>
       </div>
       <p class="status" id="status" aria-live="polite">Press start, then hold a train whenever you need it to wait.</p>
       <button class="btn" id="start" type="button">Start the trains</button>
     </div>
-    <svg class="map" id="map" viewBox="0 0 400 480" role="img" aria-label="Map of New York City: Leo's train runs from the Bronx and Vanessa's from Brooklyn to meet in Lower Manhattan">
+    <svg class="map" id="map" viewBox="0 0 400 480" role="img" aria-label="Map of New York City: Leo's D train runs from the Bronx and Vanessa's R train from Brooklyn to meet at City Hall">
       <g fill="var(--land)" opacity=".5">
         <path d="M0 0 H168 L150 80 L130 125 L110 170 L90 210 L76 250 L70 290 L58 322 L36 352 L0 362 Z"/>
         <path d="M150 248 L168 228 L192 206 L218 196 L252 190 L300 176 L330 162 L362 168 L400 160 V400 L330 392 L240 386 L230 333 L205 314 L185 294 L172 270 Z"/>
@@ -331,26 +337,30 @@ html.locked { overflow: hidden; }
       <path class="boro" d="M182 27 L230 21 L250 36 L285 56 L310 76 L315 116 L300 149 L310 166 L275 159 L250 155 L230 175 L210 168 L190 172 L178 168 L175 142 L181 116 L194 93 L200 76 L190 66 L185 43 Z"/>
       <path class="boro" d="M83 307 L84 291 L89 267 L91 241 L106 215 L128 175 L147 135 L154 109 L168 85 L174 72 L184 76 L178 96 L171 116 L167 142 L169 168 L173 182 L158 207 L143 228 L129 248 L127 267 L123 291 L102 300 Z"/>
       <path class="boro" d="M145 256 L137 274 L130 296 L110 307 L98 320 L82 340 L90 360 L75 380 L60 402 L64 426 L95 446 L105 468 L145 475 L180 465 L205 446 L230 426 L240 386 L230 333 L205 314 L185 294 L172 270 Z"/>
-      <text class="water" x="62" y="140" transform="rotate(-62 62 140)">Hudson River</text>
+      <text class="water" x="52" y="236" transform="rotate(-66 52 236)">Hudson River</text>
       <text class="water" x="150" y="262" transform="rotate(-56 150 262)">East River</text>
       <text class="faint" x="40" y="60">New Jersey</text>
       <text class="faint" x="318" y="290">Queens</text>
       <text class="boro-name" x="258" y="96" text-anchor="middle">The Bronx</text>
-      <text class="boro-sub" x="258" y="110" text-anchor="middle">Leo's ride</text>
-      <text class="boro-name" x="128" y="186" text-anchor="middle" transform="rotate(-66 128 186)" style="font-size:19px">Manhattan</text>
+      <text class="boro-sub" x="258" y="110" text-anchor="middle">Leo rides the D</text>
+      <text class="boro-name" x="110" y="168" text-anchor="middle" transform="rotate(-66 110 168)" style="font-size:18px;stroke:var(--water)">Manhattan</text>
       <text class="boro-name" x="160" y="420" text-anchor="middle">Brooklyn</text>
-      <text class="boro-sub" x="160" y="434" text-anchor="middle">Vanessa's ride</text>
-      <path id="route-leo" d="M282 102 L255 118 L222 140 L188 152 L160 168 L142 196 L118 234 L106 270 L96 296" fill="none" stroke="var(--blue)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/>
-      <path id="route-van" d="M192 384 L160 340 L130 315 L110 305 L96 296" fill="none" stroke="var(--van)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+      <text class="boro-sub" x="160" y="434" text-anchor="middle">Vanessa rides the R</text>
+      <path id="route-leo" d="M221 76 L206 96 L192 120 L176 136 L163 140 L140 170 L126 195 L117 215 L110 241 L102 268 L94 289" fill="none" stroke="var(--d-line)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
+      <path id="route-van" d="M69 418 L82 400 L98 384 L112 365 L122 345 L123 328 L114 314 L100 306 L88 302 L94 289" fill="none" stroke="var(--r-line)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
       <g fill="var(--land)" stroke="var(--fg)" stroke-width="1.3">
-        <circle cx="222" cy="140" r="3"/><circle cx="160" cy="168" r="3"/><circle cx="118" cy="234" r="3"/>
-        <circle cx="160" cy="340" r="3"/><circle cx="130" cy="315" r="3"/>
+        <circle cx="192" cy="120" r="3"/><circle cx="163" cy="140" r="3"/><circle cx="117" cy="215" r="3"/><circle cx="110" cy="241" r="3"/>
+        <circle cx="98" cy="384" r="3"/><circle cx="123" cy="328" r="3"/><circle cx="88" cy="302" r="3"/>
+      </g>
+      <g font-family="var(--font-body)" font-weight="700">
+        <circle cx="236" cy="64" r="7" fill="var(--d-line)"/><text x="236" y="64" dy=".35em" text-anchor="middle" font-size="9" fill="#fff">D</text>
+        <circle cx="52" cy="428" r="7" fill="var(--r-line)"/><text x="52" y="428" dy=".35em" text-anchor="middle" font-size="9" fill="#111">R</text>
       </g>
       <g id="station">
-        <circle class="pulse" cx="96" cy="296" r="6" fill="var(--blue)"/>
-        <circle cx="96" cy="296" r="6.5" fill="var(--land)" stroke="var(--fg)" stroke-width="2.5"/>
-        <text class="boro-sub meet" x="78" y="292" text-anchor="end">Lower</text>
-        <text class="boro-sub meet" x="78" y="302" text-anchor="end">Manhattan</text>
+        <circle class="pulse" cx="94" cy="289" r="6" fill="var(--d-line)"/>
+        <circle cx="94" cy="289" r="6.5" fill="var(--land)" stroke="var(--fg)" stroke-width="2.5"/>
+        <text class="meet-name" x="80" y="283" text-anchor="end">City Hall</text>
+        <text class="boro-sub meet" x="80" y="294" text-anchor="end">Meet here</text>
       </g>
       <g id="trains"></g>
     </svg>
@@ -410,14 +420,14 @@ html.locked { overflow: hidden; }
     var station = document.getElementById('station');
     var btns = { leo: document.getElementById('hold-leo'), van: document.getElementById('hold-van') };
     function mk(name, tag, attrs) { var el = document.createElementNS(NS, tag); for (var k in attrs) el.setAttribute(k, attrs[k]); layer.appendChild(el); return el; }
-    function train(id, base, phase, color, letter) {
+    function train(id, base, phase, color, letter, ink) {
       var path = document.getElementById('route-' + id), cars = [];
-      for (var i = 2; i >= 0; i--) cars[i] = mk(id, 'rect', { x: -7, y: -3.5, width: 14, height: 7, rx: 2.5, fill: color, opacity: i ? .75 : 1 });
-      var tag = mk(id, 'text', { 'font-size': 6, 'text-anchor': 'middle', dy: '.35em', fill: 'var(--on-blue)', style: 'letter-spacing:0' });
+      for (var i = 2; i >= 0; i--) cars[i] = mk(id, 'rect', { x: -7, y: -3.5, width: 14, height: 7, rx: 2.5, fill: color, stroke: 'rgba(0,0,0,.35)', 'stroke-width': .6, opacity: i ? .8 : 1 });
+      var tag = mk(id, 'text', { 'font-size': 6, 'text-anchor': 'middle', dy: '.35em', fill: ink, 'font-weight': 700, style: 'letter-spacing:0' });
       tag.textContent = letter;
       return { id: id, path: path, len: path.getTotalLength(), base: base, phase: phase, cars: cars, tag: tag, pos: 0, speed: 0, hold: false, done: null };
     }
-    var trains = [train('leo', 40, .4, 'var(--blue)', 'L'), train('van', 28, 2.1, 'var(--van)', 'V')];
+    var trains = [train('leo', 40, .4, 'var(--d-line)', 'D', '#fff'), train('van', 36, 2.1, 'var(--r-line)', 'R', '#111')];
     function place(t) {
       for (var i = 0; i < 3; i++) {
         var d = Math.max(0, t.pos - i * 11), a = Math.min(d, t.len - 1);
@@ -437,7 +447,7 @@ html.locked { overflow: hidden; }
       state = 'done';
       var gap = Math.abs(trains[0].done - trains[1].done), g = gap.toFixed(1);
       btns.leo.disabled = btns.van.disabled = true;
-      if (gap <= 0.5) { status.textContent = 'Perfect. Leo and Vanessa step off together in Lower Manhattan.'; station.classList.add('win'); }
+      if (gap <= 0.5) { status.textContent = 'Perfect. Leo and Vanessa step off together at City Hall.'; station.classList.add('win'); }
       else if (gap <= 1.5) { status.textContent = 'So close. They arrived ' + g + ' seconds apart, near enough for a hug.'; station.classList.add('win'); }
       else { status.textContent = (trains[0].done < trains[1].done ? 'Leo' : 'Vanessa') + ' waited ' + g + ' seconds on the platform. Try again.'; }
       startBtn.textContent = 'Play again'; startBtn.hidden = false;
@@ -450,7 +460,7 @@ html.locked { overflow: hidden; }
         var target = t.hold ? 0 : t.base * (1 + .35 * Math.sin(clock * 1.7 + t.phase));
         t.speed += (target - t.speed) * Math.min(1, dt * 8);
         t.pos += t.speed * dt;
-        if (t.pos >= t.len) { t.pos = t.len; t.done = clock; status.textContent = (t.id === 'leo' ? 'Leo' : 'Vanessa') + ' is waiting at Lower Manhattan...'; }
+        if (t.pos >= t.len) { t.pos = t.len; t.done = clock; status.textContent = (t.id === 'leo' ? 'Leo' : 'Vanessa') + ' is waiting at City Hall...'; }
         place(t);
       });
       if (trains[0].done !== null && trains[1].done !== null) return finish();
