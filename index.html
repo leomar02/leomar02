@@ -118,26 +118,6 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 .cards p { color: var(--muted); font-size: .95rem; margin: 0; }
 @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
 
-/* rsvp */
-.rsvp { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
-.rsvp > * { min-width: 0; }
-@media (max-width: 820px) { .rsvp { grid-template-columns: 1fr; gap: 32px; } }
-form { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 32px; display: grid; gap: 18px; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.row > * { min-width: 0; }
-@media (max-width: 520px) { .row { grid-template-columns: 1fr; } form { padding: 22px; } }
-label, legend { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0; }
-input[type=text], input[type=email], select, textarea { width: 100%; margin-top: 6px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font: 500 1rem var(--font-body); }
-textarea { resize: vertical; min-height: 90px; }
-fieldset { border: 0; padding: 0; margin: 0; }
-.choice { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
-.choice label { text-transform: none; letter-spacing: 0; font-size: .95rem; color: var(--fg); font-weight: 600; cursor: pointer; }
-.choice input { position: absolute; opacity: 0; pointer-events: none; }
-.choice span { display: inline-block; padding: 10px 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
-.choice input:checked + span { background: var(--blue); border-color: var(--blue); color: var(--on-blue); }
-.choice input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 3px; }
-.thanks { text-align: center; padding: 28px 8px; }
-.thanks h3 { font: 400 2.4rem/1.1 var(--font-display); margin: 0 0 8px; }
 
 footer { border-top: 1px solid var(--line); padding-block: 40px; text-align: center; }
 footer .mono { font-size: 2rem; }
@@ -209,7 +189,6 @@ html.locked { overflow: hidden; }
       <a href="#day">The day</a>
       <a href="#gallery">Photos</a>
       <a href="#details">Details</a>
-      <a class="btn" href="#rsvp">RSVP</a>
       <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
     </div>
   </div>
@@ -229,8 +208,7 @@ html.locked { overflow: hidden; }
       <div><strong id="cd-m">00</strong><small>Minutes</small></div>
     </div>
     <div class="cta">
-      <a class="btn" href="#rsvp">RSVP by May 1</a>
-      <a class="btn ghost" href="#day">See the schedule</a>
+      <a class="btn" href="#day">See the schedule</a>
     </div>
   </div>
 </header>
@@ -289,38 +267,6 @@ html.locked { overflow: hidden; }
   </div>
 </section>
 
-<section class="alt" id="rsvp">
-  <div class="wrap rsvp">
-    <div>
-      <p class="eyebrow">RSVP</p>
-      <h2>Will you join us?</h2>
-      <p>Please reply by <strong>May 1, 2027</strong>. Let us know about any dietary needs and we'll take care of the rest.</p>
-    </div>
-    <form id="rsvp-form" novalidate>
-      <div class="row">
-        <div><label for="name">Full name</label><input id="name" type="text" required autocomplete="name"></div>
-        <div><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div>
-      </div>
-      <fieldset>
-        <legend>Attending?</legend>
-        <div class="choice">
-          <label><input type="radio" name="att" value="yes" checked><span>Joyfully accepts</span></label>
-          <label><input type="radio" name="att" value="no"><span>Regretfully declines</span></label>
-        </div>
-      </fieldset>
-      <div class="row" id="more">
-        <div><label for="guests">Guests in your party</label>
-          <select id="guests"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
-        <div><label for="meal">Meal</label>
-          <select id="meal"><option>Braised short rib</option><option>Miso salmon</option><option>Wild mushroom risotto (veg)</option></select></div>
-      </div>
-      <div><label for="msg">Dietary needs or a note</label><textarea id="msg"></textarea></div>
-      <p id="err" class="muted" role="alert" hidden style="margin:0;color:#d33">Add your name and a valid email so we know who replied.</p>
-      <button class="btn" type="submit">Send RSVP</button>
-    </form>
-  </div>
-</section>
-
 <footer>
   <div class="wrap">
     <div class="mono">L<i>&amp;</i>V</div>
@@ -374,24 +320,6 @@ html.locked { overflow: hidden; }
     try { localStorage.setItem('theme', next); } catch (e) {}
   });
 
-  // rsvp (front-end only for now; wiring to a backend is a next step)
-  var form = document.getElementById('rsvp-form');
-  var more = document.getElementById('more');
-  form.addEventListener('change', function () {
-    var no = form.elements.att.value === 'no';
-    more.hidden = no;
-  });
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var name = document.getElementById('name').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var ok = name && /^\S+@\S+\.\S+$/.test(email);
-    document.getElementById('err').hidden = !!ok;
-    if (!ok) return;
-    var yes = form.elements.att.value === 'yes';
-    form.innerHTML = '<div class="thanks"><h3>' + (yes ? 'See you there.' : 'We\'ll miss you.') +
-      '</h3><p class="muted" style="margin:0 auto">Thanks, ' + name.replace(/[<>&"]/g, '') + '. Your reply is in.</p></div>';
-  });
 })();
 </script>
 </body>
