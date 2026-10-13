@@ -119,6 +119,11 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
 
 
+.totop { position: fixed; z-index: 20; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--blue); color: var(--on-blue); font-size: 1.3rem; line-height: 1; cursor: pointer;
+  box-shadow: 0 6px 18px rgba(11, 21, 48, .3); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s, transform .25s, visibility .25s; }
+.totop.show { opacity: 1; visibility: visible; transform: none; }
+.totop:hover { filter: brightness(1.1); }
 footer { border-top: 1px solid var(--line); padding-block: 40px; text-align: center; }
 footer .mono { font-size: 2rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -267,6 +272,8 @@ html.locked { overflow: hidden; }
   </div>
 </section>
 
+<button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
+
 <footer>
   <div class="wrap">
     <div class="mono">L<i>&amp;</i>V</div>
@@ -308,6 +315,11 @@ html.locked { overflow: hidden; }
     root.classList.add('locked');
     intro.classList.remove('open', 'lift', 'gone');
   });
+
+  // back to top
+  var totop = document.getElementById('totop');
+  addEventListener('scroll', function () { totop.classList.toggle('show', scrollY > 500); }, { passive: true });
+  totop.addEventListener('click', function () { scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' }); });
 
   // theme toggle
   var root = document.documentElement;
