@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alex &amp; Jordan Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one scrolling page. Full-bleed hero, then centered 1080px sections alternating flat and tinted bands. */
+:root {
+  --bg: #fbfcff;
+  --bg-alt: #eef3fd;
+  --fg: #0b1530;
+  --muted: #5a6788;
+  --line: #d8e0f2;
+  --blue: #1f4fe0;
+  --blue-soft: #dbe6ff;
+  --on-blue: #ffffff;
+  --card: #ffffff;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #05070d; --bg-alt: #0a1022; --fg: #eef2ff; --muted: #94a0c2;
+    --line: #1a2444; --blue: #4d7bff; --blue-soft: #14224f; --on-blue: #05070d; --card: #0c1226;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #05070d; --bg-alt: #0a1022; --fg: #eef2ff; --muted: #94a0c2;
+  --line: #1a2444; --blue: #4d7bff; --blue-soft: #14224f; --on-blue: #05070d; --card: #0c1226;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--fg); font: 400 1rem/1.65 var(--font-body); padding-inline: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.wrap { max-width: 1080px; margin-inline: auto; padding-inline: 20px; }
+section { padding-block: 96px; }
+.alt { background: var(--bg-alt); }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); margin: 0 0 14px; }
+h2 { font: 400 clamp(2.2rem, 5vw, 3.4rem)/1.05 var(--font-display); margin: 0 0 24px; text-wrap: balance; letter-spacing: -.01em; }
+p { margin: 0 0 1em; max-width: 62ch; }
+.muted { color: var(--muted); }
+
+/* nav */
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; }
+.mono { font: 400 1.5rem/1 var(--font-display); text-decoration: none; }
+.mono i { color: var(--blue); }
+.links { display: flex; align-items: center; gap: 22px; font-size: .85rem; font-weight: 600; }
+.links a { text-decoration: none; color: var(--muted); }
+.links a:hover { color: var(--fg); }
+.links .btn { color: var(--on-blue); }
+.theme { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; font-size: 1rem; }
+@media (max-width: 640px) { .links a:not(.btn) { display: none; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; background: var(--blue); color: var(--on-blue); border: 0; padding: 12px 24px; border-radius: 999px; font: 700 .9rem var(--font-body); text-decoration: none; cursor: pointer; }
+.btn:hover { filter: brightness(1.1); }
+.btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+
+/* hero */
+.hero { padding-block: 72px 80px; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; width: 640px; height: 640px; right: -180px; top: -200px; border-radius: 50%; background: radial-gradient(circle, var(--blue-soft), transparent 68%); pointer-events: none; }
+.hero .wrap { position: relative; }
+.hero h1 { font: 400 clamp(3.6rem, 13vw, 9.5rem)/.9 var(--font-display); margin: 0 0 32px; letter-spacing: -.03em; }
+.hero h1 em { color: var(--blue); }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 14px 40px; margin-bottom: 36px; }
+.hero-meta div { min-width: 0; }
+.hero-meta b { display: block; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.hero-meta span { font: 400 1.5rem/1.3 var(--font-display); }
+.count { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.count div { border: 1px solid var(--line); background: var(--card); border-radius: 14px; padding: 14px 20px; min-width: 92px; }
+.count strong { display: block; font: 400 2.4rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.count small { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* story */
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.story > * { min-width: 0; }
+.portrait { aspect-ratio: 4/5; border-radius: 200px 200px 16px 16px; background: linear-gradient(160deg, var(--blue), #0a1a55 80%); position: relative; overflow: hidden; }
+.portrait span { position: absolute; left: 16px; bottom: 14px; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; opacity: .75; font-weight: 700; }
+@media (max-width: 760px) { .story { grid-template-columns: 1fr; gap: 32px; } section { padding-block: 72px; } }
+
+/* schedule: a true sequence, so a vertical timeline */
+.timeline { list-style: none; margin: 40px 0 0; padding: 0; border-left: 2px solid var(--line); }
+.timeline li { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 0 0 34px 28px; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px var(--bg); }
+.timeline time { font: 400 1.6rem/1.2 var(--font-display); font-variant-numeric: tabular-nums; }
+.timeline h3 { margin: 0 0 2px; font-size: 1rem; }
+.timeline p { margin: 0; color: var(--muted); font-size: .95rem; }
+@media (max-width: 520px) { .timeline li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* gallery */
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 150px; gap: 12px; margin-top: 36px; }
+.ph { border-radius: 14px; position: relative; overflow: hidden; min-width: 0; }
+.ph::after { content: attr(data-label); position: absolute; left: 12px; bottom: 10px; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #fff; opacity: .8; }
+.ph.a { grid-column: span 2; grid-row: span 2; background: linear-gradient(145deg, #1f4fe0, #0a1a55); }
+.ph.b { background: linear-gradient(200deg, #6f93ff, #1f4fe0); }
+.ph.c { grid-row: span 2; background: linear-gradient(170deg, #0b1530, #274bb8); }
+.ph.d { background: linear-gradient(120deg, #dbe6ff, #7da0ff); }
+.ph.d::after { color: #0b1530; }
+.ph.e { grid-column: span 2; background: linear-gradient(100deg, #12296e, #4d7bff); }
+.ph.f { background: linear-gradient(160deg, #3d68f0, #0b1530); }
+@media (max-width: 640px) { .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; } }
+.note { font-size: .85rem; color: var(--muted); margin-top: 14px; }
+
+/* details */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+.cards > div { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; min-width: 0; }
+.cards h3 { margin: 0 0 8px; font: 400 1.5rem/1.2 var(--font-display); }
+.cards p { color: var(--muted); font-size: .95rem; margin: 0; }
+@media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+
+/* rsvp */
+.rsvp { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
+.rsvp > * { min-width: 0; }
+@media (max-width: 820px) { .rsvp { grid-template-columns: 1fr; gap: 32px; } }
+form { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 32px; display: grid; gap: 18px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.row > * { min-width: 0; }
+@media (max-width: 520px) { .row { grid-template-columns: 1fr; } form { padding: 22px; } }
+label, legend { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0; }
+input[type=text], input[type=email], select, textarea { width: 100%; margin-top: 6px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font: 500 1rem var(--font-body); }
+textarea { resize: vertical; min-height: 90px; }
+fieldset { border: 0; padding: 0; margin: 0; }
+.choice { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+.choice label { text-transform: none; letter-spacing: 0; font-size: .95rem; color: var(--fg); font-weight: 600; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice span { display: inline-block; padding: 10px 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+.choice input:checked + span { background: var(--blue); border-color: var(--blue); color: var(--on-blue); }
+.choice input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 3px; }
+.thanks { text-align: center; padding: 28px 8px; }
+.thanks h3 { font: 400 2.4rem/1.1 var(--font-display); margin: 0 0 8px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px; text-align: center; }
+footer .mono { font-size: 2rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="mono" href="#top">A<i>&amp;</i>J</a>
+    <div class="links">
+      <a href="#story">Our story</a>
+      <a href="#day">The day</a>
+      <a href="#gallery">Photos</a>
+      <a href="#details">Details</a>
+      <a class="btn" href="#rsvp">RSVP</a>
+      <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">We're getting married</p>
+    <h1>Alex <em>&amp;</em><br>Jordan</h1>
+    <div class="hero-meta">
+      <div><b>Date</b><span>Saturday, June 19, 2027</span></div>
+      <div><b>Place</b><span>The Glasshouse, Brooklyn</span></div>
+    </div>
+    <div class="count" aria-label="Countdown to the wedding">
+      <div><strong id="cd-d">000</strong><small>Days</small></div>
+      <div><strong id="cd-h">00</strong><small>Hours</small></div>
+      <div><strong id="cd-m">00</strong><small>Minutes</small></div>
+    </div>
+    <div class="cta">
+      <a class="btn" href="#rsvp">RSVP by May 1</a>
+      <a class="btn ghost" href="#day">See the schedule</a>
+    </div>
+  </div>
+</header>
+
+<section class="alt" id="story">
+  <div class="wrap story">
+    <div>
+      <p class="eyebrow">Our story</p>
+      <h2>Met on a rainy platform. Stayed for the coffee.</h2>
+      <p>We met in 2019 waiting out a delayed train, and spent four hours talking about everything except where we were going. Seven years, two apartments and one very opinionated cat later, we're ready to make it official.</p>
+      <p>We'd love for you to be there. Everything you need is on this page.</p>
+    </div>
+    <div class="portrait" role="img" aria-label="Placeholder for a portrait of the couple"><span>Couple photo</span></div>
+  </div>
+</section>
+
+<section id="day">
+  <div class="wrap">
+    <p class="eyebrow">The day</p>
+    <h2>Saturday, June 19</h2>
+    <ol class="timeline">
+      <li><time>3:30 pm</time><div><h3>Guests arrive</h3><p>Welcome drinks in the garden court.</p></div></li>
+      <li><time>4:00 pm</time><div><h3>Ceremony</h3><p>Under the glass atrium. About 30 minutes.</p></div></li>
+      <li><time>5:00 pm</time><div><h3>Cocktail hour</h3><p>Rooftop, with a live trio.</p></div></li>
+      <li><time>6:30 pm</time><div><h3>Dinner</h3><p>Seated, family style.</p></div></li>
+      <li><time>8:30 pm</time><div><h3>Dancing</h3><p>Open floor until 11.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="alt" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Photos</p>
+    <h2>A few of our favorite moments</h2>
+    <div class="gallery">
+      <div class="ph a" data-label="Engagement"></div>
+      <div class="ph b" data-label="Lisbon"></div>
+      <div class="ph c" data-label="Home"></div>
+      <div class="ph d" data-label="Hike"></div>
+      <div class="ph e" data-label="The proposal"></div>
+      <div class="ph f" data-label="Family"></div>
+    </div>
+    <p class="note">Placeholder tiles. Your own photos drop into these slots.</p>
+  </div>
+</section>
+
+<section id="details">
+  <div class="wrap">
+    <p class="eyebrow">Details</p>
+    <h2>Good to know</h2>
+    <div class="cards">
+      <div><h3>Venue</h3><p>The Glasshouse, 214 Water Street, Brooklyn, NY. Free parking on site after 3 pm.</p></div>
+      <div><h3>Stay</h3><p>We hold a room block at the Harbor Hotel, five minutes away. Use code ALEXJORDAN by May 15.</p></div>
+      <div><h3>Dress code</h3><p>Formal. Blues, neutrals and anything but white. The rooftop gets breezy.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="rsvp">
+  <div class="wrap rsvp">
+    <div>
+      <p class="eyebrow">RSVP</p>
+      <h2>Will you join us?</h2>
+      <p>Please reply by <strong>May 1, 2027</strong>. Let us know about any dietary needs and we'll take care of the rest.</p>
+    </div>
+    <form id="rsvp-form" novalidate>
+      <div class="row">
+        <div><label for="name">Full name</label><input id="name" type="text" required autocomplete="name"></div>
+        <div><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div>
+      </div>
+      <fieldset>
+        <legend>Attending?</legend>
+        <div class="choice">
+          <label><input type="radio" name="att" value="yes" checked><span>Joyfully accepts</span></label>
+          <label><input type="radio" name="att" value="no"><span>Regretfully declines</span></label>
+        </div>
+      </fieldset>
+      <div class="row" id="more">
+        <div><label for="guests">Guests in your party</label>
+          <select id="guests"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+        <div><label for="meal">Meal</label>
+          <select id="meal"><option>Braised short rib</option><option>Miso salmon</option><option>Wild mushroom risotto (veg)</option></select></div>
+      </div>
+      <div><label for="msg">Dietary needs or a note</label><textarea id="msg"></textarea></div>
+      <p id="err" class="muted" role="alert" hidden style="margin:0;color:#d33">Add your name and a valid email so we know who replied.</p>
+      <button class="btn" type="submit">Send RSVP</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="mono">A<i>&amp;</i>J</div>
+    <p class="muted" style="margin:8px auto 0">Questions? Reach us at hello@alexandjordan.example</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // countdown
+  var target = new Date(2027, 5, 19, 16, 0, 0).getTime();
+  function tick() {
+    var ms = Math.max(0, target - Date.now());
+    document.getElementById('cd-d').textContent = Math.floor(ms / 864e5);
+    document.getElementById('cd-h').textContent = String(Math.floor(ms % 864e5 / 36e5)).padStart(2, '0');
+    document.getElementById('cd-m').textContent = String(Math.floor(ms % 36e5 / 6e4)).padStart(2, '0');
+  }
+  tick(); setInterval(tick, 30000);
+
+  // theme toggle
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  document.getElementById('theme').addEventListener('click', function () {
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // rsvp (front-end only for now; wiring to a backend is a next step)
+  var form = document.getElementById('rsvp-form');
+  var more = document.getElementById('more');
+  form.addEventListener('change', function () {
+    var no = form.elements.att.value === 'no';
+    more.hidden = no;
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var ok = name && /^\S+@\S+\.\S+$/.test(email);
+    document.getElementById('err').hidden = !!ok;
+    if (!ok) return;
+    var yes = form.elements.att.value === 'yes';
+    form.innerHTML = '<div class="thanks"><h3>' + (yes ? 'See you there.' : 'We\'ll miss you.') +
+      '</h3><p class="muted" style="margin:0 auto">Thanks, ' + name.replace(/[<>&"]/g, '') + '. Your reply is in.</p></div>';
+  });
+})();
+</script>
+</body>
+</html>
