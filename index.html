@@ -142,9 +142,64 @@ fieldset { border: 0; padding: 0; margin: 0; }
 footer { border-top: 1px solid var(--line); padding-block: 40px; text-align: center; }
 footer .mono { font-size: 2rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* envelope opener: a fixed overlay that opens, lifts the invitation card, then fades to reveal the scrolling page */
+html.locked { overflow: hidden; }
+.intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; align-content: center; gap: 28px;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(ellipse at 50% 40%, var(--bg-alt), var(--bg) 75%); transition: opacity .7s ease, visibility .7s; }
+.intro.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+.intro-hint { margin: 0; font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); text-align: center; transition: opacity .4s; }
+.intro.open .intro-hint { opacity: 0; }
+.env { --env: color-mix(in srgb, var(--blue) 82%, #000); position: relative; width: min(88vw, 520px); aspect-ratio: 3/2; perspective: 1400px; filter: drop-shadow(0 24px 40px rgba(11, 21, 48, .28)); }
+.env > * { position: absolute; }
+.env-back { inset: 0; background: var(--env); border-radius: 10px; }
+.env-card { left: 6%; right: 6%; top: 8%; bottom: 6%; z-index: 2; background: var(--card); color: var(--fg); border-radius: 6px; border: 1px solid var(--line);
+  display: grid; place-content: center; text-align: center; gap: 6px; padding: 12px; transition: transform .9s cubic-bezier(.2, .8, .2, 1) .55s; }
+.env-card small { font-size: clamp(.55rem, 2vw, .7rem); letter-spacing: .2em; text-transform: uppercase; color: var(--blue); font-weight: 700; }
+.env-card strong { font: 400 clamp(1.6rem, 7vw, 2.8rem)/1 var(--font-display); }
+.env-card strong i { color: var(--blue); }
+.env-card span { font-size: clamp(.65rem, 2.2vw, .85rem); color: var(--muted); }
+.env-pocket { inset: 0; z-index: 3; background: color-mix(in srgb, var(--blue) 92%, #000); border-radius: 10px;
+  clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%); }
+.env-flap { left: 0; right: 0; top: 0; height: 58%; z-index: 4; background: var(--blue); transform-origin: top center;
+  clip-path: polygon(0 0, 100% 0, 50% 100%); border-radius: 10px 10px 0 0; transition: transform .7s ease, z-index 0s .35s; }
+.seal { position: absolute; left: 50%; top: 56%; z-index: 5; width: clamp(54px, 15vw, 76px); aspect-ratio: 1; margin: calc(clamp(54px, 15vw, 76px) / -2) 0 0 calc(clamp(54px, 15vw, 76px) / -2);
+  border-radius: 50%; border: 0; cursor: pointer; background: var(--fg); color: var(--bg); font: 400 clamp(1.1rem, 4vw, 1.5rem)/1 var(--font-display);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--fg) 20%, transparent), 0 6px 14px rgba(0, 0, 0, .3); transition: opacity .3s, transform .2s; }
+.seal:hover { transform: scale(1.06); }
+.seal i { color: var(--blue); }
+.intro.open .env-flap { transform: rotateX(180deg); z-index: 1; }
+.intro.open .seal { opacity: 0; pointer-events: none; }
+.intro.open .env-card { transform: translateY(-62%); }
+.intro.lift .env { transform: translateY(8%) scale(.96); transition: transform .6s ease; }
+.hero.enter .wrap > * { animation: rise .8s cubic-bezier(.2, .8, .2, 1) both; }
+.hero.enter .wrap > *:nth-child(2) { animation-delay: .08s; }
+.hero.enter .wrap > *:nth-child(3) { animation-delay: .16s; }
+.hero.enter .wrap > *:nth-child(4) { animation-delay: .24s; }
+.hero.enter .wrap > *:nth-child(5) { animation-delay: .32s; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.replay { background: none; border: 0; color: var(--blue); font: 700 .85rem var(--font-body); cursor: pointer; text-decoration: underline; margin-top: 16px; }
+@media (prefers-reduced-motion: reduce) { .intro, .env-card, .env-flap, .intro-hint { transition: none; } .hero.enter .wrap > * { animation: none; } }
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add('locked');</script>
+
+<div class="intro" id="intro" role="dialog" aria-label="Wedding invitation">
+  <div class="env" aria-hidden="false">
+    <div class="env-back"></div>
+    <div class="env-card">
+      <small>You're invited</small>
+      <strong>Leo <i>&amp;</i> Vanessa</strong>
+      <span>June 19, 2027 · Brooklyn</span>
+    </div>
+    <div class="env-pocket"></div>
+    <div class="env-flap"></div>
+    <button class="seal" id="seal" type="button" aria-label="Open the invitation">L<i>&amp;</i>V</button>
+  </div>
+  <p class="intro-hint">Tap the seal to open</p>
+</div>
 
 <nav>
   <div class="wrap">
@@ -270,6 +325,7 @@ footer .mono { font-size: 2rem; }
   <div class="wrap">
     <div class="mono">L<i>&amp;</i>V</div>
     <p class="muted" style="margin:8px auto 0">Questions? Reach us at hello@leoandvanessa.example</p>
+    <button class="replay" id="replay" type="button">Close the envelope</button>
   </div>
 </footer>
 
@@ -284,6 +340,28 @@ footer .mono { font-size: 2rem; }
     document.getElementById('cd-m').textContent = String(Math.floor(ms % 36e5 / 6e4)).padStart(2, '0');
   }
   tick(); setInterval(tick, 30000);
+
+  // envelope opener
+  var intro = document.getElementById('intro');
+  var hero = document.querySelector('.hero');
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function reveal() {
+    intro.classList.add('gone');
+    root.classList.remove('locked');
+    hero.classList.remove('enter'); void hero.offsetWidth; hero.classList.add('enter');
+    window.scrollTo(0, 0);
+  }
+  document.getElementById('seal').addEventListener('click', function () {
+    intro.classList.add('open');
+    if (still) return reveal();
+    setTimeout(function () { intro.classList.add('lift'); }, 1300);
+    setTimeout(reveal, 1900);
+  });
+  document.getElementById('replay').addEventListener('click', function () {
+    window.scrollTo(0, 0);
+    root.classList.add('locked');
+    intro.classList.remove('open', 'lift', 'gone');
+  });
 
   // theme toggle
   var root = document.documentElement;
