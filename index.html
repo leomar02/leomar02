@@ -6,7 +6,7 @@
 <title>Leo &amp; Vanessa · Azulejo e Larimar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Pinyon+Script&display=swap">
 <style>
 /* Layout: one scrolling page on whitewash. Azulejo tiles and a calçada wave band carry the Portuguese side;
    larimar blue, flamboyán coral and Zona Colonial facades carry the Dominican side. */
@@ -22,6 +22,13 @@
   --coral: #e0533a;       /* flamboyán blossom */
   --mango: #f2b23a;
   --tile-bg: #ffffff;
+  --teal: #2a93a9;        /* stationery envelope */
+  --teal-deep: #1d7184;
+  --peach: #f2a07b;       /* watercolor roses */
+  --sage: #86ad80;
+  --lemon: #e9d64b;       /* Portuguese lemon tiles */
+  --paper: #fdfcf9;
+  --font-script: "Pinyon Script", "Snell Roundhand", cursive;
   --on-cobalt: #ffffff;
   --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -31,13 +38,13 @@
   :root:not([data-theme="light"]) {
     --bg: #0b1020; --surface: #121a33; --ink: #eef2ff; --muted: #98a4c4; --line: #223055;
     --cobalt: #7290ff; --larimar: #6fd0e2; --larimar-soft: #10303a; --coral: #ff7357; --mango: #ffc65a;
-    --tile-bg: #121a33; --on-cobalt: #0b1020; color-scheme: dark;
+    --tile-bg: #121a33; --on-cobalt: #0b1020; --teal: #3fb2c8; --teal-deep: #2a8ca0; --peach: #f6ad8b; --sage: #93bb8c; --lemon: #eadb5c; --paper: #161f3b; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0b1020; --surface: #121a33; --ink: #eef2ff; --muted: #98a4c4; --line: #223055;
   --cobalt: #7290ff; --larimar: #6fd0e2; --larimar-soft: #10303a; --coral: #ff7357; --mango: #ffc65a;
-  --tile-bg: #121a33; --on-cobalt: #0b1020; color-scheme: dark;
+  --tile-bg: #121a33; --on-cobalt: #0b1020; --teal: #3fb2c8; --teal-deep: #2a8ca0; --peach: #f6ad8b; --sage: #93bb8c; --lemon: #eadb5c; --paper: #161f3b; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -93,9 +100,11 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 .culture { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; min-width: 0; }
 .culture header { padding: 26px 28px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
 .culture header h3 { margin: 0; font-size: 1.7rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+.culture header .map { height: 110px; width: auto; flex: none; }
+.culture.do header .map { height: 84px; }
 .culture header small { display: block; font-family: var(--font-body); font-size: .78rem; font-weight: 600; color: var(--muted); letter-spacing: .06em; }
 .culture .strip { height: 10px; }
-.culture.pt .strip { background: var(--cobalt); }
+.culture.pt .strip { display: block; width: 100%; height: 20px; }
 .culture.do .strip { background: linear-gradient(90deg, var(--larimar), var(--coral)); }
 .culture ul { list-style: none; margin: 0; padding: 4px 28px 22px; }
 .culture li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); align-items: start; }
@@ -164,6 +173,61 @@ footer .sign em { font-style: normal; color: var(--coral); }
 .ticker-row svg { width: .62em; height: .62em; margin-inline: .22em; vertical-align: .02em; }
 .petal { position: absolute; width: 56px; height: 56px; pointer-events: none; opacity: .9;
   transform: translateY(calc((var(--p, .5) - .5) * var(--dy))) rotate(calc(var(--p, .5) * var(--spin))); }
+
+/* stationery touches */
+.script-line { font: 400 clamp(1.6rem, 3.4vw, 2.3rem)/1 var(--font-script); color: var(--teal-deep); margin: -14px 0 26px; }
+.tile-panel { position: relative; justify-self: center; width: 100%; max-width: 460px; }
+.tile-panel .bouquet { position: absolute; z-index: 2; width: 58%; left: -16%; bottom: -14%; pointer-events: none; }
+@media (max-width: 860px) { .tile-panel { max-width: 360px; } .tile-panel .bouquet { left: -6%; } }
+footer .script { font: 400 clamp(1.8rem, 4vw, 2.6rem)/1 var(--font-script); color: var(--teal-deep); margin: 0 0 6px; }
+
+/* registry: each idea framed like a postage stamp */
+.gifts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+.gift { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 22px; display: grid; gap: 18px; align-content: start; min-width: 0; }
+.stamp-art { width: 96px; height: 96px; padding: 6px; background: #fff; border-radius: 2px; box-shadow: 0 0 0 1px var(--line), 0 10px 20px -12px rgba(15, 26, 51, .4);
+  -webkit-mask: radial-gradient(circle at 4px 4px, transparent 2.4px, #000 2.8px) -4px -4px / 8px 8px, linear-gradient(#000, #000) 6px 6px / calc(100% - 12px) calc(100% - 12px) no-repeat;
+          mask: radial-gradient(circle at 4px 4px, transparent 2.4px, #000 2.8px) -4px -4px / 8px 8px, linear-gradient(#000, #000) 6px 6px / calc(100% - 12px) calc(100% - 12px) no-repeat; transform: rotate(-3deg); }
+.gift:nth-child(2) .stamp-art { transform: rotate(2deg); }
+.gift h3 { margin: 0 0 6px; font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em; }
+.gift p { color: var(--muted); font-size: .97rem; margin: 0 0 14px; }
+.pending { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .06em; color: var(--teal-deep); border: 1px dashed var(--teal); border-radius: 999px; padding: 6px 14px; }
+@media (max-width: 820px) { .gifts { grid-template-columns: 1fr; } .gift { grid-template-columns: 96px 1fr; } }
+
+/* envelope opener: teal envelope with an azulejo liner, stamps and a silk ribbon, like the paper suite */
+html.locked { overflow: hidden; }
+.intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; align-content: center; gap: 30px; overflow: hidden;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(ellipse at 50% 45%, var(--surface), var(--bg) 70%); transition: opacity .7s ease, visibility .7s; }
+.intro.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+.scene { position: relative; width: min(84vw, 480px); }
+.ribbon { position: absolute; width: 62%; left: -20%; bottom: -16%; transform: rotate(-6deg); }
+.stamp { position: absolute; width: 15%; z-index: 6; filter: drop-shadow(0 4px 6px rgba(15, 26, 51, .25)); transition: opacity .3s; }
+.stamp.s1 { right: 3%; top: -10%; transform: rotate(7deg); }
+.stamp.s2 { right: 19%; top: -7%; transform: rotate(-5deg); }
+.env { position: relative; width: 100%; aspect-ratio: 3 / 2; filter: drop-shadow(0 24px 34px rgba(15, 26, 51, .28)); }
+.env > * { position: absolute; }
+.env-back { inset: 0; background: var(--teal-deep); border-radius: 6px; }
+.liner { left: 0; right: 0; bottom: 100%; height: 58%; clip-path: polygon(0 100%, 100% 100%, 50% 0); transform: scaleY(0); transform-origin: bottom; transition: transform .35s ease .32s; }
+.liner svg { display: block; }
+.card { left: 6%; right: 6%; top: 7%; bottom: 6%; z-index: 2; background: var(--paper); border-radius: 3px; display: grid; place-content: center; text-align: center; gap: 4px; padding: 30px 12px 12px;
+  box-shadow: 0 0 0 1px var(--line); transition: transform .9s cubic-bezier(.2, .8, .2, 1) .7s; overflow: hidden; }
+.card-tiles { position: absolute; left: 0; top: 0; width: 100%; height: 20px; }
+.card small { font-size: clamp(.5rem, 1.8vw, .66rem); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cobalt); }
+.card strong { font: 400 clamp(1.8rem, 7.5vw, 3rem)/1.1 var(--font-script); color: var(--ink); }
+.card span { font-size: clamp(.62rem, 2vw, .82rem); color: var(--muted); }
+.pocket { inset: 0; z-index: 3; background: var(--teal); border-radius: 6px; clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%); }
+.flap { left: 0; right: 0; top: 0; height: 58%; z-index: 4; background: color-mix(in srgb, var(--teal) 88%, #fff); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .35s ease-in; }
+.seal { position: absolute; z-index: 5; left: 50%; top: 56%; width: clamp(56px, 15vw, 76px); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; border: 0; cursor: pointer;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--cobalt) 70%, #fff), var(--cobalt) 60%); color: #fff; font: 400 clamp(1.3rem, 4.5vw, 1.8rem)/1 var(--font-script);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cobalt) 30%, transparent), 0 6px 14px rgba(0, 0, 0, .3); transition: opacity .25s, transform .2s; }
+.seal:hover { transform: scale(1.06); }
+.hint { margin: 0; font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); transition: opacity .3s; }
+.intro.open .seal, .intro.open .hint, .intro.open .stamp { opacity: 0; pointer-events: none; }
+.intro.open .flap { transform: scaleY(0); }
+.intro.open .liner { transform: scaleY(1); }
+.intro.open .card { transform: translateY(-62%); }
+.replay { background: none; border: 0; color: var(--teal-deep); font: 700 .88rem var(--font-body); cursor: pointer; text-decoration: underline; margin-top: 14px; }
+@media (prefers-reduced-motion: reduce) { .intro, .card, .flap, .liner { transition: none; } }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     section > .wrap { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
@@ -213,12 +277,72 @@ footer .sign em { font-style: normal; color: var(--coral); }
         <circle r="8" fill="var(--mango)"/>
       </g>
     </symbol>
+
+    <filter id="wc" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="5" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation=".45"/>
+    </filter>
+    <!-- azulejo C: the Portuguese lemon tile, cobalt frame around lemons and leaves -->
+    <symbol id="az-c" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="var(--tile-bg)"/>
+      <rect x="7" y="7" width="86" height="86" fill="none" stroke="var(--cobalt)" stroke-width="3"/>
+      <g fill="var(--cobalt)"><circle cx="0" cy="0" r="13"/><circle cx="100" cy="0" r="13"/><circle cx="0" cy="100" r="13"/><circle cx="100" cy="100" r="13"/>
+        <path d="M50 2 l5 5 l-5 5 l-5 -5z M50 88 l5 5 l-5 5 l-5 -5z M2 50 l5 -5 l5 5 l-5 5z M88 50 l5 -5 l5 5 l-5 5z"/></g>
+      <ellipse cx="38" cy="36" rx="5.5" ry="12" fill="var(--sage)" transform="rotate(-40 38 36)"/>
+      <ellipse cx="63" cy="33" rx="5.5" ry="12" fill="var(--sage)" transform="rotate(35 63 33)"/>
+      <ellipse cx="44" cy="57" rx="15" ry="11.5" fill="var(--lemon)" stroke="#b99a19" stroke-width="1.4" transform="rotate(-18 44 57)"/>
+      <ellipse cx="63" cy="62" rx="12" ry="9.5" fill="var(--lemon)" stroke="#b99a19" stroke-width="1.4" transform="rotate(22 63 62)"/>
+      <circle cx="30" cy="72" r="3" fill="var(--cobalt)"/><circle cx="74" cy="44" r="3" fill="var(--cobalt)"/>
+    </symbol>
+    <!-- watercolor bouquet: peach roses, sage leaves, a lemon and larimar buds -->
+    <symbol id="bouquet" viewBox="0 0 220 170">
+      <g filter="url(#wc)">
+        <g fill="var(--sage)" opacity=".85">
+          <ellipse cx="40" cy="96" rx="9" ry="26" transform="rotate(-62 40 96)"/><ellipse cx="62" cy="58" rx="8" ry="24" transform="rotate(-25 62 58)"/>
+          <ellipse cx="168" cy="54" rx="8" ry="24" transform="rotate(38 168 54)"/><ellipse cx="190" cy="104" rx="8" ry="22" transform="rotate(70 190 104)"/>
+          <ellipse cx="104" cy="148" rx="8" ry="22" transform="rotate(10 104 148)"/><ellipse cx="146" cy="142" rx="7" ry="20" transform="rotate(-30 146 142)"/>
+        </g>
+        <ellipse cx="58" cy="128" rx="18" ry="13" fill="var(--lemon)" opacity=".9" transform="rotate(-25 58 128)"/>
+        <g opacity=".9">
+          <circle cx="98" cy="92" r="32" fill="var(--peach)" opacity=".75"/><circle cx="92" cy="86" r="20" fill="var(--peach)"/>
+          <path d="M98 92 m-4 0 a4 4 0 1 1 8 0 a8 8 0 1 1 -16 0 a12 12 0 1 1 24 0 a16 16 0 1 1 -32 0" fill="none" stroke="#d9714a" stroke-width="2" opacity=".7"/>
+          <circle cx="150" cy="96" r="22" fill="var(--peach)" opacity=".7"/>
+          <path d="M150 96 m-3 0 a3 3 0 1 1 6 0 a6 6 0 1 1 -12 0 a10 10 0 1 1 20 0" fill="none" stroke="#d9714a" stroke-width="1.8" opacity=".7"/>
+          <circle cx="128" cy="52" r="14" fill="var(--peach)" opacity=".6"/>
+        </g>
+        <g fill="var(--larimar)"><circle cx="182" cy="76" r="5"/><circle cx="190" cy="66" r="4"/><circle cx="44" cy="70" r="4.5"/><circle cx="124" cy="134" r="4"/></g>
+      </g>
+    </symbol>
+    <pattern id="liner" width="40" height="40" patternUnits="userSpaceOnUse"><use href="#az-a" width="40" height="40" style="color:var(--cobalt)"/></pattern>
     <pattern id="mar-largo" width="120" height="28" patternUnits="userSpaceOnUse">
       <rect width="120" height="28" fill="var(--bg)"/>
       <path d="M0 14 Q30 0 60 14 T120 14 V28 Q90 14 60 28 T0 28 Z" fill="var(--ink)"/>
     </pattern>
   </defs>
 </svg>
+
+<script>document.documentElement.classList.add('locked');</script>
+<div class="intro" id="intro" role="dialog" aria-label="Wedding invitation">
+  <div class="scene">
+    <svg class="ribbon" viewBox="0 0 300 90" aria-hidden="true"><path d="M4 50 C50 10 90 80 150 44 S240 18 296 60" fill="none" stroke="var(--teal)" stroke-width="15" stroke-linecap="round"/><path d="M4 46 C50 6 90 76 150 40 S240 14 296 56" fill="none" stroke="#fff" stroke-width="2" opacity=".3"/></svg>
+    <svg class="stamp s1" viewBox="0 0 70 86" aria-hidden="true"><rect width="70" height="86" fill="#fff"/><circle cx="4" cy="0" r="2.6" fill="var(--bg)"/><circle cx="4" cy="86" r="2.6" fill="var(--bg)"/><circle cx="11" cy="0" r="2.6" fill="var(--bg)"/><circle cx="11" cy="86" r="2.6" fill="var(--bg)"/><circle cx="18" cy="0" r="2.6" fill="var(--bg)"/><circle cx="18" cy="86" r="2.6" fill="var(--bg)"/><circle cx="25" cy="0" r="2.6" fill="var(--bg)"/><circle cx="25" cy="86" r="2.6" fill="var(--bg)"/><circle cx="32" cy="0" r="2.6" fill="var(--bg)"/><circle cx="32" cy="86" r="2.6" fill="var(--bg)"/><circle cx="39" cy="0" r="2.6" fill="var(--bg)"/><circle cx="39" cy="86" r="2.6" fill="var(--bg)"/><circle cx="46" cy="0" r="2.6" fill="var(--bg)"/><circle cx="46" cy="86" r="2.6" fill="var(--bg)"/><circle cx="53" cy="0" r="2.6" fill="var(--bg)"/><circle cx="53" cy="86" r="2.6" fill="var(--bg)"/><circle cx="60" cy="0" r="2.6" fill="var(--bg)"/><circle cx="60" cy="86" r="2.6" fill="var(--bg)"/><circle cx="67" cy="0" r="2.6" fill="var(--bg)"/><circle cx="67" cy="86" r="2.6" fill="var(--bg)"/><circle cx="0" cy="4" r="2.6" fill="var(--bg)"/><circle cx="70" cy="4" r="2.6" fill="var(--bg)"/><circle cx="0" cy="11" r="2.6" fill="var(--bg)"/><circle cx="70" cy="11" r="2.6" fill="var(--bg)"/><circle cx="0" cy="18" r="2.6" fill="var(--bg)"/><circle cx="70" cy="18" r="2.6" fill="var(--bg)"/><circle cx="0" cy="25" r="2.6" fill="var(--bg)"/><circle cx="70" cy="25" r="2.6" fill="var(--bg)"/><circle cx="0" cy="32" r="2.6" fill="var(--bg)"/><circle cx="70" cy="32" r="2.6" fill="var(--bg)"/><circle cx="0" cy="39" r="2.6" fill="var(--bg)"/><circle cx="70" cy="39" r="2.6" fill="var(--bg)"/><circle cx="0" cy="46" r="2.6" fill="var(--bg)"/><circle cx="70" cy="46" r="2.6" fill="var(--bg)"/><circle cx="0" cy="53" r="2.6" fill="var(--bg)"/><circle cx="70" cy="53" r="2.6" fill="var(--bg)"/><circle cx="0" cy="60" r="2.6" fill="var(--bg)"/><circle cx="70" cy="60" r="2.6" fill="var(--bg)"/><circle cx="0" cy="67" r="2.6" fill="var(--bg)"/><circle cx="70" cy="67" r="2.6" fill="var(--bg)"/><circle cx="0" cy="74" r="2.6" fill="var(--bg)"/><circle cx="70" cy="74" r="2.6" fill="var(--bg)"/><circle cx="0" cy="81" r="2.6" fill="var(--bg)"/><circle cx="70" cy="81" r="2.6" fill="var(--bg)"/><rect x="7" y="7" width="56" height="62" fill="var(--larimar-soft)"/><use href="#az-c" x="9" y="9" width="52" height="52"/><text x="35" y="79" text-anchor="middle" font-size="6.4" font-weight="700" letter-spacing=".08em" fill="#0f1a33" font-family="Hanken Grotesk, sans-serif">PORTUGAL</text></svg><svg class="stamp s2" viewBox="0 0 70 86" aria-hidden="true"><rect width="70" height="86" fill="#fff"/><circle cx="4" cy="0" r="2.6" fill="var(--bg)"/><circle cx="4" cy="86" r="2.6" fill="var(--bg)"/><circle cx="11" cy="0" r="2.6" fill="var(--bg)"/><circle cx="11" cy="86" r="2.6" fill="var(--bg)"/><circle cx="18" cy="0" r="2.6" fill="var(--bg)"/><circle cx="18" cy="86" r="2.6" fill="var(--bg)"/><circle cx="25" cy="0" r="2.6" fill="var(--bg)"/><circle cx="25" cy="86" r="2.6" fill="var(--bg)"/><circle cx="32" cy="0" r="2.6" fill="var(--bg)"/><circle cx="32" cy="86" r="2.6" fill="var(--bg)"/><circle cx="39" cy="0" r="2.6" fill="var(--bg)"/><circle cx="39" cy="86" r="2.6" fill="var(--bg)"/><circle cx="46" cy="0" r="2.6" fill="var(--bg)"/><circle cx="46" cy="86" r="2.6" fill="var(--bg)"/><circle cx="53" cy="0" r="2.6" fill="var(--bg)"/><circle cx="53" cy="86" r="2.6" fill="var(--bg)"/><circle cx="60" cy="0" r="2.6" fill="var(--bg)"/><circle cx="60" cy="86" r="2.6" fill="var(--bg)"/><circle cx="67" cy="0" r="2.6" fill="var(--bg)"/><circle cx="67" cy="86" r="2.6" fill="var(--bg)"/><circle cx="0" cy="4" r="2.6" fill="var(--bg)"/><circle cx="70" cy="4" r="2.6" fill="var(--bg)"/><circle cx="0" cy="11" r="2.6" fill="var(--bg)"/><circle cx="70" cy="11" r="2.6" fill="var(--bg)"/><circle cx="0" cy="18" r="2.6" fill="var(--bg)"/><circle cx="70" cy="18" r="2.6" fill="var(--bg)"/><circle cx="0" cy="25" r="2.6" fill="var(--bg)"/><circle cx="70" cy="25" r="2.6" fill="var(--bg)"/><circle cx="0" cy="32" r="2.6" fill="var(--bg)"/><circle cx="70" cy="32" r="2.6" fill="var(--bg)"/><circle cx="0" cy="39" r="2.6" fill="var(--bg)"/><circle cx="70" cy="39" r="2.6" fill="var(--bg)"/><circle cx="0" cy="46" r="2.6" fill="var(--bg)"/><circle cx="70" cy="46" r="2.6" fill="var(--bg)"/><circle cx="0" cy="53" r="2.6" fill="var(--bg)"/><circle cx="70" cy="53" r="2.6" fill="var(--bg)"/><circle cx="0" cy="60" r="2.6" fill="var(--bg)"/><circle cx="70" cy="60" r="2.6" fill="var(--bg)"/><circle cx="0" cy="67" r="2.6" fill="var(--bg)"/><circle cx="70" cy="67" r="2.6" fill="var(--bg)"/><circle cx="0" cy="74" r="2.6" fill="var(--bg)"/><circle cx="70" cy="74" r="2.6" fill="var(--bg)"/><circle cx="0" cy="81" r="2.6" fill="var(--bg)"/><circle cx="70" cy="81" r="2.6" fill="var(--bg)"/><rect x="7" y="7" width="56" height="62" fill="var(--larimar-soft)"/><use href="#flor" x="11" y="11" width="48" height="48"/><text x="35" y="79" text-anchor="middle" font-size="6.4" font-weight="700" letter-spacing=".08em" fill="#0f1a33" font-family="Hanken Grotesk, sans-serif">REP. DOMINICANA</text></svg>
+    <div class="env">
+      <div class="env-back"></div>
+      <div class="liner"><svg width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true"><rect width="100%" height="100%" fill="url(#liner)"/></svg></div>
+      <div class="card">
+        <svg class="card-tiles" aria-hidden="true"><rect width="100%" height="100%" fill="url(#liner)"/></svg>
+        <small>Bem-vindos · Bienvenidos</small>
+        <strong>Leo &amp; Vanessa</strong>
+        <span>June 19, 2027 · Brooklyn</span>
+      </div>
+      <div class="pocket"></div>
+      <div class="flap"></div>
+      <button class="seal" id="seal" type="button" aria-label="Open the invitation">L&amp;V</button>
+    </div>
+  </div>
+  <p class="hint">Toque para abrir · Toca para abrir</p>
+</div>
 
 <nav>
   <div class="wrap">
@@ -228,6 +352,7 @@ footer .sign em { font-style: normal; color: var(--coral); }
       <a href="#day">The day</a>
       <a href="#photos">Photos</a>
       <a href="#details">Details</a>
+      <a href="#registry">Registry</a>
       <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
     </div>
   </div>
@@ -238,6 +363,7 @@ footer .sign em { font-style: normal; color: var(--coral); }
     <div>
       <p class="eyebrow">Bem-vindos · Bienvenidos</p>
       <h1>Leo <span class="amp">&amp;</span><br><span class="v">Vanessa</span></h1>
+      <p class="script-line">com amor · con amor</p>
       <div class="facts">
         <div><b>Date</b><span>Saturday, June 19, 2027</span></div>
         <div><b>Place</b><span>The Glasshouse, Brooklyn</span></div>
@@ -248,16 +374,18 @@ footer .sign em { font-style: normal; color: var(--coral); }
         <div><strong id="cd-m">00</strong><small>Minutos</small></div>
       </div>
     </div>
-    <div class="tiles" role="img" aria-label="Nine azulejo tiles in cobalt, larimar blue and flamboyán coral">
+    <div class="tile-panel"><svg class="bouquet" viewBox="0 0 220 170" aria-hidden="true"><use href="#bouquet"/></svg>
+    <div class="tiles" role="img" aria-label="Nine azulejo tiles in cobalt, lemon, larimar blue and flamboyán coral">
       <svg class="t" style="color:var(--cobalt)" viewBox="0 0 100 100"><use href="#az-a"/></svg>
-      <svg class="t" style="color:var(--cobalt);animation-delay:.06s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
+      <svg class="t" style="animation-delay:.06s" viewBox="0 0 100 100"><use href="#az-c"/></svg>
       <svg class="t" style="color:var(--cobalt);animation-delay:.12s" viewBox="0 0 100 100"><use href="#az-a"/></svg>
       <svg class="t" style="color:var(--larimar);animation-delay:.18s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
       <svg class="t" style="animation-delay:.24s" viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="10" y="10" width="80" height="80"/></svg>
       <svg class="t" style="color:var(--larimar);animation-delay:.3s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
       <svg class="t" style="color:var(--cobalt);animation-delay:.36s" viewBox="0 0 100 100"><use href="#az-a"/></svg>
-      <svg class="t" style="color:var(--cobalt);animation-delay:.42s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
+      <svg class="t" style="animation-delay:.42s" viewBox="0 0 100 100"><use href="#az-c"/></svg>
       <svg class="t" style="color:var(--cobalt);animation-delay:.48s" viewBox="0 0 100 100"><use href="#az-a"/></svg>
+    </div>
     </div>
   </div>
 </header>
@@ -271,9 +399,9 @@ footer .sign em { font-style: normal; color: var(--coral); }
     <p class="muted">Everything on this page borrows from both. Here's what you're looking at.</p>
     <div class="cultures">
       <article class="culture pt">
-        <div class="strip"></div>
+        <svg class="strip" aria-hidden="true"><rect width="100%" height="100%" fill="url(#liner)"/></svg>
         <header><h3>Portugal<small>From Lisbon's walls and streets</small></h3>
-          <svg width="44" height="44" viewBox="0 0 100 100" style="color:var(--cobalt)" aria-hidden="true"><use href="#az-a"/></svg></header>
+          <svg class="map" viewBox="0 0 160 290" role="img" aria-label="Watercolor map of Portugal with a heart on Lisbon"><g filter="url(#wc)"><path d="M33.2 22.4 L60.0 7.8 L72.0 20.8 L100.0 16.6 L124.0 18.2 L140.0 37.4 L114.0 67.6 L110.8 106.6 L107.2 136.8 L86.8 137.3 L100.0 182.0 L108.0 213.2 L92.0 244.4 L92.0 266.8 L72.0 275.6 L44.0 270.4 L28.4 274.6 L36.0 249.6 L36.8 218.4 L40.0 200.2 L20.0 201.8 L8.0 184.6 L12.0 166.4 L24.0 140.4 L32.0 114.4 L42.0 88.4 L38.0 57.2 Z" fill="var(--larimar)" opacity=".45"/><path d="M33.2 22.4 L60.0 7.8 L72.0 20.8 L100.0 16.6 L124.0 18.2 L140.0 37.4 L114.0 67.6 L110.8 106.6 L107.2 136.8 L86.8 137.3 L100.0 182.0 L108.0 213.2 L92.0 244.4 L92.0 266.8 L72.0 275.6 L44.0 270.4 L28.4 274.6 L36.0 249.6 L36.8 218.4 L40.0 200.2 L20.0 201.8 L8.0 184.6 L12.0 166.4 L24.0 140.4 L32.0 114.4 L42.0 88.4 L38.0 57.2 Z" fill="var(--larimar)" opacity=".35" transform="translate(1.5 1)"/><path d="M33.2 22.4 L60.0 7.8 L72.0 20.8 L100.0 16.6 L124.0 18.2 L140.0 37.4 L114.0 67.6 L110.8 106.6 L107.2 136.8 L86.8 137.3 L100.0 182.0 L108.0 213.2 L92.0 244.4 L92.0 266.8 L72.0 275.6 L44.0 270.4 L28.4 274.6 L36.0 249.6 L36.8 218.4 L40.0 200.2 L20.0 201.8 L8.0 184.6 L12.0 166.4 L24.0 140.4 L32.0 114.4 L42.0 88.4 L38.0 57.2 Z" fill="none" stroke="var(--larimar)" stroke-width="1.6" opacity=".6"/></g><path d="M22.4 190.2 C15.4 185.2 18.4 179.2 22.4 183.2 C26.4 179.2 29.4 185.2 22.4 190.2 Z" fill="var(--coral)"/></svg></header>
         <ul>
           <li><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="3" fill="var(--tile-bg)" stroke="var(--line)"/><svg x="4" y="4" width="40" height="40" viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg></svg>
             <div><b>Azulejos</b><span>The blue-and-white glazed tiles that cover Lisbon's facades. Our tiles up top are drawn the same way, with the corners joining into circles when they meet.</span></div></li>
@@ -290,7 +418,7 @@ footer .sign em { font-style: normal; color: var(--coral); }
       <article class="culture do">
         <div class="strip"></div>
         <header><h3>República Dominicana<small>From Santo Domingo and the island</small></h3>
-          <svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true"><use href="#flor"/></svg></header>
+          <svg class="map" viewBox="0 0 190 140" role="img" aria-label="Watercolor map of the Dominican Republic with a heart on Santo Domingo"><g filter="url(#wc)"><path d="M19.2 19.4 L18.2 40.8 L22.1 58.7 L8.6 75.5 L16.8 104.6 L32.6 126.5 L48.0 111.2 L67.2 94.4 L91.2 94.9 L105.6 84.2 L134.4 85.7 L151.2 87.7 L175.2 89.2 L181.0 75.5 L160.8 58.7 L139.2 52.0 L141.6 40.8 L120.0 39.3 L105.6 23.0 L81.6 17.9 L67.2 14.3 L48.0 10.2 L21.6 11.2 Z" fill="var(--larimar)" opacity=".45"/><path d="M19.2 19.4 L18.2 40.8 L22.1 58.7 L8.6 75.5 L16.8 104.6 L32.6 126.5 L48.0 111.2 L67.2 94.4 L91.2 94.9 L105.6 84.2 L134.4 85.7 L151.2 87.7 L175.2 89.2 L181.0 75.5 L160.8 58.7 L139.2 52.0 L141.6 40.8 L120.0 39.3 L105.6 23.0 L81.6 17.9 L67.2 14.3 L48.0 10.2 L21.6 11.2 Z" fill="var(--larimar)" opacity=".35" transform="translate(1.5 1)"/><path d="M19.2 19.4 L18.2 40.8 L22.1 58.7 L8.6 75.5 L16.8 104.6 L32.6 126.5 L48.0 111.2 L67.2 94.4 L91.2 94.9 L105.6 84.2 L134.4 85.7 L151.2 87.7 L175.2 89.2 L181.0 75.5 L160.8 58.7 L139.2 52.0 L141.6 40.8 L120.0 39.3 L105.6 23.0 L81.6 17.9 L67.2 14.3 L48.0 10.2 L21.6 11.2 Z" fill="none" stroke="var(--larimar)" stroke-width="1.6" opacity=".6"/></g><path d="M105.6 87.1 C98.6 82.1 101.6 76.1 105.6 80.1 C109.6 76.1 112.6 82.1 105.6 87.1 Z" fill="var(--coral)"/></svg></header>
         <ul>
           <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 26 C6 14 18 6 28 8 C40 10 44 22 40 32 C36 42 18 44 11 37 C9 34 8 30 8 26 Z" fill="var(--larimar)"/><path d="M14 20 C20 18 24 24 30 20 M12 30 C20 28 26 34 36 28 M22 12 C24 16 30 14 34 16" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".85"/></svg>
             <div><b>Larimar</b><span>A blue stone with white veins, found only in the Dominican Republic. It's the light blue that runs through this page.</span></div></li>
@@ -308,7 +436,7 @@ footer .sign em { font-style: normal; color: var(--coral); }
   </div>
 </section>
 
-<div class="frieze" data-scroll aria-hidden="true"><div class="row a"><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg></div><div class="row b"><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg></div></div>
+<div class="frieze" data-scroll aria-hidden="true"><div class="row a"><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg></div><div class="row b"><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg></div></div>
 
 <section id="day">
   <div class="wrap day">
@@ -361,11 +489,35 @@ footer .sign em { font-style: normal; color: var(--coral); }
   </div>
 </section>
 
+<section class="tint" id="registry">
+  <div class="wrap">
+    <p class="eyebrow">Lista de casamento · Lista de regalos</p>
+    <h2>Registry</h2>
+    <p class="muted">Having you there is the gift. If you'd like to give something more, here are a few ideas.</p>
+    <div class="gifts">
+      <article class="gift">
+        <svg class="stamp-art" viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" fill="var(--larimar-soft)"/><svg x="18" y="14" width="84" height="64" viewBox="0 0 160 290" preserveAspectRatio="xMidYMid meet"><g filter="url(#wc)"><path d="M33.2 22.4 L60.0 7.8 L72.0 20.8 L100.0 16.6 L124.0 18.2 L140.0 37.4 L114.0 67.6 L110.8 106.6 L107.2 136.8 L86.8 137.3 L100.0 182.0 L108.0 213.2 L92.0 244.4 L92.0 266.8 L72.0 275.6 L44.0 270.4 L28.4 274.6 L36.0 249.6 L36.8 218.4 L40.0 200.2 L20.0 201.8 L8.0 184.6 L12.0 166.4 L24.0 140.4 L32.0 114.4 L42.0 88.4 L38.0 57.2 Z" fill="var(--larimar)" opacity=".6"/></g></svg><svg x="60" y="56" width="52" height="40" viewBox="0 0 190 140"><g filter="url(#wc)"><path d="M19.2 19.4 L18.2 40.8 L22.1 58.7 L8.6 75.5 L16.8 104.6 L32.6 126.5 L48.0 111.2 L67.2 94.4 L91.2 94.9 L105.6 84.2 L134.4 85.7 L151.2 87.7 L175.2 89.2 L181.0 75.5 L160.8 58.7 L139.2 52.0 L141.6 40.8 L120.0 39.3 L105.6 23.0 L81.6 17.9 L67.2 14.3 L48.0 10.2 L21.6 11.2 Z" fill="var(--coral)" opacity=".6"/></g></svg><path d="M20 100 Q60 80 104 96" fill="none" stroke="var(--cobalt)" stroke-width="2" stroke-dasharray="3 4"/></svg>
+        <div><h3>Honeymoon fund</h3><p>A week in Portugal and a week in the Dominican Republic: pastéis in Lisbon, then the beach in Punta Cana.</p><span class="pending">Link coming soon</span></div>
+      </article>
+      <article class="gift">
+        <svg class="stamp-art" viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" fill="var(--tile-bg)"/><use href="#az-c" x="0" y="0" width="60" height="60"/><use href="#az-a" x="60" y="0" width="60" height="60" style="color:var(--cobalt)"/><use href="#az-a" x="0" y="60" width="60" height="60" style="color:var(--cobalt)"/><use href="#az-c" x="60" y="60" width="60" height="60"/></svg>
+        <div><h3>Our first home</h3><p>Help us fill our walls and kitchen, starting with a few real azulejos.</p><span class="pending">Link coming soon</span></div>
+      </article>
+      <article class="gift">
+        <svg class="stamp-art" viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" fill="var(--larimar-soft)"/><use href="#flor" x="14" y="14" width="92" height="92"/></svg>
+        <div><h3>Registry store</h3><p>A short list of things we'll use every day, from a cataplana pot to a good caldero.</p><span class="pending">Link coming soon</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <footer>
   <svg class="facades" viewBox="0 0 1200 170" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A row of colorful colonial facades from Santo Domingo, some trimmed with Portuguese tiles"><g><rect x="0" y="10" width="150" height="146" fill="#e0533a"/><rect x="-2" y="2" width="154" height="10" fill="#e0533a"/><rect x="-2" y="12" width="154" height="3" fill="#fff" opacity=".55"/><path d="M62.0 156 V99 A13 13 0 0 1 88.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M58.0 156 V99 A17 17 0 0 1 92.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="14" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="11" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="19" y1="90" x2="19" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="24" y1="90" x2="24" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="29" y1="90" x2="29" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="116" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="113" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="121" y1="90" x2="121" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="126" y1="90" x2="126" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="131" y1="90" x2="131" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="12.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="26.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="40.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="54.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="68.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="82.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="96.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="110.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="124.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="150" y="20" width="150" height="136" fill="#4fb5cb"/><rect x="148" y="12" width="154" height="10" fill="#4fb5cb"/><rect x="148" y="22" width="154" height="3" fill="#fff" opacity=".55"/><path d="M212.0 156 V99 A13 13 0 0 1 238.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M208.0 156 V99 A17 17 0 0 1 242.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="164" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="161" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="169" y1="90" x2="169" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="174" y1="90" x2="174" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="179" y1="90" x2="179" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="266" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="263" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="271" y1="90" x2="271" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="276" y1="90" x2="276" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="281" y1="90" x2="281" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="300" y="10" width="160" height="146" fill="#f2b23a"/><rect x="298" y="2" width="164" height="10" fill="#f2b23a"/><rect x="298" y="12" width="164" height="3" fill="#fff" opacity=".55"/><path d="M367.0 156 V99 A13 13 0 0 1 393.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M363.0 156 V99 A17 17 0 0 1 397.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="314" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="311" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="319" y1="90" x2="319" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="324" y1="90" x2="324" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="329" y1="90" x2="329" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="426" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="423" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="431" y1="90" x2="431" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="436" y1="90" x2="436" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="441" y1="90" x2="441" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="310.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="324.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="338.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="352.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="366.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="380.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="394.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="408.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="422.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="436.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="460" y="36" width="130" height="120" fill="#1f43a3"/><rect x="458" y="28" width="134" height="10" fill="#1f43a3"/><rect x="458" y="38" width="134" height="3" fill="#fff" opacity=".55"/><path d="M512.0 156 V99 A13 13 0 0 1 538.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M508.0 156 V99 A17 17 0 0 1 542.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="474" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="471" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="479" y1="90" x2="479" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="484" y1="90" x2="484" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="489" y1="90" x2="489" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="556" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="553" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="561" y1="90" x2="561" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="566" y1="90" x2="566" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="571" y1="90" x2="571" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="590" y="20" width="160" height="136" fill="#f08a7a"/><rect x="588" y="12" width="164" height="10" fill="#f08a7a"/><rect x="588" y="22" width="164" height="3" fill="#fff" opacity=".55"/><path d="M657.0 156 V99 A13 13 0 0 1 683.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M653.0 156 V99 A17 17 0 0 1 687.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="604" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="601" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="609" y1="90" x2="609" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="614" y1="90" x2="614" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="619" y1="90" x2="619" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="716" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="713" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="721" y1="90" x2="721" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="726" y1="90" x2="726" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="731" y1="90" x2="731" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="600.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="614.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="628.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="642.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="656.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="670.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="684.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="698.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="712.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="726.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="750" y="36" width="160" height="120" fill="#8fd0c4"/><rect x="748" y="28" width="164" height="10" fill="#8fd0c4"/><rect x="748" y="38" width="164" height="3" fill="#fff" opacity=".55"/><path d="M817.0 156 V99 A13 13 0 0 1 843.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M813.0 156 V99 A17 17 0 0 1 847.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="764" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="761" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="769" y1="90" x2="769" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="774" y1="90" x2="774" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="779" y1="90" x2="779" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="876" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="873" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="881" y1="90" x2="881" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="886" y1="90" x2="886" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="891" y1="90" x2="891" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="910" y="20" width="120" height="136" fill="#f6d27a"/><rect x="908" y="12" width="124" height="10" fill="#f6d27a"/><rect x="908" y="22" width="124" height="3" fill="#fff" opacity=".55"/><path d="M957.0 156 V99 A13 13 0 0 1 983.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M953.0 156 V99 A17 17 0 0 1 987.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="924" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="921" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="929" y1="90" x2="929" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="934" y1="90" x2="934" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="939" y1="90" x2="939" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="996" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="993" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1001" y1="90" x2="1001" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1006" y1="90" x2="1006" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1011" y1="90" x2="1011" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="921.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="935.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="949.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="963.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="977.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="991.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1005.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="1030" y="36" width="140" height="120" fill="#7aa0e8"/><rect x="1028" y="28" width="144" height="10" fill="#7aa0e8"/><rect x="1028" y="38" width="144" height="3" fill="#fff" opacity=".55"/><path d="M1087.0 156 V99 A13 13 0 0 1 1113.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M1083.0 156 V99 A17 17 0 0 1 1117.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="1044" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1041" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1049" y1="90" x2="1049" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1054" y1="90" x2="1054" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1059" y1="90" x2="1059" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="1136" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1133" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1141" y1="90" x2="1141" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1146" y1="90" x2="1146" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1151" y1="90" x2="1151" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="1170" y="10" width="120" height="146" fill="#e0533a"/><rect x="1168" y="2" width="124" height="10" fill="#e0533a"/><rect x="1168" y="12" width="124" height="3" fill="#fff" opacity=".55"/><path d="M1217.0 156 V99 A13 13 0 0 1 1243.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M1213.0 156 V99 A17 17 0 0 1 1247.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="1184" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1181" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1189" y1="90" x2="1189" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1194" y1="90" x2="1194" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1199" y1="90" x2="1199" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="1256" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1253" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1261" y1="90" x2="1261" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1266" y1="90" x2="1266" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1271" y1="90" x2="1271" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="1181.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1195.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1209.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1223.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1237.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1251.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1265.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><rect x="0" y="156" width="1200" height="14" fill="url(#mar-largo)"/></svg>
   <div class="wrap">
+    <p class="script">com amor, Leo &amp; Vanessa</p>
     <p class="sign">Até já <em>·</em> ¡Nos vemos!</p>
     <p class="muted" style="margin:0 auto">Questions? Reach us at hello@leoandvanessa.example</p>
+    <button class="replay" id="replay" type="button">Close the envelope</button>
   </div>
 </footer>
 
@@ -386,6 +538,19 @@ footer .sign em { font-style: normal; color: var(--coral); }
     document.getElementById('cd-m').textContent = String(Math.floor(ms % 36e5 / 6e4)).padStart(2, '0');
   }
   tick(); setInterval(tick, 30000);
+
+  // envelope: the flap folds back to show the tile liner, the card rises, then the page appears
+  var intro = document.getElementById('intro');
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function reveal() { intro.classList.add('gone'); root.classList.remove('locked'); scrollTo(0, 0); }
+  document.getElementById('seal').addEventListener('click', function () {
+    intro.classList.add('open');
+    if (still) return reveal();
+    setTimeout(reveal, 2100);
+  });
+  document.getElementById('replay').addEventListener('click', function () {
+    scrollTo(0, 0); root.classList.add('locked'); intro.classList.remove('open', 'gone');
+  });
 
   // scroll dividers: each gets --p, its progress across the viewport (0 entering at the bottom, 1 leaving at the top)
   var dividers = [].slice.call(document.querySelectorAll('[data-scroll]')), queued = false;
