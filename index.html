@@ -34,18 +34,6 @@
   --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b1020; --surface: #121a33; --ink: #eef2ff; --muted: #98a4c4; --line: #223055;
-    --cobalt: #7290ff; --larimar: #6fd0e2; --larimar-soft: #10303a; --coral: #ff7357; --mango: #ffc65a;
-    --tile-bg: #121a33; --on-cobalt: #0b1020; --teal: #3fb2c8; --teal-deep: #2a8ca0; --peach: #f6ad8b; --sage: #93bb8c; --lemon: #eadb5c; --paper: #161f3b; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0b1020; --surface: #121a33; --ink: #eef2ff; --muted: #98a4c4; --line: #223055;
-  --cobalt: #7290ff; --larimar: #6fd0e2; --larimar-soft: #10303a; --coral: #ff7357; --mango: #ffc65a;
-  --tile-bg: #121a33; --on-cobalt: #0b1020; --teal: #3fb2c8; --teal-deep: #2a8ca0; --peach: #f6ad8b; --sage: #93bb8c; --lemon: #eadb5c; --paper: #161f3b; color-scheme: dark;
-}
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -71,7 +59,6 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 .links { display: flex; align-items: center; gap: 24px; font-size: .9rem; font-weight: 600; }
 .links a { text-decoration: none; color: var(--muted); }
 .links a:hover { color: var(--ink); }
-.theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font-size: 1rem; }
 @media (max-width: 700px) { .links a { display: none; } }
 
 /* hero */
@@ -288,6 +275,26 @@ html.locked { overflow: hidden; }
 .couple.met .heart { transform: scale(1); }
 .couple-line { position: absolute; left: 0; right: 0; top: 16px; margin: 0; max-width: none; text-align: center; font: 400 clamp(1.8rem, 4vw, 2.6rem)/1 var(--font-script); color: var(--teal-deep); opacity: 0; transform: translateY(8px); transition: opacity .6s, transform .6s; }
 .couple.met .couple-line { opacity: 1; transform: none; }
+
+/* flower drop: Dominican and Portuguese native flowers falling over the page */
+.flowerbtn { position: fixed; z-index: 20; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 8px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--surface); color: var(--ink); font: 700 .85rem var(--font-body); box-shadow: 0 0 0 1px var(--line), 0 8px 20px -8px rgba(15, 26, 51, .35); }
+.flowerbtn svg { width: 30px; height: 30px; }
+.flowerbtn:hover svg { transform: rotate(30deg); transition: transform .3s; }
+.petals { position: fixed; inset: 0; pointer-events: none; z-index: 55; overflow: hidden; }
+.petals .fall { position: absolute; top: -70px; animation: fall linear forwards; }
+.petals .fall svg { display: block; animation: sway ease-in-out infinite alternate; }
+@keyframes fall { to { transform: translateY(calc(100vh + 140px)) rotate(var(--spin)); } }
+@keyframes sway { from { translate: calc(var(--sway) * -1) 0; } to { translate: var(--sway) 0; } }
+.flower-note { position: fixed; z-index: 56; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; width: min(92vw, 520px);
+  background: var(--surface); border-radius: 10px; padding: 12px 16px; box-shadow: 0 0 0 1px var(--line), 0 14px 30px -12px rgba(15, 26, 51, .4);
+  display: flex; gap: 12px; align-items: center; font-size: .9rem; color: var(--muted); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; pointer-events: none; }
+.flower-note.show { opacity: 1; transform: none; }
+.flower-note b { color: var(--ink); }
+.flower-note .trio { display: flex; flex: none; }
+.flower-note .trio svg { width: 28px; height: 28px; margin-left: -6px; }
+@media (max-width: 520px) { .flowerbtn .label-long { display: none; } }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     section > .wrap { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
@@ -378,6 +385,27 @@ html.locked { overflow: hidden; }
       <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="9" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
+
+    <!-- Rosa de Bayahibe: the Dominican national flower, a pink cactus bloom found only in the Dominican Republic -->
+    <symbol id="f-bayahibe" viewBox="0 0 100 100"><g transform="translate(50 50)">
+      <g fill="#e8649f"><ellipse rx="15" ry="25" cy="-22" transform="rotate(0)"/><ellipse rx="15" ry="25" cy="-22" transform="rotate(60)"/><ellipse rx="15" ry="25" cy="-22" transform="rotate(120)"/><ellipse rx="15" ry="25" cy="-22" transform="rotate(180)"/><ellipse rx="15" ry="25" cy="-22" transform="rotate(240)"/><ellipse rx="15" ry="25" cy="-22" transform="rotate(300)"/></g>
+      <g fill="#f6a3c8"><ellipse rx="8" ry="15" cy="-20" transform="rotate(0)"/><ellipse rx="8" ry="15" cy="-20" transform="rotate(60)"/><ellipse rx="8" ry="15" cy="-20" transform="rotate(120)"/><ellipse rx="8" ry="15" cy="-20" transform="rotate(180)"/><ellipse rx="8" ry="15" cy="-20" transform="rotate(240)"/><ellipse rx="8" ry="15" cy="-20" transform="rotate(300)"/></g>
+      <circle r="10" fill="#f4c73e"/><circle r="1.8" cx="6.0" cy="0.0" fill="#c98f14"/><circle r="1.8" cx="5.2" cy="3.0" fill="#c98f14"/><circle r="1.8" cx="3.0" cy="5.2" fill="#c98f14"/><circle r="1.8" cx="-0.0" cy="6.0" fill="#c98f14"/><circle r="1.8" cx="-3.0" cy="5.2" fill="#c98f14"/><circle r="1.8" cx="-5.2" cy="3.0" fill="#c98f14"/><circle r="1.8" cx="-6.0" cy="-0.0" fill="#c98f14"/><circle r="1.8" cx="-5.2" cy="-3.0" fill="#c98f14"/><circle r="1.8" cx="-3.0" cy="-5.2" fill="#c98f14"/><circle r="1.8" cx="0.0" cy="-6.0" fill="#c98f14"/><circle r="1.8" cx="3.0" cy="-5.2" fill="#c98f14"/><circle r="1.8" cx="5.2" cy="-3.0" fill="#c98f14"/>
+    </g></symbol>
+    <!-- Esteva (Cistus ladanifer): the white rockrose of Portuguese hillsides, with a maroon spot on each petal -->
+    <symbol id="f-esteva" viewBox="0 0 100 100"><g transform="translate(50 50)">
+      <g fill="#ffffff" stroke="#d9dde6" stroke-width="1.2"><ellipse rx="19" ry="23" cy="-21" transform="rotate(0)"/><ellipse rx="19" ry="23" cy="-21" transform="rotate(72)"/><ellipse rx="19" ry="23" cy="-21" transform="rotate(144)"/><ellipse rx="19" ry="23" cy="-21" transform="rotate(216)"/><ellipse rx="19" ry="23" cy="-21" transform="rotate(288)"/></g>
+      <g fill="#7a1f2b"><ellipse rx="6" ry="5" cy="-12" transform="rotate(0)"/><ellipse rx="6" ry="5" cy="-12" transform="rotate(72)"/><ellipse rx="6" ry="5" cy="-12" transform="rotate(144)"/><ellipse rx="6" ry="5" cy="-12" transform="rotate(216)"/><ellipse rx="6" ry="5" cy="-12" transform="rotate(288)"/></g>
+      <circle r="8" fill="#f2c230"/><circle r="4" fill="#e0a51c"/>
+    </g></symbol>
+    <!-- Rosmaninho (Lavandula stoechas): Portugal's wild lavender, with purple "rabbit ear" bracts -->
+    <symbol id="f-rosmaninho" viewBox="0 0 100 100">
+      <path d="M50 96 Q48 74 50 52" fill="none" stroke="#6f9a63" stroke-width="3.5" stroke-linecap="round"/>
+      <ellipse cx="40" cy="80" rx="4" ry="10" fill="#86ad80" transform="rotate(-35 40 80)"/>
+      <g><ellipse cx="47" cy="52" rx="9" ry="6" fill="#7351b3"/><ellipse cx="53" cy="46" rx="9" ry="6" fill="#5f3f9a"/><ellipse cx="47" cy="40" rx="9" ry="6" fill="#7351b3"/><ellipse cx="53" cy="34" rx="9" ry="6" fill="#5f3f9a"/><ellipse cx="47" cy="28" rx="9" ry="6" fill="#7351b3"/><ellipse cx="53" cy="22" rx="9" ry="6" fill="#5f3f9a"/></g>
+      <ellipse cx="42" cy="14" rx="6" ry="14" fill="#b79ce6" transform="rotate(-22 42 14)"/>
+      <ellipse cx="58" cy="13" rx="6" ry="14" fill="#c4adef" transform="rotate(22 58 13)"/>
+    </symbol>
     <pattern id="liner" width="40" height="40" patternUnits="userSpaceOnUse"><use href="#az-a" width="40" height="40" style="color:var(--cobalt)"/></pattern>
     <pattern id="liner-lg" width="96" height="96" patternUnits="userSpaceOnUse"><use href="#az-a" width="96" height="96" style="color:var(--cobalt)"/></pattern>
     <pattern id="mar-largo" width="120" height="28" patternUnits="userSpaceOnUse">
@@ -417,7 +445,6 @@ html.locked { overflow: hidden; }
       <a href="#photos">Photos</a>
       <a href="#agenda">Agenda</a>
       <a href="#registry">Registry</a>
-      <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
     </div>
   </div>
 </nav>
@@ -637,6 +664,13 @@ html.locked { overflow: hidden; }
   </div>
 </section>
 
+<button class="flowerbtn" id="flowerbtn" type="button"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#f-bayahibe"/></svg>Lançar flores<span class="label-long">&nbsp;· Lanzar flores</span></button>
+<div class="petals" id="petals" aria-hidden="true"></div>
+<div class="flower-note" id="flower-note" role="status">
+  <span class="trio" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#f-bayahibe"/></svg><svg viewBox="0 0 100 100"><use href="#f-esteva"/></svg><svg viewBox="0 0 100 100"><use href="#f-rosmaninho"/></svg></span>
+  <span><b>Rosa de Bayahibe</b>, the Dominican national flower, with <b>esteva</b> and <b>rosmaninho</b> from the Portuguese hills.</span>
+</div>
+
 <button class="totop" id="totop" type="button"><svg viewBox="0 0 100 100" aria-hidden="true" style="color:var(--cobalt)"><use href="#az-a"/></svg>Back to the top ↑</button>
 
 <footer>
@@ -652,11 +686,6 @@ html.locked { overflow: hidden; }
 <script>
 (function () {
   var root = document.documentElement;
-  // always land in light mode; the toggle switches for the visit
-  root.setAttribute('data-theme', 'light');
-  document.getElementById('theme').addEventListener('click', function () {
-    root.setAttribute('data-theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
 
   // countdown to 4:00 pm on June 19, 2027; on the day itself it turns into party poppers, and after it, "Casados"
   // (add #party to the address to preview the wedding-day state)
@@ -713,6 +742,27 @@ html.locked { overflow: hidden; }
   }
   document.getElementById('party').addEventListener('click', burst);
   addEventListener('hashchange', function () { tick(); if (mode === 'party') burst(); });
+
+  // flower drop: a shower of Dominican and Portuguese native flowers
+  var petals = document.getElementById('petals'), note = document.getElementById('flower-note'), noteTimer;
+  var kinds = ['f-bayahibe', 'f-esteva', 'f-rosmaninho'];
+  document.getElementById('flowerbtn').addEventListener('click', function () {
+    note.classList.add('show'); clearTimeout(noteTimer);
+    noteTimer = setTimeout(function () { note.classList.remove('show'); }, 6000);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    for (var i = 0; i < 46; i++) {
+      var f = document.createElement('div'), size = 26 + Math.random() * 30;
+      f.className = 'fall';
+      f.style.left = (Math.random() * 100) + 'vw';
+      f.style.width = size + 'px';
+      f.style.animationDuration = (5 + Math.random() * 5) + 's';
+      f.style.animationDelay = (Math.random() * 2.4) + 's';
+      f.style.setProperty('--spin', ((Math.random() - .5) * 720) + 'deg');
+      f.innerHTML = '<svg viewBox="0 0 100 100" style="animation-duration:' + (1.2 + Math.random() * 1.4) + 's;--sway:' + (12 + Math.random() * 30) + 'px"><use href="#' + kinds[i % 3] + '"/></svg>';
+      f.addEventListener('animationend', function (e) { if (e.animationName === 'fall') e.currentTarget.remove(); });
+      petals.appendChild(f);
+    }
+  });
 
   // back to the top
   var totop = document.getElementById('totop');
