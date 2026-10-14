@@ -96,6 +96,8 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 
 
 /* two cultures */
+.story-copy { columns: 2 22rem; column-gap: 40px; max-width: 900px; }
+.story-copy p { break-inside: avoid; }
 .cultures { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 44px; }
 .culture { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; min-width: 0; }
 .culture header { padding: 26px 28px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
@@ -348,10 +350,10 @@ html.locked { overflow: hidden; }
   <div class="wrap">
     <a class="mono" href="#top"><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg>L&amp;V</a>
     <div class="links">
-      <a href="#cultures">Two cultures</a>
+      <a href="#story">Our story</a>
       <a href="#day">The day</a>
       <a href="#photos">Photos</a>
-      <a href="#details">Details</a>
+      <a href="#agenda">Agenda</a>
       <a href="#registry">Registry</a>
       <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
     </div>
@@ -392,11 +394,14 @@ html.locked { overflow: hidden; }
 
 <div class="waves" data-scroll aria-hidden="true"></div>
 
-<section class="tint" id="cultures">
+<section class="tint" id="story">
   <div class="wrap">
-    <p class="eyebrow">Duas culturas · Dos culturas</p>
-    <h2>One family brings the tiles and the fado. The other brings the merengue and the bizcocho.</h2>
-    <p class="muted">Everything on this page borrows from both. Here's what you're looking at.</p>
+    <p class="eyebrow">A nossa história · Nuestra historia</p>
+    <h2>Our story</h2>
+    <div class="story-copy">
+      <p>We met in New York, two people with families an ocean apart who kept finding the same things at home in each other: big Sunday tables, music that never turns off, and a grandmother in each family who insists you eat more.</p>
+      <p>Seven years later we're bringing both families together. One brings the tiles and the fado. The other brings the merengue and the bizcocho. Everything on this page borrows from both, and here's what you're looking at.</p>
+    </div>
     <div class="cultures">
       <article class="culture pt">
         <svg class="strip" aria-hidden="true"><rect width="100%" height="100%" fill="url(#liner)"/></svg>
@@ -439,20 +444,16 @@ html.locked { overflow: hidden; }
 <div class="frieze" data-scroll aria-hidden="true"><div class="row a"><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg></div><div class="row b"><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg></div></div>
 
 <section id="day">
-  <div class="wrap day">
-    <div>
-      <p class="eyebrow">O dia · El día</p>
-      <h2>Saturday, June 19</h2>
-      <p class="muted">An afternoon in two languages. The ceremony is short and the party is long.</p>
+  <div class="wrap">
+    <p class="eyebrow">O dia · El día</p>
+    <h2>Saturday, June 19, 2027</h2>
+    <p class="muted">Ceremony at 4:00 pm, reception to follow, all in one place. Here's what you need to plan the day.</p>
+    <div class="cards">
+      <div><h3>Venue</h3><p>The Glasshouse, 214 Water Street, Brooklyn, NY. Free parking on site after 3 pm.</p></div>
+      <div><h3>Stay</h3><p>We hold a room block at the Harbor Hotel, five minutes away. Use code LEOVANESSA by May 15.</p></div>
+      <div><h3>Dress code</h3><p>Formal. Wear our colors if you like, and anything but white.</p>
+        <div class="swatches"><span><i style="background:var(--cobalt)"></i>Azulejo</span><span><i style="background:var(--larimar)"></i>Larimar</span><span><i style="background:var(--coral)"></i>Flamboyán</span></div></div>
     </div>
-    <ol class="timeline">
-      <li><time>3:30 pm</time><div><h3>Welcome <em>Boas-vindas · Bienvenida</em></h3><p>Vinho verde and morir soñando in the garden.</p></div></li>
-      <li><time>4:00 pm</time><div><h3>Ceremony <em>Cerimónia · Ceremonia</em></h3><p>Under the glass atrium, about 30 minutes.</p></div></li>
-      <li><time>5:00 pm</time><div><h3>Cocktail hour <em>Petiscos · Picaderas</em></h3><p>Pastéis de bacalhau and tostones, with a fado guitarist on the rooftop.</p></div></li>
-      <li><time>6:30 pm</time><div><h3>Dinner <em>Jantar · Cena</em></h3><p>Family style: bacalhau à Brás and pernil, side by side.</p></div></li>
-      <li><time>8:00 pm</time><div><h3>Cake &amp; toast <em>Bizcocho · Brinde · Brindis</em></h3><p>Cutting the bizcocho dominicano, then a toast with both national drinks: a glass of Port and a shot of mamajuana.</p></div></li>
-      <li><time>8:30 pm</time><div><h3>Dancing <em>Baile</em></h3><p>Merengue and bachata until 11, with at least one Portuguese pimba song for the uncles.</p></div></li>
-    </ol>
   </div>
 </section>
 
@@ -476,16 +477,21 @@ html.locked { overflow: hidden; }
 
 <div class="waves rev" data-scroll aria-hidden="true"></div>
 
-<section id="details">
-  <div class="wrap">
-    <p class="eyebrow">Detalhes · Detalles</p>
-    <h2>Good to know</h2>
-    <div class="cards">
-      <div><h3>Venue</h3><p>The Glasshouse, 214 Water Street, Brooklyn, NY. Free parking on site after 3 pm.</p></div>
-      <div><h3>Stay</h3><p>We hold a room block at the Harbor Hotel, five minutes away. Use code LEOVANESSA by May 15.</p></div>
-      <div><h3>Dress code</h3><p>Formal. Wear our colors if you like, and anything but white.</p>
-        <div class="swatches"><span><i style="background:var(--cobalt)"></i>Azulejo</span><span><i style="background:var(--larimar)"></i>Larimar</span><span><i style="background:var(--coral)"></i>Flamboyán</span></div></div>
+<section id="agenda">
+  <div class="wrap day">
+    <div>
+      <p class="eyebrow">Programa · Itinerario</p>
+      <h2>Agenda</h2>
+      <p class="muted">An afternoon in two languages. The ceremony is short and the party is long.</p>
     </div>
+    <ol class="timeline">
+      <li><time>3:30 pm</time><div><h3>Welcome <em>Boas-vindas · Bienvenida</em></h3><p>Vinho verde and morir soñando in the garden.</p></div></li>
+      <li><time>4:00 pm</time><div><h3>Ceremony <em>Cerimónia · Ceremonia</em></h3><p>Under the glass atrium, about 30 minutes.</p></div></li>
+      <li><time>5:00 pm</time><div><h3>Cocktail hour <em>Petiscos · Picaderas</em></h3><p>Pastéis de bacalhau and tostones, with a fado guitarist on the rooftop.</p></div></li>
+      <li><time>6:30 pm</time><div><h3>Dinner <em>Jantar · Cena</em></h3><p>Family style: bacalhau à Brás and pernil, side by side.</p></div></li>
+      <li><time>8:00 pm</time><div><h3>Cake &amp; toast <em>Bizcocho · Brinde · Brindis</em></h3><p>Cutting the bizcocho dominicano, then a toast with both national drinks: a glass of Port and a shot of mamajuana.</p></div></li>
+      <li><time>8:30 pm</time><div><h3>Dancing <em>Baile</em></h3><p>Merengue and bachata until 11, with at least one Portuguese pimba song for the uncles.</p></div></li>
+    </ol>
   </div>
 </section>
 
