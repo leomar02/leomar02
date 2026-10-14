@@ -279,7 +279,7 @@ html.locked { overflow: hidden; }
 .who { position: absolute; bottom: 30px; width: var(--fw); will-change: transform; }
 .who svg { display: block; width: 100%; height: auto; overflow: visible; }
 .groom { left: calc(50% - var(--fw) + 12px); transform: translateX(calc((1 - var(--m, 1)) * -40vw)); }
-.bride { left: calc(50% - 12px); transform: translateX(calc((1 - var(--m, 1)) * 40vw)); }
+.bride { width: calc(var(--fw) * .9); left: calc(50% - 12px); transform: translateX(calc((1 - var(--m, 1)) * 40vw)); }
 .groom .leg.a { transform: rotate(calc(var(--step, 0) * 16deg)); }
 .groom .leg.b { transform: rotate(calc(var(--step, 0) * -16deg)); }
 .bride .dress { transform: rotate(calc(var(--step, 0) * 3deg)); }
@@ -552,12 +552,12 @@ html.locked { overflow: hidden; }
   </g>
   <path d="M70 70 Q80 92 70 110" fill="none" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/><path d="M70 70 Q80 92 70 110" fill="none" stroke="var(--paper)" stroke-width="8" stroke-linecap="round"/>
   <g><use href="#flor" x="56" y="98" width="26" height="26"/><ellipse cx="62" cy="122" rx="3" ry="8" fill="var(--sage)" transform="rotate(25 62 122)"/><ellipse cx="74" cy="120" rx="3" ry="8" fill="var(--sage)" transform="rotate(-25 74 120)"/></g>
-  <path d="M50 70 Q34 90 16 102" fill="none" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/><path d="M50 70 Q34 90 16 102" fill="none" stroke="var(--paper)" stroke-width="8" stroke-linecap="round"/>
-  <circle cx="14" cy="104" r="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+  <path d="M50 70 Q34 84 16 89" fill="none" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/><path d="M50 70 Q34 84 16 89" fill="none" stroke="var(--paper)" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="14" cy="91" r="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
   <rect x="55" y="48" width="8" height="12" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
   <circle cx="59" cy="37" r="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="2.5"/>
-  <circle cx="72" cy="27" r="7.5" fill="var(--ink)"/>
-  <path d="M45 37 Q46 21 60 21 Q74 22 73 37 Q66 29 58 30 Q50 31 45 37 Z" fill="var(--ink)"/>
+  <circle cx="72" cy="27" r="7.5" fill="#6b4428" stroke="var(--ink)" stroke-width="1.4"/>
+  <path d="M45 37 Q46 21 60 21 Q74 22 73 37 Q66 29 58 30 Q50 31 45 37 Z" fill="#6b4428" stroke="var(--ink)" stroke-width="1.4"/>
   <circle cx="52" cy="38" r="1.5" fill="var(--ink)"/><path d="M47 44 q3 3 7 0" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
 </g></svg></div>
   <svg class="ground" viewBox="0 0 1200 12" preserveAspectRatio="none"><path d="M0 6 Q150 2 300 7 T600 6 T900 5 T1200 6" fill="none" stroke="var(--ink)" stroke-width="2" filter="url(#sketch)"/></svg>
