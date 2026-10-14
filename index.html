@@ -189,7 +189,7 @@ html.locked { overflow: hidden; }
 .intro.gone { visibility: hidden; pointer-events: none; transition: visibility 0s 1.7s; }
 .intro > * { position: absolute; }
 .backdrop { inset: 0; background: radial-gradient(ellipse at 50% 45%, var(--surface), var(--bg) 75%); transition: opacity 1.2s ease .3s; }
-.envbox { inset: 10vh 10vw; }
+.envbox { --ew: min(84vw, 76vh * 1.381, 900px); left: 50%; top: 50%; width: var(--ew); aspect-ratio: 7.25 / 5.25; translate: -50% -50%; }
 .envbox > * { position: absolute; }
 .intro.spread .backdrop { opacity: 0; }
 .liner { inset: 0; border-radius: 6px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(15, 26, 51, .5), 0 0 0 1px rgba(15, 26, 51, .06); opacity: 0; transition: opacity .8s ease; }
@@ -200,31 +200,32 @@ html.locked { overflow: hidden; }
 .panel.right { background: var(--teal); clip-path: polygon(100% 0, 50% 56%, 100% 100%); }
 .panel.bottom { background: color-mix(in srgb, var(--teal) 86%, #fff); clip-path: polygon(0 100%, 50% 50%, 100% 100%); }
 .panel.flap { background: color-mix(in srgb, var(--teal-deep) 92%, #fff); clip-path: polygon(0 0, 100% 0, 50% 62%); transform-origin: top; transition: transform .85s ease-in; }
-.card { left: 50%; top: 50%; width: min(70vw, 500px); aspect-ratio: 3 / 2; translate: -50% -50%; transform: translateY(40%); z-index: 0;
-  background: var(--paper); border-radius: 4px; display: grid; place-content: center; text-align: center; gap: 6px; padding: 34px 16px 16px; overflow: hidden;
-  box-shadow: 0 30px 60px -20px rgba(15, 26, 51, .45); transition: transform 1s cubic-bezier(.2, .8, .2, 1) .45s, opacity .7s ease, z-index 0s; }
-.card-tiles { position: absolute; left: 0; top: 0; width: 100%; height: 24px; }
-.card small { font-size: clamp(.55rem, 1.8vw, .72rem); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cobalt); }
-.card strong { font: 400 clamp(2.2rem, 8vw, 3.6rem)/1.1 var(--font-script); color: var(--ink); }
-.card span { font-size: clamp(.7rem, 2vw, .9rem); color: var(--muted); }
+.card { left: 50%; top: 50%; width: calc(var(--ew) * .82); aspect-ratio: 7 / 5; translate: -50% -50%; z-index: 0;
+  background: var(--paper); border-radius: 3px; display: grid; place-content: center; text-align: center; gap: calc(var(--ew) * .008); padding: calc(var(--ew) * .05) 12px 12px; overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(15, 26, 51, .45); transition: opacity .9s ease .3s; }
+.card-tiles { position: absolute; left: 0; top: 0; width: 100%; height: calc(var(--ew) * .035); }
+.card small { font-size: max(.5rem, calc(var(--ew) * .016)); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cobalt); }
+.card strong { font: 400 calc(var(--ew) * .085)/1.1 var(--font-script); color: var(--ink); }
+.card span { font-size: max(.62rem, calc(var(--ew) * .02)); color: var(--muted); }
 .stamps { right: 3%; top: 4%; display: flex; gap: 10px; transition: opacity .3s; z-index: 2; }
-.stamp { position: static; width: clamp(54px, 8vw, 84px); filter: drop-shadow(0 4px 6px rgba(15, 26, 51, .25)); }
+.stamp { position: static; width: calc(var(--ew) * .085); filter: drop-shadow(0 4px 6px rgba(15, 26, 51, .25)); }
 .stamp.s1 { transform: rotate(7deg); order: 2; }
 .stamp.s2 { transform: rotate(-5deg); }
-.seal { left: 50%; top: 62%; width: clamp(68px, 13vw, 104px); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; border: 0; cursor: pointer; z-index: 2;
-  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--cobalt) 70%, #fff), var(--cobalt) 60%); color: #fff; font: 400 clamp(1.6rem, 4vw, 2.4rem)/1 var(--font-script);
+.seal { left: 50%; top: 62%; width: max(52px, calc(var(--ew) * .13)); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; border: 0; cursor: pointer; z-index: 2;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--cobalt) 70%, #fff), var(--cobalt) 60%); color: #fff; font: 400 max(1.3rem, calc(var(--ew) * .036))/1 var(--font-script);
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--cobalt) 30%, transparent), 0 8px 18px rgba(0, 0, 0, .3); transition: opacity .25s, transform .2s; }
 .seal:hover { transform: scale(1.06); }
-.hint { left: 0; right: 0; max-width: none; top: calc(62% + clamp(50px, 9vw, 74px)); margin: 0; text-align: center; font-size: clamp(.6rem, 2.6vw, .8rem); white-space: nowrap; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #fff; transition: opacity .3s; z-index: 2; }
+.hint { left: 0; right: 0; max-width: none; top: calc(100% + 22px); margin: 0; text-align: center; font-size: clamp(.6rem, 2.6vw, .8rem); white-space: nowrap; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); transition: opacity .3s; z-index: 2; }
 .intro.open .seal, .intro.open .hint, .intro.open .stamps { opacity: 0; pointer-events: none; }
 .intro.open .flap { transform: scaleY(0); }
-.intro.open .card { transform: translateY(-4%); z-index: 3; transition: transform 1.9s cubic-bezier(.2, .8, .2, 1) .7s, opacity .7s ease, z-index 0s 1.45s; }
-.intro.spread .panel.left { transform: translateX(-100%); }
-.intro.spread .panel.right { transform: translateX(100%); }
-.intro.spread .panel.bottom { transform: translateY(100%); }
+.intro.open .card { animation: pullout 2.4s cubic-bezier(.3, .7, .2, 1) .7s forwards; }
+@keyframes pullout { 0% { transform: none; z-index: 0; } 55% { transform: translateY(-58%); z-index: 0; } 56% { z-index: 3; } 100% { transform: translateY(-6%) scale(1.12); z-index: 3; } }
+.intro.spread .panel.left { transform: translateX(-120vw); }
+.intro.spread .panel.right { transform: translateX(120vw); }
+.intro.spread .panel.bottom { transform: translateY(110vh); }
 .intro.spread .liner { opacity: 0; transition: opacity 1.2s ease; }
-.intro.spread .card { transform: translateY(-4%) scale(1.08); opacity: 0; transition: transform 1.3s ease, opacity .9s ease .3s; }
-@media (prefers-reduced-motion: reduce) { .panel, .card, .liner, .panel.flap { transition: none; } }
+.intro.spread .card { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .panel, .card, .liner, .panel.flap { transition: none; animation: none !important; } }
 .totop { position: fixed; z-index: 20; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px 10px 10px; border: 0; border-radius: 999px; cursor: pointer;
   background: var(--cobalt); color: var(--on-cobalt); font: 700 .85rem var(--font-body); box-shadow: 0 8px 20px -6px rgba(15, 26, 51, .45);
@@ -277,24 +278,35 @@ html.locked { overflow: hidden; }
 .couple.met .couple-line { opacity: 1; transform: none; }
 
 /* flower drop: Dominican and Portuguese native flowers falling over the page */
-.flowerbtn { position: fixed; z-index: 20; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 8px; border: 0; border-radius: 999px; cursor: pointer;
-  background: var(--surface); color: var(--ink); font: 700 .85rem var(--font-body); box-shadow: 0 0 0 1px var(--line), 0 8px 20px -8px rgba(15, 26, 51, .35); }
-.flowerbtn svg { width: 30px; height: 30px; }
-.flowerbtn:hover svg { transform: rotate(30deg); transition: transform .3s; }
+.flowerbtn { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); cursor: pointer; }
+.flowerbtn svg { width: 28px; height: 28px; transition: transform .4s; }
+.flowerbtn:hover svg, .flowerbtn:focus-visible svg { transform: rotate(60deg) scale(1.1); }
 .petals { position: fixed; inset: 0; pointer-events: none; z-index: 55; overflow: hidden; }
 .petals .fall { position: absolute; top: -70px; animation: fall linear forwards; }
 .petals .fall svg { display: block; animation: sway ease-in-out infinite alternate; }
 @keyframes fall { to { transform: translateY(calc(100vh + 140px)) rotate(var(--spin)); } }
 @keyframes sway { from { translate: calc(var(--sway) * -1) 0; } to { translate: var(--sway) 0; } }
-.flower-note { position: fixed; z-index: 56; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; width: min(92vw, 520px);
+.flower-note { position: fixed; z-index: 56; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; width: min(92vw, 520px);
   background: var(--surface); border-radius: 10px; padding: 12px 16px; box-shadow: 0 0 0 1px var(--line), 0 14px 30px -12px rgba(15, 26, 51, .4);
   display: flex; gap: 12px; align-items: center; font-size: .9rem; color: var(--muted); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; pointer-events: none; }
 .flower-note.show { opacity: 1; transform: none; }
 .flower-note b { color: var(--ink); }
 .flower-note .trio { display: flex; flex: none; }
 .flower-note .trio svg { width: 28px; height: 28px; margin-left: -6px; }
-@media (max-width: 520px) { .flowerbtn .label-long { display: none; } }
+
+/* add to my calendar */
+.addcal { position: relative; display: inline-block; margin-top: 16px; }
+.addcal summary { list-style: none; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 18px; border-radius: 999px;
+  background: #fff; color: var(--cobalt); font: 700 .92rem var(--font-body); box-shadow: 0 8px 18px -10px rgba(0, 0, 0, .5); }
+.addcal summary::-webkit-details-marker { display: none; }
+.addcal summary svg { width: 18px; height: 18px; }
+.addcal summary:hover { background: color-mix(in srgb, #fff 88%, var(--larimar)); }
+.calmenu { position: absolute; z-index: 30; left: 0; top: calc(100% + 8px); min-width: 230px; background: var(--surface); border-radius: 10px; padding: 6px;
+  box-shadow: 0 0 0 1px var(--line), 0 18px 36px -12px rgba(15, 26, 51, .45); display: grid; }
+.calmenu a { padding: 10px 12px; border-radius: 6px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: .92rem; }
+.calmenu a:hover { background: var(--larimar-soft); }
+.datebar { overflow: visible; }
+.datebar-tiles { overflow: hidden; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     section > .wrap { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
@@ -445,6 +457,7 @@ html.locked { overflow: hidden; }
       <a href="#photos">Photos</a>
       <a href="#agenda">Agenda</a>
       <a href="#registry">Registry</a>
+      <button class="flowerbtn" id="flowerbtn" type="button" aria-label="Drop flowers · Lançar flores · Lanzar flores" title="Lançar flores · Lanzar flores"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#f-bayahibe"/></svg></button>
     </div>
   </div>
 </nav>
@@ -456,6 +469,14 @@ html.locked { overflow: hidden; }
       <p class="date-kicker">Reserve a data · Reserva la fecha · Save the date</p>
       <p class="date-big"><span>19</span><i>·</i><span>06</span><i>·</i><span>2027</span></p>
       <p class="date-sub">Sábado · Saturday, June 19, 2027 · 4:00 pm</p>
+      <details class="addcal">
+        <summary><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to my calendar</summary>
+        <div class="calmenu">
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Leo+%26+Vanessa%27s+wedding&amp;dates=20270619T200000Z%2F20270620T030000Z&amp;details=Ceremony+at+4%3A00+pm%2C+reception+to+follow.+Bem-vindos+%C2%B7+Bienvenidos%21&amp;location=The+Glasshouse%2C+214+Water+Street%2C+Brooklyn%2C+NY" target="_blank" rel="noopener">Google Calendar</a>
+          <a href="https://outlook.live.com/calendar/0/action/compose?subject=Leo+%26+Vanessa%27s+wedding&amp;startdt=2027-06-19T16%3A00%3A00-04%3A00&amp;enddt=2027-06-19T23%3A00%3A00-04%3A00&amp;location=The+Glasshouse%2C+214+Water+Street%2C+Brooklyn%2C+NY&amp;body=Ceremony+at+4%3A00+pm%2C+reception+to+follow.+Bem-vindos+%C2%B7+Bienvenidos%21&amp;path=%2Fcalendar%2Faction%2Fcompose&amp;rru=addevent" target="_blank" rel="noopener">Outlook</a>
+          <a href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-//Leo%20and%20Vanessa//Wedding//EN%0D%0ABEGIN%3AVEVENT%0D%0AUID%3Aleo-vanessa-wedding-20270619%0D%0ADTSTAMP%3A20261014T000000Z%0D%0ADTSTART%3A20270619T200000Z%0D%0ADTEND%3A20270620T030000Z%0D%0ASUMMARY%3ALeo%20%26%20Vanessa%27s%20wedding%0D%0ALOCATION%3AThe%20Glasshouse%5C%2C%20214%20Water%20Street%5C%2C%20Brooklyn%5C%2C%20NY%0D%0ADESCRIPTION%3ACeremony%20at%204%3A00%20pm%2C%20reception%20to%20follow.%20Bem-vindos%20%C2%B7%20Bienvenidos%21%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR%0D%0A" download="leo-vanessa-wedding.ics">Apple Calendar (.ics)</a>
+        </div>
+      </details>
     </div>
     <div class="date-side">
       <div class="count" id="count" aria-label="Countdown to the wedding">
@@ -664,7 +685,6 @@ html.locked { overflow: hidden; }
   </div>
 </section>
 
-<button class="flowerbtn" id="flowerbtn" type="button"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#f-bayahibe"/></svg>Lançar flores<span class="label-long">&nbsp;· Lanzar flores</span></button>
 <div class="petals" id="petals" aria-hidden="true"></div>
 <div class="flower-note" id="flower-note" role="status">
   <span class="trio" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#f-bayahibe"/></svg><svg viewBox="0 0 100 100"><use href="#f-esteva"/></svg><svg viewBox="0 0 100 100"><use href="#f-rosmaninho"/></svg></span>
