@@ -247,6 +247,47 @@ html.locked { overflow: hidden; }
 .totop:hover { filter: brightness(1.1); }
 .replay { background: none; border: 0; color: var(--teal-deep); font: 700 .88rem var(--font-body); cursor: pointer; text-decoration: underline; margin-top: 14px; }
 @media (prefers-reduced-motion: reduce) { .intro, .card, .flap, .liner { transition: none; } }
+
+/* date band: the date and the countdown, first thing under the nav */
+.datebar { position: relative; overflow: hidden; background: var(--cobalt); color: #fff; padding-block: 34px; }
+.datebar-tiles { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .12; mix-blend-mode: screen; }
+.datebar .wrap { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; }
+.datebar .wrap > * { min-width: 0; }
+.date-kicker { margin: 0 0 6px; font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: color-mix(in srgb, #fff 78%, var(--larimar)); }
+.date-big { margin: 0; font: 800 clamp(3.2rem, 10vw, 6.6rem)/.9 var(--font-display); letter-spacing: -.05em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.date-big i { font-style: normal; color: var(--coral); margin-inline: .06em; }
+.date-sub { margin: 10px 0 0; font-weight: 600; color: color-mix(in srgb, #fff 82%, var(--larimar)); }
+.date-side { flex: 1 1 320px; max-width: 520px; margin-left: auto; min-width: 0; }
+.datebar .count { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.datebar .count div { background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .25); border-radius: 4px; padding: 12px 14px; text-align: center; }
+.datebar .count strong { display: block; font: 800 clamp(1.8rem, 4vw, 2.6rem)/1 var(--font-display); font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
+.datebar .count small { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: color-mix(in srgb, #fff 75%, var(--larimar)); }
+.party { display: flex; align-items: center; gap: 16px; border: 0; background: rgba(255, 255, 255, .12); color: #fff; border-radius: 8px; padding: 16px 22px; cursor: pointer; text-align: left; font: inherit; }
+.party b, .married b { display: block; font: 800 clamp(1.4rem, 3.4vw, 2rem)/1.1 var(--font-display); letter-spacing: -.02em; }
+.party small, .married small { display: block; margin-top: 4px; color: color-mix(in srgb, #fff 80%, var(--larimar)); font-weight: 600; }
+.popper { font-size: clamp(2.2rem, 5vw, 3rem); animation: pop 1.2s ease-in-out infinite alternate; }
+.popper.flip { transform: scaleX(-1); animation-name: popflip; }
+@keyframes pop { from { transform: rotate(-8deg) scale(1); } to { transform: rotate(8deg) scale(1.12); } }
+@keyframes popflip { from { transform: scaleX(-1) rotate(-8deg); } to { transform: scaleX(-1) rotate(8deg) scale(1.12); } }
+.married { margin: 0; }
+.confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 60; }
+@media (max-width: 560px) { .date-side { margin-left: 0; } .datebar .count div { padding: 10px 4px; } .datebar .count small { font-size: .55rem; letter-spacing: .08em; } }
+@media (prefers-reduced-motion: reduce) { .popper, .popper.flip { animation: none; } }
+
+/* the couple: hand-drawn bride and groom who walk toward each other as you scroll, then lead into The day */
+.couple { --fw: clamp(104px, 13vw, 146px); position: relative; overflow: hidden; height: calc(var(--fw) * 1.833 + 150px); background: var(--bg); }
+.who { position: absolute; bottom: 30px; width: var(--fw); will-change: transform; }
+.who svg { display: block; width: 100%; height: auto; overflow: visible; }
+.groom { left: calc(50% - var(--fw) + 12px); transform: translateX(calc((1 - var(--m, 1)) * -40vw)); }
+.bride { left: calc(50% - 12px); transform: translateX(calc((1 - var(--m, 1)) * 40vw)); }
+.groom .leg.a { transform: rotate(calc(var(--step, 0) * 16deg)); }
+.groom .leg.b { transform: rotate(calc(var(--step, 0) * -16deg)); }
+.bride .dress { transform: rotate(calc(var(--step, 0) * 3deg)); }
+.couple .ground { position: absolute; left: 0; bottom: 26px; width: 100%; height: 12px; }
+.couple .heart { position: absolute; left: 50%; width: 44px; bottom: calc(30px + var(--fw) * 1.833 - 2px); translate: -50% 0; transform: scale(0); transition: transform .5s cubic-bezier(.3, 1.6, .5, 1); }
+.couple.met .heart { transform: scale(1); }
+.couple-line { position: absolute; left: 0; right: 0; top: 16px; margin: 0; max-width: none; text-align: center; font: 400 clamp(1.8rem, 4vw, 2.6rem)/1 var(--font-script); color: var(--teal-deep); opacity: 0; transform: translateY(8px); transition: opacity .6s, transform .6s; }
+.couple.met .couple-line { opacity: 1; transform: none; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     section > .wrap { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
@@ -333,6 +374,10 @@ html.locked { overflow: hidden; }
         <g fill="var(--larimar)"><circle cx="182" cy="76" r="5"/><circle cx="190" cy="66" r="4"/><circle cx="44" cy="70" r="4.5"/><circle cx="124" cy="134" r="4"/></g>
       </g>
     </symbol>
+    <filter id="sketch" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
     <pattern id="liner" width="40" height="40" patternUnits="userSpaceOnUse"><use href="#az-a" width="40" height="40" style="color:var(--cobalt)"/></pattern>
     <pattern id="liner-lg" width="96" height="96" patternUnits="userSpaceOnUse"><use href="#az-a" width="96" height="96" style="color:var(--cobalt)"/></pattern>
     <pattern id="mar-largo" width="120" height="28" patternUnits="userSpaceOnUse">
@@ -377,6 +422,32 @@ html.locked { overflow: hidden; }
   </div>
 </nav>
 
+<div class="datebar" id="datebar">
+  <svg class="datebar-tiles" aria-hidden="true"><rect width="100%" height="100%" fill="url(#liner-lg)"/></svg>
+  <div class="wrap">
+    <div class="date-main">
+      <p class="date-kicker">Reserve a data · Reserva la fecha · Save the date</p>
+      <p class="date-big"><span>19</span><i>·</i><span>06</span><i>·</i><span>2027</span></p>
+      <p class="date-sub">Sábado · Saturday, June 19, 2027 · 4:00 pm</p>
+    </div>
+    <div class="date-side">
+      <div class="count" id="count" aria-label="Countdown to the wedding">
+        <div><strong id="cd-d">000</strong><small>Dias · Días</small></div>
+        <div><strong id="cd-h">00</strong><small>Horas</small></div>
+        <div><strong id="cd-m">00</strong><small>Minutos</small></div>
+        <div><strong id="cd-s">00</strong><small>Segundos</small></div>
+      </div>
+      <button class="party" id="party" type="button" hidden aria-live="polite">
+        <span class="popper" aria-hidden="true">🎉</span>
+        <span><b>Hoje é o dia! · ¡Hoy es el día!</b><small>Today's the day. Tap for more confetti.</small></span>
+        <span class="popper flip" aria-hidden="true">🎉</span>
+      </button>
+      <p class="married" id="married" hidden><b>Casados · Casados</b><small>Married June 19, 2027. Thank you for celebrating with us.</small></p>
+    </div>
+  </div>
+</div>
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
 <header class="hero" id="top">
   <div class="wrap">
     <div>
@@ -384,13 +455,7 @@ html.locked { overflow: hidden; }
       <h1>Leo <span class="amp">&amp;</span><br><span class="v">Vanessa</span></h1>
       <p class="script-line">com amor · con amor</p>
       <div class="facts">
-        <div><b>Date</b><span>Saturday, June 19, 2027</span></div>
         <div><b>Place</b><span>The Glasshouse, Brooklyn</span></div>
-      </div>
-      <div class="count" aria-label="Countdown to the wedding">
-        <div><strong id="cd-d">000</strong><small>Dias · Días</small></div>
-        <div><strong id="cd-h">00</strong><small>Horas</small></div>
-        <div><strong id="cd-m">00</strong><small>Minutos</small></div>
       </div>
     </div>
     <div class="tile-panel"><svg class="bouquet" viewBox="0 0 220 170" aria-hidden="true"><use href="#bouquet"/></svg>
@@ -459,6 +524,44 @@ html.locked { overflow: hidden; }
 </section>
 
 <div class="frieze" data-scroll aria-hidden="true"><div class="row a"><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg></div><div class="row b"><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg></div></div>
+
+<div class="couple" data-scroll aria-hidden="true">
+  <p class="couple-line">e assim começou · y así empezó</p>
+  <svg class="heart" viewBox="0 0 40 36"><path d="M20 34 C4 22 0 14 4 7 C8 0 17 1 20 8 C23 1 32 0 36 7 C40 14 36 22 20 34 Z" fill="var(--coral)" stroke="var(--ink)" stroke-width="1.6" filter="url(#sketch)"/></svg>
+  <div class="who groom"><svg viewBox="0 0 120 220" aria-hidden="true"><g filter="url(#sketch)" stroke-linejoin="round">
+  <g class="leg a" style="transform-origin:58px 128px"><path d="M58 128 L54 204" fill="none" stroke="var(--ink)" stroke-width="13" stroke-linecap="round"/><path d="M58 128 L54 204" fill="none" stroke="#1a2236" stroke-width="10" stroke-linecap="round"/><path d="M50 206 h12" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/></g>
+  <g class="leg b" style="transform-origin:66px 128px"><path d="M66 128 L70 204" fill="none" stroke="var(--ink)" stroke-width="13" stroke-linecap="round"/><path d="M66 128 L70 204" fill="none" stroke="#1a2236" stroke-width="10" stroke-linecap="round"/><path d="M66 206 h12" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/></g>
+  <path d="M47 68 Q40 96 47 122" fill="none" stroke="var(--ink)" stroke-width="12" stroke-linecap="round"/><path d="M47 68 Q40 96 47 122" fill="none" stroke="var(--cobalt)" stroke-width="9" stroke-linecap="round"/>
+  <path d="M44 62 Q60 54 78 62 L82 132 Q62 139 42 132 Z" fill="var(--cobalt)" stroke="var(--ink)" stroke-width="2.5"/>
+  <path d="M55 60 L61 86 L67 60 Z" fill="#fff" stroke="var(--ink)" stroke-width="1.6"/>
+  <path d="M56 61 l5 3 l5 -3 v7 l-5 -3 l-5 3 z" fill="var(--coral)" stroke="var(--ink)" stroke-width="1"/>
+  <path d="M70 76 l7 -3 l1 6 z" fill="var(--coral)"/>
+  <path d="M76 67 Q92 90 104 102" fill="none" stroke="var(--ink)" stroke-width="12" stroke-linecap="round"/><path d="M76 67 Q92 90 104 102" fill="none" stroke="var(--cobalt)" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="106" cy="104" r="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="57" y="47" width="8" height="12" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+  <circle cx="61" cy="35" r="15" fill="var(--paper)" stroke="var(--ink)" stroke-width="2.5"/>
+  <path d="M46 33 Q47 17 62 18 Q77 18 77 31 Q70 25 60 26 Q52 27 46 33 Z" fill="var(--ink)"/>
+  <circle cx="68" cy="36" r="1.5" fill="var(--ink)"/><path d="M64 42 q4 3 8 0" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+</g></svg></div>
+  <div class="who bride"><svg viewBox="0 0 120 220" aria-hidden="true"><g filter="url(#sketch)" stroke-linejoin="round">
+  <path d="M66 24 Q100 40 104 126 Q92 146 76 136 Q84 82 62 38 Z" fill="var(--larimar-soft)" stroke="var(--larimar)" stroke-width="1.6" opacity=".9"/>
+  <g class="dress" style="transform-origin:60px 98px">
+    <path d="M48 66 Q60 60 72 66 L74 100 Q100 168 106 206 Q60 216 14 206 Q20 168 46 100 Z" fill="var(--paper)" stroke="var(--ink)" stroke-width="2.5"/>
+    <path d="M40 140 q10 6 20 0 q10 6 20 0 M30 176 q15 7 30 0 q15 7 30 0" fill="none" stroke="var(--larimar)" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M46 97 Q60 104 74 97 L75 104 Q60 111 45 104 Z" fill="var(--coral)" stroke="var(--ink)" stroke-width="1.2"/>
+  </g>
+  <path d="M70 70 Q80 92 70 110" fill="none" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/><path d="M70 70 Q80 92 70 110" fill="none" stroke="var(--paper)" stroke-width="8" stroke-linecap="round"/>
+  <g><use href="#flor" x="56" y="98" width="26" height="26"/><ellipse cx="62" cy="122" rx="3" ry="8" fill="var(--sage)" transform="rotate(25 62 122)"/><ellipse cx="74" cy="120" rx="3" ry="8" fill="var(--sage)" transform="rotate(-25 74 120)"/></g>
+  <path d="M50 70 Q34 90 16 102" fill="none" stroke="var(--ink)" stroke-width="11" stroke-linecap="round"/><path d="M50 70 Q34 90 16 102" fill="none" stroke="var(--paper)" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="14" cy="104" r="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="55" y="48" width="8" height="12" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+  <circle cx="59" cy="37" r="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="2.5"/>
+  <circle cx="72" cy="27" r="7.5" fill="var(--ink)"/>
+  <path d="M45 37 Q46 21 60 21 Q74 22 73 37 Q66 29 58 30 Q50 31 45 37 Z" fill="var(--ink)"/>
+  <circle cx="52" cy="38" r="1.5" fill="var(--ink)"/><path d="M47 44 q3 3 7 0" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+</g></svg></div>
+  <svg class="ground" viewBox="0 0 1200 12" preserveAspectRatio="none"><path d="M0 6 Q150 2 300 7 T600 6 T900 5 T1200 6" fill="none" stroke="var(--ink)" stroke-width="2" filter="url(#sketch)"/></svg>
+</div>
 
 <section id="day">
   <div class="wrap">
@@ -555,14 +658,61 @@ html.locked { overflow: hidden; }
     root.setAttribute('data-theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
+  // countdown to 4:00 pm on June 19, 2027; on the day itself it turns into party poppers, and after it, "Casados"
+  // (add #party to the address to preview the wedding-day state)
   var target = new Date(2027, 5, 19, 16, 0, 0).getTime();
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  function phase() {
+    if (location.hash === '#party') return 'party';
+    var n = new Date();
+    var day = n.getFullYear() * 10000 + (n.getMonth() + 1) * 100 + n.getDate();
+    return day < 20270619 ? 'count' : day === 20270619 ? 'party' : 'married';
+  }
+  var mode = null;
   function tick() {
+    var p = phase();
+    if (p !== mode) {
+      mode = p;
+      document.getElementById('count').hidden = p !== 'count';
+      document.getElementById('party').hidden = p !== 'party';
+      document.getElementById('married').hidden = p !== 'married';
+    }
+    if (p !== 'count') return;
     var ms = Math.max(0, target - Date.now());
     document.getElementById('cd-d').textContent = Math.floor(ms / 864e5);
-    document.getElementById('cd-h').textContent = String(Math.floor(ms % 864e5 / 36e5)).padStart(2, '0');
-    document.getElementById('cd-m').textContent = String(Math.floor(ms % 36e5 / 6e4)).padStart(2, '0');
+    document.getElementById('cd-h').textContent = pad(Math.floor(ms % 864e5 / 36e5));
+    document.getElementById('cd-m').textContent = pad(Math.floor(ms % 36e5 / 6e4));
+    document.getElementById('cd-s').textContent = pad(Math.floor(ms % 6e4 / 1e3));
   }
-  tick(); setInterval(tick, 30000);
+  tick(); setInterval(tick, 1000);
+
+  // party poppers: confetti in the wedding colors fired from both bottom corners
+  var cv = document.getElementById('confetti'), cx = cv.getContext('2d'), bits = [], running = false;
+  var colors = ['#1f43a3', '#4fb5cb', '#e0533a', '#f2b23a', '#e9d64b', '#86ad80', '#ffffff'];
+  function size() { var r = devicePixelRatio || 1; cv.width = innerWidth * r; cv.height = innerHeight * r; cx.setTransform(r, 0, 0, r, 0, 0); }
+  function burst() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    size();
+    [[0, 1], [innerWidth, -1]].forEach(function (side) {
+      for (var i = 0; i < 90; i++) {
+        var a = (55 + Math.random() * 25) * Math.PI / 180, v = 10 + Math.random() * 9;
+        bits.push({ x: side[0], y: innerHeight, vx: side[1] * Math.cos(a) * v, vy: -Math.sin(a) * v, r: Math.random() * 6.28,
+          vr: (Math.random() - .5) * .3, w: 6 + Math.random() * 6, h: 4 + Math.random() * 5, c: colors[i % colors.length], life: 0 });
+      }
+    });
+    if (!running) { running = true; requestAnimationFrame(draw); }
+  }
+  function draw() {
+    cx.clearRect(0, 0, innerWidth, innerHeight);
+    bits = bits.filter(function (b) { return b.y < innerHeight + 40 && b.life < 400; });
+    bits.forEach(function (b) {
+      b.life++; b.vy += .28; b.vx *= .99; b.vy *= .99; b.x += b.vx; b.y += b.vy; b.r += b.vr;
+      cx.save(); cx.translate(b.x, b.y); cx.rotate(b.r); cx.fillStyle = b.c; cx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h * Math.abs(Math.cos(b.r * 2))); cx.restore();
+    });
+    if (bits.length) requestAnimationFrame(draw); else { running = false; cx.clearRect(0, 0, innerWidth, innerHeight); }
+  }
+  document.getElementById('party').addEventListener('click', burst);
+  addEventListener('hashchange', function () { tick(); if (mode === 'party') burst(); });
 
   // back to the top
   var totop = document.getElementById('totop');
@@ -572,7 +722,10 @@ html.locked { overflow: hidden; }
   // envelope: the flap folds back to show the tile liner, the card rises, then the page appears
   var intro = document.getElementById('intro');
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function reveal() { intro.classList.add('spread', 'gone'); root.classList.remove('locked'); scrollTo(0, 0); }
+  function reveal() {
+    intro.classList.add('spread', 'gone'); root.classList.remove('locked'); scrollTo(0, 0);
+    if (mode === 'party') setTimeout(burst, 600);
+  }
   document.getElementById('seal').addEventListener('click', function () {
     intro.classList.add('open');
     if (still) return reveal();
@@ -589,9 +742,18 @@ html.locked { overflow: hidden; }
     var vh = innerHeight;
     dividers.forEach(function (el) {
       var r = el.getBoundingClientRect(), p = (vh - r.top) / (vh + r.height);
-      el.style.setProperty('--p', Math.max(0, Math.min(1, p)).toFixed(4));
+      p = Math.max(0, Math.min(1, p));
+      el.style.setProperty('--p', p.toFixed(4));
+      if (el.classList.contains('couple')) {
+        // they start apart, walk in step with the scroll, and meet just before the middle of the screen
+        var m = Math.max(0, Math.min(1, (p - .1) / .36));
+        el.style.setProperty('--m', m.toFixed(4));
+        el.style.setProperty('--step', m < 1 ? Math.sin(p * 90).toFixed(3) : 0);
+        el.classList.toggle('met', m >= 1);
+      }
     });
   }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.couple').classList.add('met');
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(progress); } }, { passive: true });
     addEventListener('resize', progress);
