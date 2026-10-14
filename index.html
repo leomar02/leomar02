@@ -22,9 +22,12 @@
   --d-line: #ff6319;
   --r-line: #fccc0a;
   --on-r: #111111;
-  --water: #e1e9fb;
+  --a-line: #0039a6;
+  --water: #bcd4ee;
   --land: #ffffff;
-  --land-line: #c3cfee;
+  --park: #e6ecc4;
+  --boro-ink: #a9aca6;
+  --stop: #111111;
   --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
   --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -33,14 +36,14 @@
   :root:not([data-theme="light"]) {
     --bg: #05070d; --bg-alt: #0a1022; --fg: #eef2ff; --muted: #94a0c2;
     --line: #1a2444; --blue: #4d7bff; --blue-soft: #14224f; --on-blue: #05070d; --card: #0c1226;
-    --water: #070b18; --land: #111a38; --land-line: #24315e;
+    --a-line: #2f6fe0; --water: #18325f; --land: #0d1429; --park: #16271f; --boro-ink: #3b4874; --stop: #000000;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #05070d; --bg-alt: #0a1022; --fg: #eef2ff; --muted: #94a0c2;
   --line: #1a2444; --blue: #4d7bff; --blue-soft: #14224f; --on-blue: #05070d; --card: #0c1226;
-  --water: #070b18; --land: #111a38; --land-line: #24315e;
+  --a-line: #2f6fe0; --water: #18325f; --land: #0d1429; --park: #16271f; --boro-ink: #3b4874; --stop: #000000;
   color-scheme: dark;
 }
 
@@ -132,34 +135,39 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 
 
 
-/* game */
-.game { display: grid; grid-template-columns: 5fr 6fr; gap: 48px; align-items: center; }
+/* game: map drawn in the style of the MTA subway diagram */
+.game { display: grid; grid-template-columns: 5fr 6fr; grid-template-areas: "intro map" "panel map"; column-gap: 48px; row-gap: 0; align-items: start; }
 .game > * { min-width: 0; }
-@media (max-width: 820px) { .game { grid-template-columns: 1fr; gap: 28px; } .map { order: -1; } }
-.map { width: 100%; max-width: 460px; margin-inline: auto; display: block; border-radius: 20px; border: 1px solid var(--line); background: var(--water); touch-action: manipulation; }
-.map text { paint-order: stroke; stroke-linejoin: round; }
-.boro { fill: var(--land); stroke: var(--land-line); stroke-width: 1.2; stroke-linejoin: round; }
-.boro-name { font: 400 22px var(--font-display); font-style: italic; fill: var(--fg); stroke: var(--land); stroke-width: 3; letter-spacing: .01em; }
-.boro-sub { font: 700 7px var(--font-body); letter-spacing: .18em; text-transform: uppercase; fill: var(--muted); stroke: var(--land); stroke-width: 2.5; }
-.boro-sub.meet { fill: var(--fg); font-size: 7.5px; stroke: var(--water); stroke-width: 3; }
-.water { font: italic 400 10px var(--font-display); letter-spacing: .14em; fill: var(--muted); opacity: .8; }
-.faint { font: 700 7px var(--font-body); letter-spacing: .22em; text-transform: uppercase; fill: var(--muted); opacity: .7; }
+.game-intro { grid-area: intro; align-self: end; }
+.game-panel { grid-area: panel; }
+@media (max-width: 820px) { .game { grid-template-columns: 1fr; grid-template-areas: "intro" "map" "panel"; row-gap: 20px; } }
+.map { grid-area: map; display: block; justify-self: center; height: min(74vh, 720px); width: auto; max-width: 100%; border-radius: 18px; border: 1px solid var(--line); background: var(--land); touch-action: manipulation; }
+.map text { paint-order: stroke; stroke-linejoin: round; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.map .line { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.map .walkway { fill: none; stroke: var(--fg); stroke-width: 1.4; stroke-dasharray: 2 3; stroke-linecap: round; opacity: .7; }
+.map .river { fill: none; stroke: var(--water); stroke-linecap: round; stroke-linejoin: round; }
+.map .boro { font-size: 24px; font-weight: 700; letter-spacing: -.02em; fill: var(--boro-ink); }
+.map .river-name { font-size: 7px; font-style: italic; font-weight: 600; letter-spacing: .08em; fill: var(--muted); }
+.map .stop-label { font-size: 7px; font-weight: 600; fill: var(--fg); stroke: var(--land); stroke-width: 2.4; }
+.map .stop-label.key { font-size: 7.8px; font-weight: 800; }
+.map .meet { font-size: 9px; font-weight: 800; fill: var(--fg); stroke: var(--land); stroke-width: 3; }
+.map .meet-sub { font-size: 6px; font-weight: 700; letter-spacing: .14em; fill: var(--muted); stroke: var(--land); stroke-width: 2.4; }
 .pulse { transform-box: fill-box; transform-origin: center; }
 .win .pulse { animation: pulse 1.2s ease-out infinite; }
 @keyframes pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(3.2); opacity: 0; } }
 .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0 14px; }
-.hold { padding: 18px 12px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--fg); font: 700 .95rem/1.3 var(--font-body); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: none; }
-.hold small { display: block; font-weight: 500; color: var(--muted); font-size: .75rem; margin-top: 2px; }
+.hold { padding: 16px 12px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--fg); font: 700 .95rem/1.3 var(--font-body); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: none; }
+.hold small { display: block; font-weight: 500; color: var(--muted); font-size: .75rem; margin-top: 4px; }
 .hold.leo { border-color: var(--d-line); }
 .hold.van { border-color: var(--r-line); }
-.hold.on { color: var(--on-blue); }
 .hold.leo.on { background: var(--d-line); color: #fff; }
 .hold.van.on { background: var(--r-line); color: var(--on-r); }
-.bullet { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%; font-weight: 700; font-size: .85em; margin-right: 6px; vertical-align: -.1em; }
-.bullet.d { background: var(--d-line); color: #fff; }
-.bullet.r { background: var(--r-line); color: var(--on-r); }
-.meet-name { font: italic 400 13px var(--font-display); fill: var(--fg); stroke: var(--water); stroke-width: 3; }
+.hold.on small { color: inherit; }
 .hold:disabled { opacity: .45; cursor: default; }
+.bullet { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%; font-weight: 700; font-size: .85em; margin-right: 4px; vertical-align: -.1em; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.bullet.d { background: var(--d-line); color: #fff; }
+.bullet.a { background: var(--a-line); color: #fff; }
+.bullet.r { background: var(--r-line); color: var(--on-r); }
 .status { min-height: 3.2em; margin: 0 0 16px; font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .win .pulse { animation: none; } }
 .totop { position: fixed; z-index: 20; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
@@ -318,52 +326,59 @@ html.locked { overflow: hidden; }
 
 <section class="alt" id="game">
   <div class="flow wrap game">
-    <div>
+    <div class="game-intro">
       <p class="eyebrow">A little game</p>
-      <h2>Meet me at City Hall</h2>
-      <p>Leo takes the <span class="bullet d">D</span>down from the Bronx. Vanessa takes the <span class="bullet r">R</span>up from Brooklyn. Both trains hit random slowdowns on the way. Hold a train in the station to make sure they pull into City Hall together.</p>
-      <div class="controls">
-        <button class="hold leo" id="hold-leo" type="button" disabled><span class="bullet d">D</span>Hold Leo's train<small>From the Bronx · key A</small></button>
-        <button class="hold van" id="hold-van" type="button" disabled><span class="bullet r">R</span>Hold Vanessa's train<small>From Brooklyn · key L</small></button>
-      </div>
-      <p class="status" id="status" aria-live="polite">Press start, then hold a train whenever you need it to wait.</p>
-      <button class="btn" id="start" type="button">Start the trains</button>
+      <h2>Meet me at the World Trade Center</h2>
+      <p>Leo takes the <span class="bullet d">D</span> from Norwood–205 St, changes to the <span class="bullet a">A</span> at 59 St–Columbus Circle, gets off at Chambers St and walks over. Vanessa takes the <span class="bullet r">R</span> from Bay Ridge–95 St to Rector St and walks the rest. Both rides hit random delays. Hold either one to make them arrive together.</p>
     </div>
-    <svg class="map" id="map" viewBox="0 0 400 480" role="img" aria-label="Map of New York City: Leo's D train runs from the Bronx and Vanessa's R train from Brooklyn to meet at City Hall">
-      <g fill="var(--land)" opacity=".5">
-        <path d="M0 0 H168 L150 80 L130 125 L110 170 L90 210 L76 250 L70 290 L58 322 L36 352 L0 362 Z"/>
-        <path d="M150 248 L168 228 L192 206 L218 196 L252 190 L300 176 L330 162 L362 168 L400 160 V400 L330 392 L240 386 L230 333 L205 314 L185 294 L172 270 Z"/>
+    <svg class="map" id="map" viewBox="0 0 400 660" role="img" aria-label="Subway map. Leo rides the D from the Bronx, changes to the A at 59 St–Columbus Circle, gets off at Chambers St and walks. Vanessa rides the R from Bay Ridge–95 St to Rector St and walks. They meet at the World Trade Center.">
+      <rect width="400" height="660" fill="var(--land)"/>
+      <g fill="var(--park)">
+        <rect x="66" y="8" width="96" height="34" rx="4"/>
+        <rect x="282" y="58" width="40" height="64" rx="8"/>
+        <rect x="116" y="214" width="26" height="58" rx="2"/>
+        <rect x="320" y="548" width="40" height="46" rx="10"/>
       </g>
-      <path class="boro" d="M182 27 L230 21 L250 36 L285 56 L310 76 L315 116 L300 149 L310 166 L275 159 L250 155 L230 175 L210 168 L190 172 L178 168 L175 142 L181 116 L194 93 L200 76 L190 66 L185 43 Z"/>
-      <path class="boro" d="M83 307 L84 291 L89 267 L91 241 L106 215 L128 175 L147 135 L154 109 L168 85 L174 72 L184 76 L178 96 L171 116 L167 142 L169 168 L173 182 L158 207 L143 228 L129 248 L127 267 L123 291 L102 300 Z"/>
-      <path class="boro" d="M145 256 L137 274 L130 296 L110 307 L98 320 L82 340 L90 360 L75 380 L60 402 L64 426 L95 446 L105 468 L145 475 L180 465 L205 446 L230 426 L240 386 L230 333 L205 314 L185 294 L172 270 Z"/>
-      <text class="water" x="52" y="236" transform="rotate(-66 52 236)">Hudson River</text>
-      <text class="water" x="150" y="262" transform="rotate(-56 150 262)">East River</text>
-      <text class="faint" x="40" y="60">New Jersey</text>
-      <text class="faint" x="318" y="290">Queens</text>
-      <text class="boro-name" x="258" y="96" text-anchor="middle">The Bronx</text>
-      <text class="boro-sub" x="258" y="110" text-anchor="middle">Leo rides the D</text>
-      <text class="boro-name" x="110" y="168" text-anchor="middle" transform="rotate(-66 110 168)" style="font-size:18px;stroke:var(--water)">Manhattan</text>
-      <text class="boro-name" x="160" y="420" text-anchor="middle">Brooklyn</text>
-      <text class="boro-sub" x="160" y="434" text-anchor="middle">Vanessa rides the R</text>
-      <path id="route-leo" d="M221 76 L206 96 L192 120 L176 136 L163 140 L140 170 L126 195 L117 215 L110 241 L102 268 L94 289" fill="none" stroke="var(--d-line)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
-      <path id="route-van" d="M69 418 L82 400 L98 384 L112 365 L122 345 L123 328 L114 314 L100 306 L88 302 L94 289" fill="none" stroke="var(--r-line)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
-      <g fill="var(--land)" stroke="var(--fg)" stroke-width="1.3">
-        <circle cx="192" cy="120" r="3"/><circle cx="163" cy="140" r="3"/><circle cx="117" cy="215" r="3"/><circle cx="110" cy="241" r="3"/>
-        <circle cx="98" cy="384" r="3"/><circle cx="123" cy="328" r="3"/><circle cx="88" cy="302" r="3"/>
+      <path class="river" d="M28 -10 V670" stroke-width="52"/>
+      <path class="river" d="M40 150 C90 160 130 170 165 190 S210 230 215 270" stroke-width="12"/>
+      <path class="river" d="M215 270 C212 330 205 400 196 460 S180 515 168 540" stroke-width="22"/>
+      <path d="M0 500 H118 Q146 502 160 516 L178 532 L160 570 L138 615 L112 660 H0 Z" fill="var(--water)"/>
+      <text class="boro" x="60" y="96">The Bronx</text>
+      <text class="boro" x="262" y="330">Queens</text>
+      <text class="boro" x="240" y="478">Brooklyn</text>
+      <text class="boro" x="136" y="380" text-anchor="middle" transform="rotate(-90 136 380)" style="font-size:17px">Manhattan</text>
+      <text class="river-name" x="22" y="560" transform="rotate(-90 22 560)">Hudson River</text>
+      <text class="river-name" x="218" y="286" text-anchor="middle" transform="rotate(-86 218 286)">East River</text>
+      <text class="river-name" x="96" y="168" text-anchor="middle" transform="rotate(13 96 168)">Harlem River</text>
+      <path class="line" d="M400 236 H250 Q240 236 233 243 L150 326 V490 Q150 505 165 505 H285 Q300 505 300 520 V540 L200 640" stroke="var(--r-line)"/>
+      <path class="line" d="M70 172 L100 202 V424" stroke="var(--a-line)"/>
+      <path class="line" d="M262 24 H238 Q228 24 228 34 V196 Q228 206 218 206 H120 Q110 206 110 216 V280" stroke="var(--d-line)"/>
+      <path class="walkway" d="M100 424 L122 446 M150 462 L122 446"/>
+      <g fill="none" stroke="none">
+        <path id="leo-d" d="M262 24 H238 Q228 24 228 34 V196 Q228 206 218 206 H120 Q110 206 110 216 V280"/>
+        <path id="leo-x" d="M110 280 H100"/>
+        <path id="leo-a" d="M100 280 V424"/>
+        <path id="leo-w" d="M100 424 L122 446"/>
+        <path id="van-r" d="M200 640 L300 540 V520 Q300 505 285 505 H165 Q150 505 150 490 V462"/>
+        <path id="van-w" d="M150 462 L122 446"/>
       </g>
-      <g font-family="var(--font-body)" font-weight="700">
-        <circle cx="236" cy="64" r="7" fill="var(--d-line)"/><text x="236" y="64" dy=".35em" text-anchor="middle" font-size="9" fill="#fff">D</text>
-        <circle cx="52" cy="428" r="7" fill="var(--r-line)"/><text x="52" y="428" dy=".35em" text-anchor="middle" font-size="9" fill="#111">R</text>
-      </g>
+      <g id="stops"></g>
       <g id="station">
-        <circle class="pulse" cx="94" cy="289" r="6" fill="var(--d-line)"/>
-        <circle cx="94" cy="289" r="6.5" fill="var(--land)" stroke="var(--fg)" stroke-width="2.5"/>
-        <text class="meet-name" x="80" y="283" text-anchor="end">City Hall</text>
-        <text class="boro-sub meet" x="80" y="294" text-anchor="end">Meet here</text>
+        <circle class="pulse" cx="122" cy="446" r="6" fill="var(--a-line)"/>
+        <circle cx="122" cy="446" r="6" fill="var(--land)" stroke="var(--fg)" stroke-width="2.5"/>
+        <text class="meet" x="114" y="463" text-anchor="end">World Trade Center</text>
+        <text class="meet-sub" x="114" y="472" text-anchor="end">MEET HERE</text>
       </g>
       <g id="trains"></g>
     </svg>
+    <div class="game-panel">
+      <div class="controls">
+        <button class="hold leo" id="hold-leo" type="button" disabled><span class="bullet d">D</span><span class="bullet a">A</span> Hold Leo<small>From the Bronx · ← key</small></button>
+        <button class="hold van" id="hold-van" type="button" disabled><span class="bullet r">R</span> Hold Vanessa<small>From Brooklyn · → key</small></button>
+      </div>
+      <p class="status" id="status" aria-live="polite">Press start, then hold Leo or Vanessa whenever one of them needs to wait.</p>
+      <button class="btn" id="start" type="button">Start the trains</button>
+    </div>
   </div>
 </section>
 
@@ -411,7 +426,7 @@ html.locked { overflow: hidden; }
     intro.classList.remove('open', 'lift', 'gone');
   });
 
-  // game: two trains, hold either one so they arrive together
+  // game: Leo (D, then A, then a walk) and Vanessa (R, then a walk) race to the World Trade Center
   (function () {
     var NS = 'http://www.w3.org/2000/svg';
     var layer = document.getElementById('trains');
@@ -419,71 +434,148 @@ html.locked { overflow: hidden; }
     var startBtn = document.getElementById('start');
     var station = document.getElementById('station');
     var btns = { leo: document.getElementById('hold-leo'), van: document.getElementById('hold-van') };
-    function mk(name, tag, attrs) { var el = document.createElementNS(NS, tag); for (var k in attrs) el.setAttribute(k, attrs[k]); layer.appendChild(el); return el; }
-    function train(id, base, phase, color, letter, ink) {
-      var path = document.getElementById('route-' + id), cars = [];
-      for (var i = 2; i >= 0; i--) cars[i] = mk(id, 'rect', { x: -7, y: -3.5, width: 14, height: 7, rx: 2.5, fill: color, stroke: 'rgba(0,0,0,.35)', 'stroke-width': .6, opacity: i ? .8 : 1 });
-      var tag = mk(id, 'text', { 'font-size': 6, 'text-anchor': 'middle', dy: '.35em', fill: ink, 'font-weight': 700, style: 'letter-spacing:0' });
-      tag.textContent = letter;
-      return { id: id, path: path, len: path.getTotalLength(), base: base, phase: phase, cars: cars, tag: tag, pos: 0, speed: 0, hold: false, done: null };
+    var LINES = { D: ['var(--d-line)', '#fff'], A: ['var(--a-line)', '#fff'], R: ['var(--r-line)', '#111'] };
+    function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); (parent || layer).appendChild(e); return e; }
+
+    // stations, as on the MTA diagram: a black dot carrying each line's letter
+    var stopsLayer = document.getElementById('stops');
+    function stop(bullets, label, side, key) {
+      bullets.forEach(function (b) {
+        el('circle', { cx: b[0], cy: b[1], r: 4.4, fill: 'var(--stop)', stroke: 'var(--land)', 'stroke-width': 1 }, stopsLayer);
+        var t = el('text', { x: b[0], y: b[1], dy: '.36em', 'text-anchor': 'middle', 'font-size': 5.6, 'font-weight': 700, fill: '#fff' }, stopsLayer);
+        t.textContent = b[2];
+      });
+      var f = bullets[0], l = bullets[bullets.length - 1], x, y = f[1], anchor;
+      if (side === 'r') { x = l[0] + 8; anchor = 'start'; y += 2.5; }
+      else if (side === 'l') { x = f[0] - 8; anchor = 'end'; y += 2.5; }
+      else if (side === 't') { x = f[0]; anchor = 'middle'; y -= 8; }
+      else { x = f[0]; anchor = 'middle'; y += 13; }
+      label.split('\n').forEach(function (line, i) {
+        var t = el('text', { x: x, y: y + i * 8, 'text-anchor': anchor, 'class': 'stop-label' + (key ? ' key' : '') }, stopsLayer);
+        t.textContent = line;
+      });
     }
-    var trains = [train('leo', 40, .4, 'var(--d-line)', 'D', '#fff'), train('van', 36, 2.1, 'var(--r-line)', 'R', '#111')];
-    function place(t) {
+    ['Bedford Pk Blvd', 'Kingsbridge Rd', 'Fordham Rd', '182–183 Sts', 'Tremont Av', '174–175 Sts', '170 St', '167 St', '161 St–Yankee Stadium']
+      .forEach(function (n, i) { stop([[228, i < 8 ? 44 + i * 18 : 190, 'D']], n, 'r'); });
+    stop([[262, 24, 'D']], 'Norwood–205 St', 'r', true);
+    stop([[150, 206, 'D']], '155 St', 't');
+    stop([[100, 228, 'A'], [110, 228, 'D']], '145 St', 'l');
+    stop([[100, 250, 'A'], [110, 250, 'D']], '125 St', 'l');
+    stop([[100, 280, 'A'], [110, 280, 'D']], '59 St–Columbus Circle', 'l', true);
+    [['42 St–Port Authority', 316], ['34 St–Penn Station', 334], ['14 St', 362], ['W 4 St–Wash Sq', 382], ['Canal St', 404]]
+      .forEach(function (s) { stop([[100, s[1], 'A']], s[0], 'l'); });
+    stop([[100, 424, 'A']], 'Chambers St', 'l', true);
+    [['34 St–Herald Sq', 330], ['14 St–Union Sq', 378], ['Canal St', 404], ['City Hall', 424], ['Cortlandt St', 443]]
+      .forEach(function (s) { stop([[150, s[1], 'R']], s[0], 'r'); });
+    stop([[150, 462, 'R']], 'Rector St', 'r', true);
+    stop([[150, 482, 'R']], 'Whitehall St–South Ferry', 'r');
+    stop([[206, 505, 'R']], 'Court St', 'b');
+    stop([[238, 505, 'R']], 'Jay St–\nMetroTech', 'b');
+    stop([[270, 505, 'R']], 'DeKalb Av', 'b');
+    stop([[300, 522, 'R']], 'Atlantic Av–Barclays Ctr', 'r');
+    ['Union St', '4 Av–9 St', 'Prospect Av', '25 St', '36 St', '45 St', '53 St', '59 St', 'Bay Ridge Av', '77 St', '86 St', 'Bay Ridge–95 St']
+      .forEach(function (n, i) { stop([[300 - i * 100 / 11, 540 + i * 100 / 11, 'R']], n, 'r', i === 11); });
+
+    // each rider follows a list of legs: a train line, or a walk
+    function rider(id, name, base, legs) {
+      var start = 0;
+      legs = legs.map(function (l) {
+        var p = document.getElementById(id + '-' + l[0]), len = p.getTotalLength();
+        var leg = { path: p, line: l[1], msg: l[2], start: start, len: len };
+        start += len; return leg;
+      });
+      var cars = [];
+      for (var i = 2; i >= 0; i--) cars[i] = el('rect', { 'stroke-width': .7 });
+      var tag = el('text', { 'font-size': 6, 'font-weight': 700, 'text-anchor': 'middle', dy: '.36em' });
+      return { id: id, name: name, base: base, legs: legs, len: start, cars: cars, tag: tag, pos: 0, speed: 0, hold: false, done: null, leg: 0, phase: 0 };
+    }
+    var riders = [
+      rider('leo', 'Leo', 92, [['d', 'D'], ['x', null, 'Leo changes to the A at 59 St–Columbus Circle.'], ['a', 'A', 'Leo is on the A, heading downtown.'], ['w', null, 'Leo gets off at Chambers St and walks to the World Trade Center.']]),
+      rider('van', 'Vanessa', 72, [['r', 'R'], ['w', null, 'Vanessa gets off at Rector St and walks over.']])
+    ];
+    function legAt(r, d) { for (var i = r.legs.length - 1; i > 0; i--) if (d >= r.legs[i].start) return i; return 0; }
+    function point(r, d) {
+      var i = legAt(r, d), leg = r.legs[i], o = Math.max(0, Math.min(leg.len, d - leg.start));
+      var a = Math.min(o, leg.len - .5), p = leg.path.getPointAtLength(o), p0 = leg.path.getPointAtLength(a), p1 = leg.path.getPointAtLength(a + .5);
+      return { i: i, x: p.x, y: p.y, deg: Math.atan2(p1.y - p0.y, p1.x - p0.x) * 180 / Math.PI };
+    }
+    function place(r) {
+      var head = point(r, r.pos), headLeg = r.legs[head.i];
       for (var i = 0; i < 3; i++) {
-        var d = Math.max(0, t.pos - i * 11), a = Math.min(d, t.len - 1);
-        var p = t.path.getPointAtLength(d), q = t.path.getPointAtLength(a + 1), p0 = t.path.getPointAtLength(a);
-        var deg = Math.atan2(q.y - p0.y, q.x - p0.x) * 180 / Math.PI;
-        t.cars[i].setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ') rotate(' + deg + ')');
-        if (i === 0) t.tag.setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ')');
+        var c = r.cars[i], q = i ? point(r, Math.max(0, r.pos - i * 11)) : head;
+        if (!headLeg.line) {
+          // walking: a single person dot
+          if (i) { c.setAttribute('visibility', 'hidden'); continue; }
+          c.setAttribute('visibility', 'visible');
+          c.setAttribute('x', -3.5); c.setAttribute('y', -3.5); c.setAttribute('width', 7); c.setAttribute('height', 7); c.setAttribute('rx', 3.5);
+          c.setAttribute('fill', 'var(--land)'); c.setAttribute('stroke', 'var(--fg)'); c.setAttribute('stroke-width', 1.6);
+          c.setAttribute('transform', 'translate(' + q.x + ' ' + q.y + ')');
+          continue;
+        }
+        c.setAttribute('visibility', q.i === head.i ? 'visible' : 'hidden');
+        c.setAttribute('x', -7); c.setAttribute('y', -3.5); c.setAttribute('width', 14); c.setAttribute('height', 7); c.setAttribute('rx', 2.5);
+        c.setAttribute('fill', LINES[headLeg.line][0]); c.setAttribute('stroke', 'rgba(0,0,0,.4)'); c.setAttribute('stroke-width', .7);
+        c.setAttribute('opacity', i ? .85 : 1);
+        c.setAttribute('transform', 'translate(' + q.x + ' ' + q.y + ') rotate(' + q.deg + ')');
       }
+      r.tag.textContent = headLeg.line || '';
+      r.tag.setAttribute('fill', headLeg.line ? LINES[headLeg.line][1] : 'none');
+      r.tag.setAttribute('transform', 'translate(' + head.x + ' ' + head.y + ')');
     }
     var state = 'ready', clock = 0, last = 0;
     function reset() {
-      trains.forEach(function (t) { t.pos = 0; t.speed = 0; t.hold = false; t.done = null; place(t); });
+      riders.forEach(function (r) { r.pos = 0; r.speed = 0; r.hold = false; r.done = null; r.leg = 0; r.phase = Math.random() * 6.28; place(r); });
       btns.leo.classList.remove('on'); btns.van.classList.remove('on');
       station.classList.remove('win'); clock = 0;
     }
     function finish() {
       state = 'done';
-      var gap = Math.abs(trains[0].done - trains[1].done), g = gap.toFixed(1);
+      var gap = Math.abs(riders[0].done - riders[1].done), g = gap.toFixed(1);
       btns.leo.disabled = btns.van.disabled = true;
-      if (gap <= 0.5) { status.textContent = 'Perfect. Leo and Vanessa step off together at City Hall.'; station.classList.add('win'); }
+      if (gap <= 0.5) { status.textContent = 'Perfect. Leo and Vanessa meet at the World Trade Center at the same moment.'; station.classList.add('win'); }
       else if (gap <= 1.5) { status.textContent = 'So close. They arrived ' + g + ' seconds apart, near enough for a hug.'; station.classList.add('win'); }
-      else { status.textContent = (trains[0].done < trains[1].done ? 'Leo' : 'Vanessa') + ' waited ' + g + ' seconds on the platform. Try again.'; }
+      else { status.textContent = (riders[0].done < riders[1].done ? 'Leo' : 'Vanessa') + ' waited ' + g + ' seconds at the World Trade Center. Try again.'; }
       startBtn.textContent = 'Play again'; startBtn.hidden = false;
     }
     function frame(ts) {
       if (state !== 'running') return;
       var dt = Math.min(.05, (ts - last) / 1000); last = ts; clock += dt;
-      trains.forEach(function (t) {
-        if (t.done !== null) return;
-        var target = t.hold ? 0 : t.base * (1 + .35 * Math.sin(clock * 1.7 + t.phase));
-        t.speed += (target - t.speed) * Math.min(1, dt * 8);
-        t.pos += t.speed * dt;
-        if (t.pos >= t.len) { t.pos = t.len; t.done = clock; status.textContent = (t.id === 'leo' ? 'Leo' : 'Vanessa') + ' is waiting at City Hall...'; }
-        place(t);
+      riders.forEach(function (r) {
+        if (r.done !== null) return;
+        var leg = r.legs[r.leg];
+        var target = r.hold ? 0 : leg.line ? r.base * (1 + .35 * Math.sin(clock * 1.7 + r.phase)) : 26;
+        r.speed += (target - r.speed) * Math.min(1, dt * 8);
+        r.pos += r.speed * dt;
+        var li = legAt(r, Math.min(r.pos, r.len - .01));
+        if (li !== r.leg) { r.leg = li; if (r.legs[li].msg) status.textContent = r.legs[li].msg; }
+        if (r.pos >= r.len) { r.pos = r.len; r.done = clock; status.textContent = r.name + ' is waiting at the World Trade Center...'; }
+        place(r);
       });
-      if (trains[0].done !== null && trains[1].done !== null) return finish();
+      if (riders[0].done !== null && riders[1].done !== null) return finish();
       requestAnimationFrame(frame);
     }
     function start() {
       reset(); state = 'running'; startBtn.hidden = true;
       btns.leo.disabled = btns.van.disabled = false;
-      status.textContent = 'Hold a train to make it wait. Release to let it go.';
+      status.textContent = 'Leo boards the D at Norwood–205 St. Vanessa boards the R at Bay Ridge–95 St.';
       last = performance.now(); requestAnimationFrame(frame);
     }
     function setHold(i, on) {
       if (state !== 'running') return;
-      trains[i].hold = on; btns[i ? 'van' : 'leo'].classList.toggle('on', on);
+      riders[i].hold = on; btns[i ? 'van' : 'leo'].classList.toggle('on', on);
     }
     [['leo', 0], ['van', 1]].forEach(function (b) {
-      var el = btns[b[0]], i = b[1];
-      el.addEventListener('pointerdown', function (e) { e.preventDefault(); setHold(i, true); });
-      ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) { el.addEventListener(ev, function () { setHold(i, false); }); });
-      el.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      var btn = btns[b[0]], i = b[1];
+      btn.addEventListener('pointerdown', function (e) { e.preventDefault(); setHold(i, true); });
+      ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) { btn.addEventListener(ev, function () { setHold(i, false); }); });
+      btn.addEventListener('contextmenu', function (e) { e.preventDefault(); });
     });
-    addEventListener('keydown', function (e) { if (e.repeat || e.metaKey || e.ctrlKey) return; var k = e.key.toLowerCase(); if (k === 'a') setHold(0, true); if (k === 'l') setHold(1, true); });
-    addEventListener('keyup', function (e) { var k = e.key.toLowerCase(); if (k === 'a') setHold(0, false); if (k === 'l') setHold(1, false); });
+    addEventListener('keydown', function (e) {
+      if (e.repeat || state !== 'running') return;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); setHold(0, true); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); setHold(1, true); }
+    });
+    addEventListener('keyup', function (e) { if (e.key === 'ArrowLeft') setHold(0, false); if (e.key === 'ArrowRight') setHold(1, false); });
     startBtn.addEventListener('click', start);
     reset();
   })();
