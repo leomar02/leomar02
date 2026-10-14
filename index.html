@@ -339,6 +339,18 @@ html.locked, html.menu-open { overflow: hidden; }
 .calmenu a:hover { background: var(--larimar-soft); }
 .datebar { overflow: visible; }
 .datebar-tiles { overflow: hidden; }
+
+/* two flags: Portugal and the Dominican Republic arrive from opposite sides on their poles and cross over a heart */
+.flags { position: relative; overflow: hidden; height: 360px; background: linear-gradient(var(--larimar-soft), var(--bg)); }
+.flags .flag { position: absolute; bottom: 0; width: 300px; height: 300px; will-change: transform; }
+.flags .flag svg { display: block; overflow: visible; }
+.flags .pt { left: calc(50% - 200px); transform-origin: 230px 292px; transform: translateX(calc((1 - var(--m, 1)) * -70vw)) rotate(calc((1 - var(--m, 1)) * -26deg)); }
+.flags .dr { left: calc(50% - 100px); transform-origin: 70px 292px; transform: translateX(calc((1 - var(--m, 1)) * 70vw)) rotate(calc((1 - var(--m, 1)) * 26deg)); }
+.flags-knot { position: absolute; left: 50%; bottom: 128px; width: 38px; translate: -50% 0; transform: scale(0) rotate(-20deg); transition: transform .55s cubic-bezier(.3, 1.7, .5, 1); z-index: 2; }
+.flags.met .flags-knot { transform: scale(1) rotate(0); }
+.flags-line { position: absolute; left: 0; right: 0; top: 18px; margin: 0; max-width: none; text-align: center; font: 400 clamp(1.7rem, 4vw, 2.5rem)/1 var(--font-script); color: var(--teal-deep); opacity: 0; transform: translateY(8px); transition: opacity .6s, transform .6s; }
+.flags.met .flags-line { opacity: 1; transform: none; }
+.flags::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--bg); border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     section > .wrap { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
@@ -614,6 +626,37 @@ html.locked, html.menu-open { overflow: hidden; }
     </div>
   </div>
 </section>
+
+<div class="flags" data-scroll aria-hidden="true">
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <linearGradient id="cloth-shade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".14"/><stop offset=".25" stop-color="#fff" stop-opacity=".14"/><stop offset=".5" stop-color="#000" stop-opacity=".12"/><stop offset=".75" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity=".16"/></linearGradient>
+    <filter id="flagwave" x="-10%" y="-15%" width="120%" height="130%">
+      <feTurbulence id="flagturb" type="fractalNoise" baseFrequency="0.012 0.04" numOctaves="2" seed="3" result="n"><animate attributeName="baseFrequency" values="0.012 0.04;0.02 0.058;0.012 0.04" dur="3.4s" repeatCount="indefinite"/></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter></defs></svg>
+  <p class="flags-line">duas bandeiras, uma família · dos banderas, una familia</p>
+  <div class="flag pt"><svg viewBox="0 0 300 300" width="300" height="300">
+    <path d="M230 292 L180 22" stroke="#6b4a2f" stroke-width="5" stroke-linecap="round"/><circle cx="180" cy="19" r="6" fill="#e0a51c" stroke="#8a5f0f" stroke-width="1"/>
+    <g transform="translate(31 26) skewX(10.6)" filter="url(#flagwave)">
+        <rect width="60" height="100" fill="#046a38"/><rect x="60" width="90" height="100" fill="#da291c"/>
+        <circle cx="60" cy="50" r="21" fill="none" stroke="#ffd100" stroke-width="3.4"/><ellipse cx="60" cy="50" rx="9" ry="21" fill="none" stroke="#ffd100" stroke-width="2"/><path d="M39 50 H81" stroke="#ffd100" stroke-width="2"/>
+        <path d="M50 38 h20 v16 q0 10 -10 14 q-10 -4 -10 -14z" fill="#da291c" stroke="#fff" stroke-width="2.2"/>
+        <rect x="55.5" y="42" width="9" height="9" fill="#fff"/><circle cx="60" cy="46.5" r="2" fill="#2a4ba6"/><circle cx="60" cy="58" r="1.8" fill="#ffd100"/>
+        <rect width="150" height="100" fill="url(#cloth-shade)"/>
+      </g></svg></div>
+  <div class="flag dr"><svg viewBox="0 0 300 300" width="300" height="300">
+    <path d="M70 292 L120 22" stroke="#6b4a2f" stroke-width="5" stroke-linecap="round"/><circle cx="120" cy="19" r="6" fill="#e0a51c" stroke="#8a5f0f" stroke-width="1"/>
+    <g transform="translate(121 26) skewX(-10.6)" filter="url(#flagwave)">
+        <rect width="150" height="100" fill="#ffffff"/>
+        <rect width="69" height="44" fill="#002d62"/><rect x="81" width="69" height="44" fill="#ce1126"/>
+        <rect y="56" width="69" height="44" fill="#ce1126"/><rect x="81" y="56" width="69" height="44" fill="#002d62"/>
+        <g transform="translate(75 50)"><path d="M-12 -10 q-8 10 0 24 M12 -10 q8 10 0 24" fill="none" stroke="#2f7d3b" stroke-width="3" stroke-linecap="round"/>
+          <path d="M-8 -9 h16 v11 q0 8 -8 11 q-8 -3 -8 -11z" fill="#ce1126" stroke="#fff" stroke-width="1.6"/><path d="M-8 -9 h8 v10 h-8z" fill="#002d62"/><path d="M0 1 h8 v1 q0 6 -8 9z" fill="#002d62"/>
+          <rect x="-3" y="-4" width="6" height="5" fill="#fff"/><rect x="-8" y="-14" width="16" height="3" fill="#ffd100"/></g>
+        <rect width="150" height="100" fill="url(#cloth-shade)"/>
+      </g></svg></div>
+  <svg class="flags-knot" viewBox="0 0 60 60"><path d="M30 52 C8 36 2 24 8 14 C14 5 26 8 30 18 C34 8 46 5 52 14 C58 24 52 36 30 52 Z" fill="var(--coral)" stroke="var(--ink)" stroke-width="2.4" filter="url(#sketch)"/></svg>
+</div>
 
 <div class="frieze" data-scroll aria-hidden="true"><div class="row a"><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg></div><div class="row b"><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="14" y="14" width="72" height="72"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100"><use href="#az-c"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-a"/></svg><svg viewBox="0 0 100 100" style="color:var(--larimar)"><use href="#az-b"/></svg><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg></div></div>
 
@@ -908,6 +951,11 @@ html.locked, html.menu-open { overflow: hidden; }
       var r = el.getBoundingClientRect(), p = (vh - r.top) / (vh + r.height);
       p = Math.max(0, Math.min(1, p));
       el.style.setProperty('--p', p.toFixed(4));
+      if (el.classList.contains('flags')) {
+        var fm = Math.max(0, Math.min(1, (p - .12) / .34));
+        el.style.setProperty('--m', fm.toFixed(4));
+        el.classList.toggle('met', fm >= 1);
+      }
       if (el.classList.contains('couple')) {
         // they start apart, walk in step with the scroll, and meet just before the middle of the screen
         var m = Math.max(0, Math.min(1, (p - .1) / .36));
@@ -918,6 +966,7 @@ html.locked, html.menu-open { overflow: hidden; }
     });
   }
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.couple').classList.add('met');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { document.querySelector('.flags').classList.add('met'); document.querySelectorAll('#flagturb animate').forEach(function (a) { a.remove(); }); }
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(progress); } }, { passive: true });
     addEventListener('resize', progress);
