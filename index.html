@@ -329,9 +329,9 @@ html.locked { overflow: hidden; }
     <div class="game-intro">
       <p class="eyebrow">A little game</p>
       <h2>Meet me at the World Trade Center</h2>
-      <p>Leo takes the <span class="bullet d">D</span> from Norwood–205 St, changes to the <span class="bullet a">A</span> at 59 St–Columbus Circle, gets off at Chambers St and walks over. Vanessa takes the <span class="bullet r">R</span> from Bay Ridge–95 St to Rector St and walks the rest. Both rides hit random delays. Hold either one to make them arrive together.</p>
+      <p>Leo takes the <span class="bullet d">D</span> from Fordham Rd, changes to the <span class="bullet a">A</span> at 59 St–Columbus Circle, gets off at Chambers St and walks over. Vanessa takes the <span class="bullet r">R</span> from Bay Ridge Av to Rector St and walks the rest. Both rides hit random delays. Hold either one to make them arrive together.</p>
     </div>
-    <svg class="map" id="map" viewBox="0 0 400 660" role="img" aria-label="Subway map. Leo rides the D from the Bronx, changes to the A at 59 St–Columbus Circle, gets off at Chambers St and walks. Vanessa rides the R from Bay Ridge–95 St to Rector St and walks. They meet at the World Trade Center.">
+    <svg class="map" id="map" viewBox="0 0 400 660" role="img" aria-label="Subway map. Leo rides the D from Fordham Rd in the Bronx, changes to the A at 59 St–Columbus Circle, gets off at Chambers St and walks. Vanessa rides the R from Bay Ridge Av to Rector St and walks. They meet at the World Trade Center.">
       <rect width="400" height="660" fill="var(--land)"/>
       <g fill="var(--park)">
         <rect x="66" y="8" width="96" height="34" rx="4"/>
@@ -355,11 +355,11 @@ html.locked { overflow: hidden; }
       <path class="line" d="M262 24 H238 Q228 24 228 34 V196 Q228 206 218 206 H120 Q110 206 110 216 V280" stroke="var(--d-line)"/>
       <path class="walkway" d="M100 424 L122 446 M150 462 L122 446"/>
       <g fill="none" stroke="none">
-        <path id="leo-d" d="M262 24 H238 Q228 24 228 34 V196 Q228 206 218 206 H120 Q110 206 110 216 V280"/>
+        <path id="leo-d" d="M228 80 V196 Q228 206 218 206 H120 Q110 206 110 216 V280"/>
         <path id="leo-x" d="M110 280 H100"/>
         <path id="leo-a" d="M100 280 V424"/>
         <path id="leo-w" d="M100 424 L122 446"/>
-        <path id="van-r" d="M200 640 L300 540 V520 Q300 505 285 505 H165 Q150 505 150 490 V462"/>
+        <path id="van-r" d="M227.27 612.73 L300 540 V520 Q300 505 285 505 H165 Q150 505 150 490 V462"/>
         <path id="van-w" d="M150 462 L122 446"/>
       </g>
       <g id="stops"></g>
@@ -456,8 +456,8 @@ html.locked { overflow: hidden; }
       });
     }
     ['Bedford Pk Blvd', 'Kingsbridge Rd', 'Fordham Rd', '182–183 Sts', 'Tremont Av', '174–175 Sts', '170 St', '167 St', '161 St–Yankee Stadium']
-      .forEach(function (n, i) { stop([[228, i < 8 ? 44 + i * 18 : 190, 'D']], n, 'r'); });
-    stop([[262, 24, 'D']], 'Norwood–205 St', 'r', true);
+      .forEach(function (n, i) { stop([[228, i < 8 ? 44 + i * 18 : 190, 'D']], n, 'r', n === 'Fordham Rd'); });
+    stop([[262, 24, 'D']], 'Norwood–205 St', 'r');
     stop([[150, 206, 'D']], '155 St', 't');
     stop([[100, 228, 'A'], [110, 228, 'D']], '145 St', 'l');
     stop([[100, 250, 'A'], [110, 250, 'D']], '125 St', 'l');
@@ -474,7 +474,7 @@ html.locked { overflow: hidden; }
     stop([[270, 505, 'R']], 'DeKalb Av', 'b');
     stop([[300, 522, 'R']], 'Atlantic Av–Barclays Ctr', 'r');
     ['Union St', '4 Av–9 St', 'Prospect Av', '25 St', '36 St', '45 St', '53 St', '59 St', 'Bay Ridge Av', '77 St', '86 St', 'Bay Ridge–95 St']
-      .forEach(function (n, i) { stop([[300 - i * 100 / 11, 540 + i * 100 / 11, 'R']], n, 'r', i === 11); });
+      .forEach(function (n, i) { stop([[300 - i * 100 / 11, 540 + i * 100 / 11, 'R']], n, 'r', n === 'Bay Ridge Av'); });
 
     // each rider follows a list of legs: a train line, or a walk
     function rider(id, name, base, legs) {
@@ -557,7 +557,7 @@ html.locked { overflow: hidden; }
     function start() {
       reset(); state = 'running'; startBtn.hidden = true;
       btns.leo.disabled = btns.van.disabled = false;
-      status.textContent = 'Leo boards the D at Norwood–205 St. Vanessa boards the R at Bay Ridge–95 St.';
+      status.textContent = 'Leo boards the D at Fordham Rd. Vanessa boards the R at Bay Ridge Av.';
       last = performance.now(); requestAnimationFrame(frame);
     }
     function setHold(i, on) {
