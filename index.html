@@ -267,7 +267,7 @@ html.locked { overflow: hidden; }
 .who { position: absolute; bottom: 22px; width: var(--fw); will-change: transform; }
 .who svg { display: block; width: 100%; height: auto; overflow: visible; }
 .groom { left: calc(50% - var(--fw) + 22px); transform: translateX(calc((1 - var(--m, 1)) * -40vw)); }
-.bride { left: calc(50% - 22px); transform: translateX(calc((1 - var(--m, 1)) * 40vw)); }
+.bride { width: calc(var(--fw) * .86); left: calc(50% - 22px); transform: translateX(calc((1 - var(--m, 1)) * 40vw)); }
 .groom .leg.a { transform: rotate(calc(var(--step, 0) * 16deg)); }
 .groom .leg.b { transform: rotate(calc(var(--step, 0) * -16deg)); }
 .bride .dress { transform: skewX(calc(var(--step, 0) * 3deg)); }
@@ -609,8 +609,8 @@ html.locked { overflow: hidden; }
   <path d="M62 94 Q60 118 48 130" fill="none" stroke="#1b1f2a" stroke-width="6.4"/><path d="M62 94 Q60 118 48 130" fill="none" stroke="#eec3a1" stroke-width="4.4"/>
   <g><ellipse cx="38" cy="142" rx="4" ry="11" fill="var(--sage)" transform="rotate(25 38 142)"/><ellipse cx="54" cy="142" rx="4" ry="11" fill="var(--sage)" transform="rotate(-25 54 142)"/>
     <use href="#f-bayahibe" x="32" y="118" width="20" height="20"/><use href="#f-esteva" x="44" y="122" width="16" height="16"/><use href="#f-bayahibe" x="38" y="128" width="14" height="14"/></g>
-  <path d="M55 92 Q36 108 17 120" fill="none" stroke="#1b1f2a" stroke-width="6.4"/><path d="M55 92 Q36 108 17 120" fill="none" stroke="#eec3a1" stroke-width="4.4"/>
-  <ellipse cx="15" cy="122" rx="4.6" ry="5" fill="#eec3a1" stroke="#1b1f2a" stroke-width="1.4"/>
+  <path d="M55 92 Q36 101 17 103" fill="none" stroke="#1b1f2a" stroke-width="6.4"/><path d="M55 92 Q36 101 17 103" fill="none" stroke="#eec3a1" stroke-width="4.4"/>
+  <ellipse cx="15" cy="105" rx="4.6" ry="5" fill="#eec3a1" stroke="#1b1f2a" stroke-width="1.4"/>
   <path d="M57 62 L64 62 Q63 76 65 90 L56 90 Q58 76 57 62 Z" fill="#eec3a1" stroke="#1b1f2a" stroke-width="1.4"/>
   <path d="M70 50 Q72 31 56 30 Q44 31 44 42 L40 49 L44 51 Q43 56 46 58 Q48 65 56 65 Q66 65 70 56 Z" fill="#eec3a1" stroke="#1b1f2a" stroke-width="1.8"/>
   <path d="M70 52 Q74 30 56 28 Q42 28 43 40 Q50 36 58 38 Q64 44 64 54 Q66 60 70 52 Z" fill="url(#hair-v)" stroke="#1b1f2a" stroke-width="1.1"/>
