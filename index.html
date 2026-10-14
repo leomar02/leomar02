@@ -38,6 +38,10 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.65 var(--font-body); }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; }
@@ -150,11 +154,11 @@ footer .sign em { font-style: normal; color: var(--coral); }
 .frieze { overflow: hidden; background: var(--tile-bg); border-block: 1px solid var(--line); }
 .frieze .row { display: flex; width: max-content; will-change: transform; }
 .frieze .row svg { width: clamp(56px, 8vw, 92px); height: clamp(56px, 8vw, 92px); flex: none; display: block; }
-.frieze .row.a { transform: translateX(calc(var(--p, .5) * -520px)); }
-.frieze .row.b { transform: translateX(calc(-520px + var(--p, .5) * 520px)); }
+.frieze .row.a { transform: translateX(calc(var(--p, .5) * -520px)) skewX(calc(var(--skew, 0) * 1deg)); }
+.frieze .row.b { transform: translateX(calc(-520px + var(--p, .5) * 520px)) skewX(calc(var(--skew, 0) * 1deg)); }
 .ticker { position: relative; overflow: hidden; padding-block: 56px; background: var(--bg); }
 .ticker-row { white-space: nowrap; font: 800 clamp(3rem, 9vw, 7rem)/1 var(--font-display); letter-spacing: -.045em; will-change: transform;
-  transform: translateX(calc(var(--p, .5) * -42%)); }
+  transform: translateX(calc(var(--p, .5) * -42%)) skewX(calc(var(--skew, 0) * -1.2deg)); }
 .ticker-row span:nth-of-type(4n+1) { color: var(--cobalt); }
 .ticker-row span:nth-of-type(4n+2) { color: var(--coral); }
 .ticker-row span:nth-of-type(4n+3) { color: transparent; -webkit-text-stroke: 2px var(--larimar); }
@@ -715,6 +719,7 @@ html.locked { overflow: hidden; }
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.17/dist/lenis.min.js"></script>
 <script>
 (function () {
   var root = document.documentElement;
@@ -796,16 +801,38 @@ html.locked { overflow: hidden; }
     }
   });
 
+  // Lenis smooth scrolling (https://github.com/darkroomengineering/lenis): eased wheel and touch scrolling, with the
+  // scroll speed feeding a slight skew on the tile and word bands. Skipped for visitors who prefer reduced motion.
+  var lenis = null;
+  if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    lenis = new Lenis({ lerp: 0.085, smoothWheel: true, anchors: false });
+    lenis.stop();
+    lenis.on('scroll', function (e) {
+      root.style.setProperty('--skew', Math.max(-5, Math.min(5, e.velocity * 0.22)).toFixed(2));
+    });
+    (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        var id = a.getAttribute('href').slice(1), el = id && document.getElementById(id);
+        if (el) { ev.preventDefault(); lenis.scrollTo(el, { offset: -64, duration: 1.6 }); }
+      });
+    });
+  }
+
   // back to the top
   var totop = document.getElementById('totop');
   addEventListener('scroll', function () { totop.classList.toggle('show', scrollY > 600); }, { passive: true });
-  totop.addEventListener('click', function () { scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
+  totop.addEventListener('click', function () {
+    if (lenis) lenis.scrollTo(0, { duration: 1.8 });
+    else scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
 
   // envelope: the flap folds back to show the tile liner, the card rises, then the page appears
   var intro = document.getElementById('intro');
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   function reveal() {
     intro.classList.add('spread', 'gone'); root.classList.remove('locked'); scrollTo(0, 0);
+    if (lenis) { lenis.scrollTo(0, { immediate: true }); lenis.start(); }
     if (mode === 'party') setTimeout(burst, 600);
   }
   document.getElementById('seal').addEventListener('click', function () {
@@ -814,7 +841,8 @@ html.locked { overflow: hidden; }
     setTimeout(reveal, 4000);
   });
   document.getElementById('replay').addEventListener('click', function () {
-    scrollTo(0, 0); root.classList.add('locked'); intro.classList.remove('open', 'spread', 'gone');
+    scrollTo(0, 0); root.classList.add('locked'); if (lenis) { lenis.scrollTo(0, { immediate: true }); lenis.stop(); }
+    intro.classList.remove('open', 'spread', 'gone');
   });
 
   // scroll dividers: each gets --p, its progress across the viewport (0 entering at the bottom, 1 leaving at the top)
