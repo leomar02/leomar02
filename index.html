@@ -81,7 +81,20 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
 
 /* hero */
-.hero { padding-block: 72px 80px; position: relative; overflow: hidden; }
+.hero { padding-block: 20px 80px; position: relative; overflow: hidden; }
+/* rolling train: a two-car subway train, seen from the side, that loops across the top of the hero */
+.rail { position: relative; height: 58px; margin-bottom: 36px; overflow: hidden; }
+.rail::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 7px;
+  background: linear-gradient(var(--muted), var(--muted)) top / 100% 2px no-repeat,
+              repeating-linear-gradient(90deg, var(--muted) 0 3px, transparent 3px 14px) bottom / 100% 5px no-repeat;
+  opacity: .45; }
+.train { position: absolute; left: 0; bottom: 9px; width: 304px; height: 44px; transform: translateX(-330px); }
+.train svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.rail.rolling .train { animation: roll 11s linear infinite; }
+.rail.rolling .train svg { animation: sway .5s ease-in-out infinite alternate; }
+@keyframes roll { from { transform: translateX(-330px); } to { transform: translateX(calc(100vw + 30px)); } }
+@keyframes sway { from { transform: translateY(0); } to { transform: translateY(-.8px); } }
+@media (prefers-reduced-motion: reduce) { .rail.rolling .train, .rail.rolling .train svg { animation: none; } .train { transform: translateX(16px); } }
 .hero::before { content: ""; position: absolute; width: 640px; height: 640px; right: -180px; top: -200px; border-radius: 50%; background: radial-gradient(circle, var(--blue-soft), transparent 68%); pointer-events: none; }
 .hero .wrap { position: relative; }
 .hero h1 { font: 400 clamp(3.6rem, 13vw, 9.5rem)/.9 var(--font-display); margin: 0 0 32px; letter-spacing: -.03em; }
@@ -252,6 +265,40 @@ html.locked { overflow: hidden; }
 </nav>
 
 <header class="hero" id="top">
+  <div class="rail" id="rail" aria-hidden="true">
+    <div class="train">
+      <svg viewBox="0 0 304 44">
+        <defs><linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef1f5"/><stop offset=".55" stop-color="#cfd5dd"/><stop offset="1" stop-color="#aeb5bf"/></linearGradient></defs>
+        <g>
+            <rect x="4" y="0" width="142" height="4" rx="2" fill="#9aa1ac"/>
+            <rect x="0" y="2" width="150" height="32" rx="5" fill="url(#steel)" stroke="#4a5160" stroke-width=".8"/>
+            <rect class="train-stripe" x="0" y="25.5" width="150" height="2.4" fill="#ff6319"/>
+            <rect x="30" y="6" width="14" height="27" fill="#b9bfc8" stroke="#4a5160" stroke-width=".6"/><rect x="33" y="9" width="8" height="10" rx="1" fill="#2e3542"/>
+            <rect x="100" y="6" width="14" height="27" fill="#b9bfc8" stroke="#4a5160" stroke-width=".6"/><rect x="103" y="9" width="8" height="10" rx="1" fill="#2e3542"/>
+            <rect x="9" y="9" width="17" height="10" rx="1.5" fill="#2e3542"/>
+            <rect x="50" y="9" width="20" height="10" rx="1.5" fill="#2e3542"/><rect x="74" y="9" width="20" height="10" rx="1.5" fill="#2e3542"/>
+            <rect x="120" y="9" width="22" height="10" rx="1.5" fill="#2e3542"/>
+            <rect x="6" y="34" width="138" height="4" fill="#3a3f4a"/>
+            <circle cx="22" cy="39.5" r="3.6" fill="#2a2e36"/><circle cx="34" cy="39.5" r="3.6" fill="#2a2e36"/>
+            <circle cx="116" cy="39.5" r="3.6" fill="#2a2e36"/><circle cx="128" cy="39.5" r="3.6" fill="#2a2e36"/>
+          </g>
+        <rect x="150" y="27" width="4" height="3" fill="#3a3f4a"/>
+        <g>
+            <rect x="158" y="0" width="142" height="4" rx="2" fill="#9aa1ac"/>
+            <rect x="154" y="2" width="150" height="32" rx="5" fill="url(#steel)" stroke="#4a5160" stroke-width=".8"/>
+            <rect class="train-stripe" x="154" y="25.5" width="150" height="2.4" fill="#ff6319"/>
+            <rect x="184" y="6" width="14" height="27" fill="#b9bfc8" stroke="#4a5160" stroke-width=".6"/><rect x="187" y="9" width="8" height="10" rx="1" fill="#2e3542"/>
+            <rect x="254" y="6" width="14" height="27" fill="#b9bfc8" stroke="#4a5160" stroke-width=".6"/><rect x="257" y="9" width="8" height="10" rx="1" fill="#2e3542"/>
+            <rect x="163" y="9" width="17" height="10" rx="1.5" fill="#2e3542"/>
+            <rect x="204" y="9" width="20" height="10" rx="1.5" fill="#2e3542"/><rect x="228" y="9" width="20" height="10" rx="1.5" fill="#2e3542"/>
+            <rect x="273" y="9" width="14" height="10" rx="1.5" fill="#2e3542"/><circle class="train-badge" cx="280" cy="14" r="4.3" fill="#ff6319"/><text class="train-letter" x="280" y="14" dy=".36em" text-anchor="middle" font-size="5.6" font-weight="700" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" fill="#fff">D</text><rect x="294" y="8" width="7" height="12" rx="1.5" fill="#2e3542"/><circle cx="300.5" cy="29.5" r="1.6" fill="#fff4b0"/>
+            <rect x="160" y="34" width="138" height="4" fill="#3a3f4a"/>
+            <circle cx="176" cy="39.5" r="3.6" fill="#2a2e36"/><circle cx="188" cy="39.5" r="3.6" fill="#2a2e36"/>
+            <circle cx="270" cy="39.5" r="3.6" fill="#2a2e36"/><circle cx="282" cy="39.5" r="3.6" fill="#2a2e36"/>
+          </g>
+      </svg>
+    </div>
+  </div>
   <div class="wrap flow" data-flow="out">
     <p class="eyebrow">We're getting married</p>
     <h1>Leo <em>&amp;</em><br>Vanessa</h1>
@@ -408,10 +455,21 @@ html.locked { overflow: hidden; }
   var intro = document.getElementById('intro');
   var hero = document.querySelector('.hero');
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // the rolling train changes its route each pass: D, A, R (Leo's and Vanessa's lines)
+  var rail = document.getElementById('rail'), routes = [['D', '#ff6319', '#fff'], ['A', '#0039a6', '#fff'], ['R', '#fccc0a', '#111']], route = 0;
+  rail.querySelector('.train').addEventListener('animationiteration', function (e) {
+    if (e.animationName !== 'roll') return;
+    route = (route + 1) % routes.length;
+    var r = routes[route];
+    rail.querySelectorAll('.train-stripe').forEach(function (e) { e.setAttribute('fill', r[1]); });
+    rail.querySelector('.train-badge').setAttribute('fill', r[1]);
+    var t = rail.querySelector('.train-letter'); t.textContent = r[0]; t.setAttribute('fill', r[2]);
+  });
   function reveal() {
     intro.classList.add('gone');
     root.classList.remove('locked');
     hero.classList.remove('enter'); void hero.offsetWidth; hero.classList.add('enter');
+    rail.classList.remove('rolling'); void rail.offsetWidth; rail.classList.add('rolling');
     window.scrollTo(0, 0);
   }
   document.getElementById('seal').addEventListener('click', function () {
