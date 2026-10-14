@@ -484,10 +484,32 @@ html.locked { overflow: hidden; }
         var leg = { path: p, line: l[1], msg: l[2], start: start, len: len };
         start += len; return leg;
       });
-      var cars = [];
-      for (var i = 2; i >= 0; i--) cars[i] = el('rect', { 'stroke-width': .7 });
-      var tag = el('text', { 'font-size': 6, 'font-weight': 700, 'text-anchor': 'middle', dy: '.36em' });
-      return { id: id, name: name, base: base, legs: legs, len: start, cars: cars, tag: tag, pos: 0, speed: 0, hold: false, done: null, leg: 0, phase: 0 };
+      // three stainless-steel cars seen from above: windows down both sides, a stripe in the line's color,
+      // and the route bullet on the lead car's cab
+      var cars = [], stripes = [];
+      for (var i = 2; i >= 0; i--) {
+        var g = el('g', {});
+        el('rect', { x: -11, y: -4.6, width: 22, height: 9.2, rx: i ? 1.8 : 3.2, fill: '#d3d8df', stroke: '#2b313d', 'stroke-width': .7 }, g);
+        el('rect', { x: -10.4, y: -3.9, width: 20.8, height: 1.2, fill: '#ffffff', opacity: .7 }, g);
+        stripes[i] = el('rect', { x: -11, y: -.7, width: 22, height: 1.4 }, g);
+        (i ? [-8.6, -4.3, 0, 4.3] : [-8.6, -4.3, 0]).forEach(function (wx) {
+          el('rect', { x: wx, y: -3.3, width: 3.1, height: 2, rx: .5, fill: '#3b4354' }, g);
+          el('rect', { x: wx, y: 1.3, width: 3.1, height: 2, rx: .5, fill: '#3b4354' }, g);
+        });
+        if (!i) {
+          el('rect', { x: 9.6, y: -3.4, width: 1.2, height: 6.8, rx: .6, fill: '#3b4354' }, g);
+          el('circle', { cx: 10.6, cy: -3.2, r: .8, fill: '#fff7c2' }, g);
+          el('circle', { cx: 10.6, cy: 3.2, r: .8, fill: '#fff7c2' }, g);
+        }
+        cars[i] = g;
+      }
+      var badge = el('circle', { r: 3.4, stroke: '#2b313d', 'stroke-width': .5 });
+      var tag = el('text', { 'font-size': 4.6, 'font-weight': 700, 'text-anchor': 'middle', dy: '.36em' });
+      // walking: a small person instead of a train
+      var walker = el('g', { visibility: 'hidden' });
+      el('circle', { cx: 0, cy: -6.2, r: 2.1, fill: 'var(--fg)' }, walker);
+      el('path', { d: 'M0 -3.6 V1.6 M0 1.6 L-2.2 5.6 M0 1.6 L2.2 5.6 M-2.6 -1.4 L0 -2.8 L2.6 -1.4', stroke: 'var(--fg)', 'stroke-width': 1.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', fill: 'none' }, walker);
+      return { id: id, name: name, base: base, legs: legs, len: start, cars: cars, stripes: stripes, badge: badge, tag: tag, walker: walker, pos: 0, speed: 0, hold: false, done: null, leg: 0, phase: 0 };
     }
     var riders = [
       rider('leo', 'Leo', 92, [['d', 'D'], ['x', null, 'Leo changes to the A at 59 St–Columbus Circle.'], ['a', 'A', 'Leo is on the A, heading downtown.'], ['w', null, 'Leo gets off at Chambers St and walks to the World Trade Center.']]),
@@ -500,27 +522,33 @@ html.locked { overflow: hidden; }
       return { i: i, x: p.x, y: p.y, deg: Math.atan2(p1.y - p0.y, p1.x - p0.x) * 180 / Math.PI };
     }
     function place(r) {
-      var head = point(r, r.pos), headLeg = r.legs[head.i];
+      var head = point(r, r.pos), leg = r.legs[head.i];
+      if (!leg.line) {
+        r.cars.forEach(function (c) { c.setAttribute('visibility', 'hidden'); });
+        r.badge.setAttribute('visibility', 'hidden'); r.tag.setAttribute('visibility', 'hidden');
+        var bob = Math.abs(Math.sin(r.pos * .9)) * 1.2;
+        r.walker.setAttribute('visibility', 'visible');
+        r.walker.setAttribute('transform', 'translate(' + head.x + ' ' + (head.y - bob) + ')');
+        return;
+      }
+      r.walker.setAttribute('visibility', 'hidden');
+      var color = LINES[leg.line][0];
       for (var i = 0; i < 3; i++) {
-        var c = r.cars[i], q = i ? point(r, Math.max(0, r.pos - i * 11)) : head;
-        if (!headLeg.line) {
-          // walking: a single person dot
-          if (i) { c.setAttribute('visibility', 'hidden'); continue; }
-          c.setAttribute('visibility', 'visible');
-          c.setAttribute('x', -3.5); c.setAttribute('y', -3.5); c.setAttribute('width', 7); c.setAttribute('height', 7); c.setAttribute('rx', 3.5);
-          c.setAttribute('fill', 'var(--land)'); c.setAttribute('stroke', 'var(--fg)'); c.setAttribute('stroke-width', 1.6);
-          c.setAttribute('transform', 'translate(' + q.x + ' ' + q.y + ')');
-          continue;
-        }
-        c.setAttribute('visibility', q.i === head.i ? 'visible' : 'hidden');
-        c.setAttribute('x', -7); c.setAttribute('y', -3.5); c.setAttribute('width', 14); c.setAttribute('height', 7); c.setAttribute('rx', 2.5);
-        c.setAttribute('fill', LINES[headLeg.line][0]); c.setAttribute('stroke', 'rgba(0,0,0,.4)'); c.setAttribute('stroke-width', .7);
-        c.setAttribute('opacity', i ? .85 : 1);
+        var d = r.pos - i * 23.5, c = r.cars[i];
+        r.stripes[i].setAttribute('fill', color);
+        // trailing cars pull out of the station behind the lead car
+        if (i && d < leg.start) { c.setAttribute('visibility', 'hidden'); continue; }
+        var q = i ? point(r, d) : head;
+        c.setAttribute('visibility', 'visible');
         c.setAttribute('transform', 'translate(' + q.x + ' ' + q.y + ') rotate(' + q.deg + ')');
       }
-      r.tag.textContent = headLeg.line || '';
-      r.tag.setAttribute('fill', headLeg.line ? LINES[headLeg.line][1] : 'none');
-      r.tag.setAttribute('transform', 'translate(' + head.x + ' ' + head.y + ')');
+      var rad = head.deg * Math.PI / 180, bx = head.x + Math.cos(rad) * 6.4, by = head.y + Math.sin(rad) * 6.4;
+      r.badge.setAttribute('visibility', 'visible'); r.tag.setAttribute('visibility', 'visible');
+      r.badge.setAttribute('fill', color);
+      r.badge.setAttribute('transform', 'translate(' + bx + ' ' + by + ')');
+      r.tag.textContent = leg.line;
+      r.tag.setAttribute('fill', LINES[leg.line][1]);
+      r.tag.setAttribute('transform', 'translate(' + bx + ' ' + by + ')');
     }
     var state = 'ready', clock = 0, last = 0;
     function reset() {
