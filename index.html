@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leo &amp; Vanessa · Azulejo e Larimar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one scrolling page on whitewash. Azulejo tiles and a calçada wave band carry the Portuguese side;
+   larimar blue, flamboyán coral and Zona Colonial facades carry the Dominican side. */
+:root {
+  --bg: #f6f8fb;          /* cal: Portuguese whitewash, kept cool */
+  --surface: #ffffff;
+  --ink: #0f1a33;
+  --muted: #56627f;
+  --line: #dbe2ee;
+  --cobalt: #1f43a3;      /* azulejo blue */
+  --larimar: #4fb5cb;     /* the Dominican gemstone */
+  --larimar-soft: #d9f0f5;
+  --coral: #e0533a;       /* flamboyán blossom */
+  --mango: #f2b23a;
+  --tile-bg: #ffffff;
+  --on-cobalt: #ffffff;
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1020; --surface: #121a33; --ink: #eef2ff; --muted: #98a4c4; --line: #223055;
+    --cobalt: #7290ff; --larimar: #6fd0e2; --larimar-soft: #10303a; --coral: #ff7357; --mango: #ffc65a;
+    --tile-bg: #121a33; --on-cobalt: #0b1020; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1020; --surface: #121a33; --ink: #eef2ff; --muted: #98a4c4; --line: #223055;
+  --cobalt: #7290ff; --larimar: #6fd0e2; --larimar-soft: #10303a; --coral: #ff7357; --mango: #ffc65a;
+  --tile-bg: #121a33; --on-cobalt: #0b1020; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.65 var(--font-body); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+section { padding-block: 104px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+h2 { font-size: clamp(2.2rem, 5.4vw, 3.8rem); font-weight: 800; line-height: .98; letter-spacing: -.035em; margin: 0 0 28px; }
+p { margin: 0 0 1em; max-width: 62ch; }
+.eyebrow { display: inline-flex; gap: 10px; align-items: center; font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cobalt); margin: 0 0 18px; }
+.eyebrow::before { content: ""; width: 14px; height: 14px; background: var(--coral); transform: rotate(45deg); border-radius: 2px; }
+.muted { color: var(--muted); }
+.tint { background: var(--larimar-soft); }
+
+/* nav */
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+.mono { display: inline-flex; align-items: center; gap: 10px; font: 800 1.15rem/1 var(--font-display); text-decoration: none; letter-spacing: -.02em; }
+.mono svg { width: 28px; height: 28px; border-radius: 4px; }
+.links { display: flex; align-items: center; gap: 24px; font-size: .9rem; font-weight: 600; }
+.links a { text-decoration: none; color: var(--muted); }
+.links a:hover { color: var(--ink); }
+.theme { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font-size: 1rem; }
+@media (max-width: 700px) { .links a { display: none; } }
+
+/* hero */
+.hero { padding-block: 64px 72px; }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+.hero .wrap > * { min-width: 0; }
+.hero h1 { font-size: clamp(3.6rem, 11vw, 8.4rem); font-weight: 800; line-height: .86; letter-spacing: -.055em; margin: 0 0 30px; }
+.hero h1 .amp { color: var(--coral); font-weight: 400; }
+.hero h1 .v { color: var(--cobalt); }
+.facts { display: flex; flex-wrap: wrap; gap: 14px 40px; margin-bottom: 30px; }
+.facts b { display: block; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.facts span { font: 600 1.35rem/1.3 var(--font-display); letter-spacing: -.01em; }
+.count { display: flex; gap: 10px; flex-wrap: wrap; }
+.count div { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 12px 18px; min-width: 88px; }
+.count strong { display: block; font: 800 2.2rem/1 var(--font-display); font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
+.count small { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; aspect-ratio: 1; max-width: 460px; width: 100%; justify-self: center; box-shadow: 0 30px 60px -30px rgba(15, 26, 51, .45); }
+.tiles svg { display: block; width: 100%; height: 100%; }
+.tiles .t { animation: lay .9s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes lay { from { transform: rotate(-90deg) scale(.6); } to { transform: none; } }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; gap: 40px; } .tiles { max-width: 360px; } }
+
+/* calçada portuguesa: the black-and-white wave pavement of Lisbon's Rossio */
+.calcada { display: block; width: 100%; height: 56px; }
+
+/* two cultures */
+.cultures { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 44px; }
+.culture { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; min-width: 0; }
+.culture header { padding: 26px 28px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.culture header h3 { margin: 0; font-size: 1.7rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+.culture header small { display: block; font-family: var(--font-body); font-size: .78rem; font-weight: 600; color: var(--muted); letter-spacing: .06em; }
+.culture .strip { height: 10px; }
+.culture.pt .strip { background: var(--cobalt); }
+.culture.do .strip { background: linear-gradient(90deg, var(--larimar), var(--coral)); }
+.culture ul { list-style: none; margin: 0; padding: 4px 28px 22px; }
+.culture li { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); align-items: start; }
+.culture li svg { width: 48px; height: 48px; }
+.culture li b { display: block; font: 700 1.05rem/1.3 var(--font-display); }
+.culture li span { color: var(--muted); font-size: .95rem; }
+@media (max-width: 820px) { .cultures { grid-template-columns: 1fr; } }
+
+/* day: a real sequence, so a timeline */
+.day { display: grid; grid-template-columns: 4fr 7fr; gap: 56px; align-items: start; }
+.day > * { min-width: 0; }
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 96px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--line); }
+.timeline time { font: 800 1.4rem/1.2 var(--font-display); font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--cobalt); }
+.timeline h3 { margin: 0 0 2px; font-size: 1.15rem; font-weight: 700; }
+.timeline h3 em { font-style: normal; font-family: var(--font-body); font-weight: 500; font-size: .85rem; color: var(--muted); margin-left: 8px; }
+.timeline p { margin: 0; color: var(--muted); }
+@media (max-width: 820px) { .day { grid-template-columns: 1fr; gap: 12px; } }
+@media (max-width: 480px) { .timeline li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* gallery: photo slots framed like tiles */
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 170px; gap: 10px; margin-top: 40px; }
+.ph { position: relative; overflow: hidden; border-radius: 4px; min-width: 0; }
+.ph::after { content: attr(data-label); position: absolute; left: 12px; bottom: 10px; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #fff; }
+.ph.big { grid-column: span 2; grid-row: span 2; }
+.ph.tall { grid-row: span 2; }
+.ph.wide { grid-column: span 2; }
+@media (max-width: 680px) { .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; } }
+.note { font-size: .88rem; color: var(--muted); margin-top: 14px; }
+
+/* details */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.cards > div { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 26px; min-width: 0; }
+.cards h3 { margin: 0 0 8px; font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; }
+.cards p { color: var(--muted); font-size: .97rem; margin: 0; }
+.swatches { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.swatches span { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; color: var(--ink); padding: 6px 10px 6px 6px; border: 1px solid var(--line); border-radius: 999px; }
+.swatches i { width: 18px; height: 18px; border-radius: 50%; }
+@media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+
+/* footer: a row of Zona Colonial facades */
+footer { padding-block: 0 44px; text-align: center; }
+.facades { display: block; width: 100%; height: auto; max-height: 190px; }
+footer .sign { font: 800 clamp(2rem, 6vw, 3.4rem)/1 var(--font-display); letter-spacing: -.04em; margin: 36px 0 8px; }
+footer .sign em { font-style: normal; color: var(--coral); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    section > .wrap { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
+    @keyframes rise { from { opacity: .15; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+  }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .tiles .t { animation: none; } }
+</style>
+</head>
+<body>
+
+<!-- shared drawings -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- azulejo A: corner quarter-circles that join into full circles when tiled, with an eight-petal star -->
+    <symbol id="az-a" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="var(--tile-bg)"/>
+      <g fill="currentColor">
+        <circle cx="0" cy="0" r="20"/><circle cx="100" cy="0" r="20"/><circle cx="0" cy="100" r="20"/><circle cx="100" cy="100" r="20"/>
+        <ellipse cx="50" cy="50" rx="7" ry="27"/><ellipse cx="50" cy="50" rx="7" ry="27" transform="rotate(45 50 50)"/>
+        <ellipse cx="50" cy="50" rx="7" ry="27" transform="rotate(90 50 50)"/><ellipse cx="50" cy="50" rx="7" ry="27" transform="rotate(135 50 50)"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="0" cy="0" r="29"/><circle cx="100" cy="0" r="29"/><circle cx="0" cy="100" r="29"/><circle cx="100" cy="100" r="29"/>
+        <circle cx="50" cy="0" r="9"/><circle cx="50" cy="100" r="9"/><circle cx="0" cy="50" r="9"/><circle cx="100" cy="50" r="9"/>
+      </g>
+      <circle cx="50" cy="50" r="8" fill="var(--tile-bg)"/><circle cx="50" cy="50" r="3.5" fill="currentColor"/>
+    </symbol>
+    <!-- azulejo B: a lattice diamond with filled corners -->
+    <symbol id="az-b" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="var(--tile-bg)"/>
+      <g fill="currentColor">
+        <path d="M0 0 H22 L0 22 Z M100 0 V22 L78 0 Z M0 100 V78 L22 100 Z M100 100 H78 L100 78 Z"/>
+        <path d="M50 26 L74 50 L50 74 L26 50 Z"/>
+      </g>
+      <path d="M50 8 L92 50 L50 92 L8 50 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="50" cy="50" r="9" fill="var(--tile-bg)"/><circle cx="50" cy="50" r="4" fill="currentColor"/>
+    </symbol>
+    <!-- flamboyán blossom: five petals, one flecked lighter like the real flower's standard petal -->
+    <symbol id="flor" viewBox="0 0 100 100">
+      <g transform="translate(50 50)">
+        <ellipse rx="15" ry="26" cy="-24" fill="var(--coral)"/>
+        <ellipse rx="15" ry="26" cy="-24" fill="var(--coral)" transform="rotate(72)"/>
+        <ellipse rx="15" ry="26" cy="-24" fill="var(--coral)" transform="rotate(144)"/>
+        <ellipse rx="15" ry="26" cy="-24" fill="var(--coral)" transform="rotate(216)"/>
+        <ellipse rx="15" ry="26" cy="-24" fill="var(--mango)" transform="rotate(288)"/>
+        <circle r="8" fill="var(--mango)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<nav>
+  <div class="wrap">
+    <a class="mono" href="#top"><svg viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg>L&amp;V</a>
+    <div class="links">
+      <a href="#cultures">Two cultures</a>
+      <a href="#day">The day</a>
+      <a href="#photos">Photos</a>
+      <a href="#details">Details</a>
+      <button class="theme" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Bem-vindos · Bienvenidos</p>
+      <h1>Leo <span class="amp">&amp;</span><br><span class="v">Vanessa</span></h1>
+      <div class="facts">
+        <div><b>Date</b><span>Saturday, June 19, 2027</span></div>
+        <div><b>Place</b><span>The Glasshouse, Brooklyn</span></div>
+      </div>
+      <div class="count" aria-label="Countdown to the wedding">
+        <div><strong id="cd-d">000</strong><small>Dias · Días</small></div>
+        <div><strong id="cd-h">00</strong><small>Horas</small></div>
+        <div><strong id="cd-m">00</strong><small>Minutos</small></div>
+      </div>
+    </div>
+    <div class="tiles" role="img" aria-label="Nine azulejo tiles in cobalt, larimar blue and flamboyán coral">
+      <svg class="t" style="color:var(--cobalt)" viewBox="0 0 100 100"><use href="#az-a"/></svg>
+      <svg class="t" style="color:var(--cobalt);animation-delay:.06s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
+      <svg class="t" style="color:var(--cobalt);animation-delay:.12s" viewBox="0 0 100 100"><use href="#az-a"/></svg>
+      <svg class="t" style="color:var(--larimar);animation-delay:.18s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
+      <svg class="t" style="animation-delay:.24s" viewBox="0 0 100 100"><rect width="100" height="100" fill="var(--tile-bg)"/><use href="#flor" x="10" y="10" width="80" height="80"/></svg>
+      <svg class="t" style="color:var(--larimar);animation-delay:.3s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
+      <svg class="t" style="color:var(--cobalt);animation-delay:.36s" viewBox="0 0 100 100"><use href="#az-a"/></svg>
+      <svg class="t" style="color:var(--cobalt);animation-delay:.42s" viewBox="0 0 100 100"><use href="#az-b"/></svg>
+      <svg class="t" style="color:var(--cobalt);animation-delay:.48s" viewBox="0 0 100 100"><use href="#az-a"/></svg>
+    </div>
+  </div>
+</header>
+
+<svg class="calcada" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <pattern id="mar-largo" width="120" height="28" patternUnits="userSpaceOnUse">
+      <rect width="120" height="28" fill="var(--bg)"/>
+      <path d="M0 14 Q30 0 60 14 T120 14 V28 Q90 14 60 28 T0 28 Z" fill="var(--ink)"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="56" fill="url(#mar-largo)"/>
+</svg>
+
+<section class="tint" id="cultures">
+  <div class="wrap">
+    <p class="eyebrow">Duas culturas · Dos culturas</p>
+    <h2>One family brings the tiles and the fado. The other brings the merengue and the bizcocho.</h2>
+    <p class="muted">Everything on this page borrows from both. Here's what you're looking at.</p>
+    <div class="cultures">
+      <article class="culture pt">
+        <div class="strip"></div>
+        <header><h3>Portugal<small>From Lisbon's walls and streets</small></h3>
+          <svg width="44" height="44" viewBox="0 0 100 100" style="color:var(--cobalt)" aria-hidden="true"><use href="#az-a"/></svg></header>
+        <ul>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="3" fill="var(--tile-bg)" stroke="var(--line)"/><svg x="4" y="4" width="40" height="40" viewBox="0 0 100 100" style="color:var(--cobalt)"><use href="#az-a"/></svg></svg>
+            <div><b>Azulejos</b><span>The blue-and-white glazed tiles that cover Lisbon's facades. Our tiles up top are drawn the same way, with the corners joining into circles when they meet.</span></div></li>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="3" fill="var(--bg)" stroke="var(--line)"/><path d="M4 18 Q14 10 24 18 T44 18 V26 Q34 18 24 26 T4 26 Z M4 34 Q14 26 24 34 T44 34 V40 Q34 34 24 40 T4 40 Z" fill="var(--ink)"/></svg>
+            <div><b>Calçada portuguesa</b><span>Hand-laid black and white stone paving. The wave band under the hero copies the "mar largo" pattern of Rossio square.</span></div></li>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="18" cy="30" r="13" fill="var(--mango)"/><circle cx="18" cy="30" r="4" fill="var(--ink)"/><rect x="26" y="8" width="5" height="22" rx="2" fill="var(--ink)" transform="rotate(35 28 19)"/><path d="M34 4 l8 2 l-2 8 z" fill="var(--ink)"/></svg>
+            <div><b>Fado</b><span>Lisbon's song of saudade, played on the pear-shaped guitarra portuguesa. Expect one during cocktails.</span></div></li>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="#e9c27a"/><circle cx="24" cy="24" r="15" fill="#f6d77b"/><circle cx="19" cy="20" r="3" fill="#8a4b16"/><circle cx="29" cy="27" r="4" fill="#8a4b16"/><circle cx="22" cy="31" r="2" fill="#8a4b16"/></svg>
+            <div><b>Pastéis de nata</b><span>Custard tarts with a scorched top. They'll come out late, next to the cake.</span></div></li>
+        </ul>
+      </article>
+      <article class="culture do">
+        <div class="strip"></div>
+        <header><h3>República Dominicana<small>From Santo Domingo and the island</small></h3>
+          <svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true"><use href="#flor"/></svg></header>
+        <ul>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 26 C6 14 18 6 28 8 C40 10 44 22 40 32 C36 42 18 44 11 37 C9 34 8 30 8 26 Z" fill="var(--larimar)"/><path d="M14 20 C20 18 24 24 30 20 M12 30 C20 28 26 34 36 28 M22 12 C24 16 30 14 34 16" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".85"/></svg>
+            <div><b>Larimar</b><span>A blue stone with white veins, found only in the Dominican Republic. It's the light blue that runs through this page.</span></div></li>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#flor" x="2" y="2" width="44" height="44"/></svg>
+            <div><b>Flamboyán</b><span>The tree that turns the island red-orange from May to July. In June it'll be in full bloom, so it gave us our coral.</span></div></li>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="14" width="26" height="22" rx="3" fill="var(--coral)"/><ellipse cx="8" cy="25" rx="4" ry="11" fill="var(--mango)"/><ellipse cx="34" cy="25" rx="4" ry="11" fill="var(--mango)"/><path d="M12 14 L20 36 M20 14 L28 36" stroke="var(--ink)" stroke-width="1.5"/><rect x="38" y="6" width="5" height="36" rx="2.5" fill="var(--muted)"/></svg>
+            <div><b>Merengue &amp; bachata</b><span>Tambora, güira and accordion. The dance floor opens with merengue and doesn't stop.</span></div></li>
+          <li><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="26" width="28" height="14" rx="2" fill="#f2d7b0"/><rect x="14" y="14" width="20" height="13" rx="2" fill="#f2d7b0"/><path d="M10 28 q4 4 7 0 q4 4 7 0 q4 4 7 0 q4 4 7 0 M14 16 q3 3 5 0 q3 3 5 0 q3 3 5 0 q3 3 5 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="10" r="3" fill="var(--coral)"/></svg>
+            <div><b>Bizcocho dominicano</b><span>The Dominican wedding cake: soft, pineapple-filled, under a cloud of suspiro meringue.</span></div></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="day">
+  <div class="wrap day">
+    <div>
+      <p class="eyebrow">O dia · El día</p>
+      <h2>Saturday, June 19</h2>
+      <p class="muted">An afternoon in two languages. The ceremony is short and the party is long.</p>
+    </div>
+    <ol class="timeline">
+      <li><time>3:30 pm</time><div><h3>Welcome <em>Boas-vindas · Bienvenida</em></h3><p>Vinho verde and morir soñando in the garden.</p></div></li>
+      <li><time>4:00 pm</time><div><h3>Ceremony <em>Cerimónia · Ceremonia</em></h3><p>Under the glass atrium, about 30 minutes.</p></div></li>
+      <li><time>5:00 pm</time><div><h3>Cocktail hour <em>Petiscos · Picaderas</em></h3><p>Pastéis de bacalhau and tostones, with a fado guitarist on the rooftop.</p></div></li>
+      <li><time>6:30 pm</time><div><h3>Dinner <em>Jantar · Cena</em></h3><p>Family style: bacalhau à Brás and pernil, side by side.</p></div></li>
+      <li><time>8:00 pm</time><div><h3>Cake <em>Bizcocho</em></h3><p>Cutting the bizcocho dominicano, then pastéis de nata for anyone still hungry.</p></div></li>
+      <li><time>8:30 pm</time><div><h3>Dancing <em>Baile</em></h3><p>Merengue and bachata until 11, with at least one Portuguese pimba song for the uncles.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="tint" id="photos">
+  <div class="wrap">
+    <p class="eyebrow">Fotos</p>
+    <h2>A few of our favorite moments</h2>
+    <div class="gallery">
+      <div class="ph big" data-label="Engagement" style="background:linear-gradient(150deg,var(--cobalt),#0f1a33)"></div>
+      <div class="ph" data-label="Lisboa" style="background:linear-gradient(200deg,var(--larimar),var(--cobalt))"></div>
+      <div class="ph tall" data-label="Santo Domingo" style="background:linear-gradient(170deg,var(--coral),#7a1f12)"></div>
+      <div class="ph" data-label="Family" style="background:linear-gradient(120deg,var(--mango),var(--coral))"></div>
+      <div class="ph wide" data-label="The proposal" style="background:linear-gradient(100deg,#0f1a33,var(--larimar))"></div>
+      <div class="ph" data-label="Home" style="background:linear-gradient(160deg,var(--cobalt),var(--larimar))"></div>
+    </div>
+    <p class="note">Placeholder tiles. Your own photos drop into these slots.</p>
+  </div>
+</section>
+
+<section id="details">
+  <div class="wrap">
+    <p class="eyebrow">Detalhes · Detalles</p>
+    <h2>Good to know</h2>
+    <div class="cards">
+      <div><h3>Venue</h3><p>The Glasshouse, 214 Water Street, Brooklyn, NY. Free parking on site after 3 pm.</p></div>
+      <div><h3>Stay</h3><p>We hold a room block at the Harbor Hotel, five minutes away. Use code LEOVANESSA by May 15.</p></div>
+      <div><h3>Dress code</h3><p>Formal. Wear our colors if you like, and anything but white.</p>
+        <div class="swatches"><span><i style="background:var(--cobalt)"></i>Azulejo</span><span><i style="background:var(--larimar)"></i>Larimar</span><span><i style="background:var(--coral)"></i>Flamboyán</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg class="facades" viewBox="0 0 1200 170" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A row of colorful colonial facades from Santo Domingo, some trimmed with Portuguese tiles"><g><rect x="0" y="10" width="150" height="146" fill="#e0533a"/><rect x="-2" y="2" width="154" height="10" fill="#e0533a"/><rect x="-2" y="12" width="154" height="3" fill="#fff" opacity=".55"/><path d="M62.0 156 V99 A13 13 0 0 1 88.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M58.0 156 V99 A17 17 0 0 1 92.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="14" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="11" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="19" y1="90" x2="19" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="24" y1="90" x2="24" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="29" y1="90" x2="29" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="116" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="113" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="121" y1="90" x2="121" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="126" y1="90" x2="126" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="131" y1="90" x2="131" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="12.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="26.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="40.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="54.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="68.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="82.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="96.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="110.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="124.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="150" y="20" width="150" height="136" fill="#4fb5cb"/><rect x="148" y="12" width="154" height="10" fill="#4fb5cb"/><rect x="148" y="22" width="154" height="3" fill="#fff" opacity=".55"/><path d="M212.0 156 V99 A13 13 0 0 1 238.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M208.0 156 V99 A17 17 0 0 1 242.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="164" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="161" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="169" y1="90" x2="169" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="174" y1="90" x2="174" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="179" y1="90" x2="179" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="266" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="263" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="271" y1="90" x2="271" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="276" y1="90" x2="276" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="281" y1="90" x2="281" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="300" y="10" width="160" height="146" fill="#f2b23a"/><rect x="298" y="2" width="164" height="10" fill="#f2b23a"/><rect x="298" y="12" width="164" height="3" fill="#fff" opacity=".55"/><path d="M367.0 156 V99 A13 13 0 0 1 393.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M363.0 156 V99 A17 17 0 0 1 397.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="314" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="311" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="319" y1="90" x2="319" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="324" y1="90" x2="324" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="329" y1="90" x2="329" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="426" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="423" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="431" y1="90" x2="431" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="436" y1="90" x2="436" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="441" y1="90" x2="441" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="310.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="324.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="338.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="352.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="366.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="380.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="394.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="408.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="422.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="436.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="460" y="36" width="130" height="120" fill="#1f43a3"/><rect x="458" y="28" width="134" height="10" fill="#1f43a3"/><rect x="458" y="38" width="134" height="3" fill="#fff" opacity=".55"/><path d="M512.0 156 V99 A13 13 0 0 1 538.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M508.0 156 V99 A17 17 0 0 1 542.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="474" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="471" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="479" y1="90" x2="479" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="484" y1="90" x2="484" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="489" y1="90" x2="489" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="556" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="553" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="561" y1="90" x2="561" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="566" y1="90" x2="566" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="571" y1="90" x2="571" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="590" y="20" width="160" height="136" fill="#f08a7a"/><rect x="588" y="12" width="164" height="10" fill="#f08a7a"/><rect x="588" y="22" width="164" height="3" fill="#fff" opacity=".55"/><path d="M657.0 156 V99 A13 13 0 0 1 683.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M653.0 156 V99 A17 17 0 0 1 687.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="604" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="601" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="609" y1="90" x2="609" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="614" y1="90" x2="614" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="619" y1="90" x2="619" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="716" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="713" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="721" y1="90" x2="721" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="726" y1="90" x2="726" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="731" y1="90" x2="731" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="600.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="614.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="628.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="642.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="656.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="670.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="684.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="698.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="712.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="726.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="750" y="36" width="160" height="120" fill="#8fd0c4"/><rect x="748" y="28" width="164" height="10" fill="#8fd0c4"/><rect x="748" y="38" width="164" height="3" fill="#fff" opacity=".55"/><path d="M817.0 156 V99 A13 13 0 0 1 843.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M813.0 156 V99 A17 17 0 0 1 847.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="764" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="761" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="769" y1="90" x2="769" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="774" y1="90" x2="774" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="779" y1="90" x2="779" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="876" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="873" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="881" y1="90" x2="881" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="886" y1="90" x2="886" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="891" y1="90" x2="891" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="910" y="20" width="120" height="136" fill="#f6d27a"/><rect x="908" y="12" width="124" height="10" fill="#f6d27a"/><rect x="908" y="22" width="124" height="3" fill="#fff" opacity=".55"/><path d="M957.0 156 V99 A13 13 0 0 1 983.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M953.0 156 V99 A17 17 0 0 1 987.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="924" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="921" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="929" y1="90" x2="929" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="934" y1="90" x2="934" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="939" y1="90" x2="939" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="996" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="993" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1001" y1="90" x2="1001" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1006" y1="90" x2="1006" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1011" y1="90" x2="1011" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="921.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="935.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="949.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="963.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="977.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="991.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1005.0" y="32" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><g><rect x="1030" y="36" width="140" height="120" fill="#7aa0e8"/><rect x="1028" y="28" width="144" height="10" fill="#7aa0e8"/><rect x="1028" y="38" width="144" height="3" fill="#fff" opacity=".55"/><path d="M1087.0 156 V99 A13 13 0 0 1 1113.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M1083.0 156 V99 A17 17 0 0 1 1117.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="1044" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1041" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1049" y1="90" x2="1049" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1054" y1="90" x2="1054" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1059" y1="90" x2="1059" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="1136" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1133" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1141" y1="90" x2="1141" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1146" y1="90" x2="1146" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1151" y1="90" x2="1151" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/></g><g><rect x="1170" y="10" width="120" height="146" fill="#e0533a"/><rect x="1168" y="2" width="124" height="10" fill="#e0533a"/><rect x="1168" y="12" width="124" height="3" fill="#fff" opacity=".55"/><path d="M1217.0 156 V99 A13 13 0 0 1 1243.0 99 V156 Z" fill="#0f1a33" opacity=".78"/><path d="M1213.0 156 V99 A17 17 0 0 1 1247.0 99 V156" fill="none" stroke="#fff" stroke-width="2.5" opacity=".7"/><rect x="1184" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1181" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1189" y1="90" x2="1189" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1194" y1="90" x2="1194" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1199" y1="90" x2="1199" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><rect x="1256" y="90" width="20" height="34" fill="#0f1a33" opacity=".7"/><rect x="1253" y="87" width="26" height="40" fill="none" stroke="#fff" stroke-width="2" opacity=".75"/><line x1="1261" y1="90" x2="1261" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1266" y1="90" x2="1266" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><line x1="1271" y1="90" x2="1271" y2="124" stroke="#fff" stroke-width="1" opacity=".6"/><svg x="1181.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1195.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1209.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1223.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1237.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1251.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg><svg x="1265.0" y="22" width="14" height="14" viewBox="0 0 100 100" style="color:#1f43a3"><use href="#az-a"/></svg></g><rect x="0" y="156" width="1200" height="14" fill="url(#mar-largo)"/></svg>
+  <div class="wrap">
+    <p class="sign">Até já <em>·</em> ¡Nos vemos!</p>
+    <p class="muted" style="margin:0 auto">Questions? Reach us at hello@leoandvanessa.example</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  // always land in light mode; the toggle switches for the visit
+  root.setAttribute('data-theme', 'light');
+  document.getElementById('theme').addEventListener('click', function () {
+    root.setAttribute('data-theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  var target = new Date(2027, 5, 19, 16, 0, 0).getTime();
+  function tick() {
+    var ms = Math.max(0, target - Date.now());
+    document.getElementById('cd-d').textContent = Math.floor(ms / 864e5);
+    document.getElementById('cd-h').textContent = String(Math.floor(ms % 864e5 / 36e5)).padStart(2, '0');
+    document.getElementById('cd-m').textContent = String(Math.floor(ms % 36e5 / 6e4)).padStart(2, '0');
+  }
+  tick(); setInterval(tick, 30000);
+})();
+</script>
+</body>
+</html>
