@@ -63,7 +63,35 @@ nav .wrap { display: flex; align-items: center; justify-content: space-between; 
 .links { display: flex; align-items: center; gap: 24px; font-size: .9rem; font-weight: 600; }
 .links a { text-decoration: none; color: var(--muted); }
 .links a:hover { color: var(--ink); }
-@media (max-width: 700px) { .links a { display: none; } }
+@media (max-width: 700px) { .links > a { display: none; } }
+
+/* mobile menu */
+.menubtn { display: none; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--ink); cursor: pointer; place-items: center; }
+.menubtn span { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; position: relative; transition: background .2s; }
+.menubtn span::before, .menubtn span::after { content: ""; position: absolute; left: 0; width: 16px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .3s, top .3s; }
+.menubtn span::before { top: -5px; }
+.menubtn span::after { top: 5px; }
+.menubtn[aria-expanded="true"] span { background: transparent; }
+.menubtn[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+.menubtn[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+.sheet { display: none; }
+@media (max-width: 700px) {
+  .menubtn { display: grid; }
+  .sheet { display: block; position: absolute; left: 0; right: 0; top: 100%; height: calc(100dvh - 62px - env(safe-area-inset-top, 0px)); overflow-y: auto; background: var(--bg);
+    visibility: hidden; opacity: 0; transform: translateY(-8px); transition: opacity .3s, transform .3s, visibility 0s .3s; }
+  nav.open .sheet { visibility: visible; opacity: 1; transform: none; transition: opacity .3s, transform .3s; }
+  .sheet .strip-tiles { display: block; width: 100%; height: 36px; }
+  .sheet ul { list-style: none; margin: 0; padding: 12px 20px 28px; }
+  .sheet li { border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(12px); transition: opacity .4s, transform .4s; }
+  nav.open .sheet li { opacity: 1; transform: none; }
+  nav.open .sheet li:nth-child(1) { transition-delay: .08s; } nav.open .sheet li:nth-child(2) { transition-delay: .14s; } nav.open .sheet li:nth-child(3) { transition-delay: .2s; }
+  nav.open .sheet li:nth-child(4) { transition-delay: .26s; } nav.open .sheet li:nth-child(5) { transition-delay: .32s; }
+  .sheet a { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 18px 0; text-decoration: none; color: var(--ink); font: 800 clamp(2rem, 9vw, 2.8rem)/1 var(--font-display); letter-spacing: -.04em; }
+  .sheet a small { font: 600 .72rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--cobalt); text-align: right; letter-spacing: .1em; }
+  .sheet a:active { color: var(--cobalt); }
+  .sheet .sheet-foot { padding: 4px 20px 32px; font: 400 clamp(1.8rem, 8vw, 2.4rem)/1 var(--font-script); color: var(--teal-deep); }
+}
+@media (prefers-reduced-motion: reduce) { .sheet, .sheet li, .menubtn span::before, .menubtn span::after { transition: none; } }
 
 /* hero */
 .hero { padding-block: 64px 72px; }
@@ -188,7 +216,7 @@ footer .script { font: 400 clamp(1.8rem, 4vw, 2.6rem)/1 var(--font-script); colo
 
 /* envelope opener: the whole screen is the envelope. The flap folds back to show the azulejo liner,
    the card rises, then the four panels slide off the edges and open straight into the site. */
-html.locked { overflow: hidden; }
+html.locked, html.menu-open { overflow: hidden; }
 .intro { position: fixed; inset: 0; z-index: 100; overflow: hidden; pointer-events: auto; }
 .intro.gone { visibility: hidden; pointer-events: none; transition: visibility 0s 1.7s; }
 .intro > * { position: absolute; }
@@ -462,7 +490,19 @@ html.locked { overflow: hidden; }
       <a href="#photos">Photos</a>
       <a href="#registry">Registry</a>
       <button class="flowerbtn" id="flowerbtn" type="button" aria-label="Drop flowers · Lançar flores · Lanzar flores" title="Lançar flores · Lanzar flores"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#f-bayahibe"/></svg></button>
+      <button class="menubtn" id="menubtn" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="sheet"><span></span></button>
     </div>
+  </div>
+  <div class="sheet" id="sheet">
+    <svg class="strip-tiles" aria-hidden="true"><rect width="100%" height="100%" fill="url(#liner)"/></svg>
+    <ul>
+      <li><a href="#story">Our story<small>A nossa história<br>Nuestra historia</small></a></li>
+      <li><a href="#day">The day<small>O dia<br>El día</small></a></li>
+      <li><a href="#agenda">Agenda<small>Programa<br>Itinerario</small></a></li>
+      <li><a href="#photos">Photos<small>Fotos<br>Fotos</small></a></li>
+      <li><a href="#registry">Registry<small>Lista de casamento<br>Lista de regalos</small></a></li>
+    </ul>
+    <p class="sheet-foot">com amor, Leo &amp; Vanessa</p>
   </div>
 </nav>
 
@@ -814,10 +854,24 @@ html.locked { overflow: hidden; }
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
       a.addEventListener('click', function (ev) {
         var id = a.getAttribute('href').slice(1), el = id && document.getElementById(id);
-        if (el) { ev.preventDefault(); lenis.scrollTo(el, { offset: -64, duration: 1.6 }); }
+        if (el) { ev.preventDefault(); if (a.closest('.sheet')) setMenu(false); lenis.scrollTo(el, { offset: -64, duration: 1.6 }); }
       });
     });
   }
+
+  // mobile menu: opens under the header, locks the page behind it, closes on a link, Escape or a wider screen
+  var navEl = document.querySelector('nav'), menubtn = document.getElementById('menubtn');
+  function setMenu(open) {
+    navEl.classList.toggle('open', open);
+    menubtn.setAttribute('aria-expanded', open);
+    menubtn.setAttribute('aria-label', open ? 'Close the menu' : 'Open the menu');
+    root.classList.toggle('menu-open', open);
+    if (lenis) { if (open) lenis.stop(); else if (!root.classList.contains('locked')) lenis.start(); }
+  }
+  menubtn.addEventListener('click', function () { setMenu(!navEl.classList.contains('open')); });
+  document.querySelectorAll('.sheet a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' && navEl.classList.contains('open')) { setMenu(false); menubtn.focus(); } });
+  matchMedia('(min-width: 701px)').addEventListener('change', function (m) { if (m.matches) setMenu(false); });
 
   // back to the top
   var totop = document.getElementById('totop');
