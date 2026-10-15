@@ -86,8 +86,24 @@ a { color: inherit; }
 .sway2 { transform-origin: 800px 80px; animation: breeze 9s ease-in-out infinite alternate-reverse; }
 @keyframes breeze { from { transform: rotate(-.5deg) translateX(-3px); } to { transform: rotate(.5deg) translateX(3px); } }
 
+/* GSAP mode: the library drives these, so the CSS transitions step aside */
+html.gs main { transition: none; opacity: 0; }
+html.gs.entered main { opacity: 1; }
+#entry.gs .stage, #entry.gs .leaf { transition: none; }
+.motes { position: fixed; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
+.mote { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 240, 179, .95), rgba(227, 185, 79, .35) 45%, rgba(227, 185, 79, 0) 70%); opacity: 0; }
+
+/* scroll progress + back to top */
+.progress { position: fixed; z-index: 320; top: 0; left: 0; right: 0; height: 3px; background: rgba(227, 185, 79, .15); }
+.progress i { display: block; height: 100%; transform: scaleX(0); transform-origin: 0 50%; background: linear-gradient(90deg, var(--gold-3), var(--gold-1), var(--gold-2)); box-shadow: 0 0 10px rgba(255, 214, 130, .8); }
+.totop { position: fixed; z-index: 300; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); padding: 8px 18px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(8, 24, 48, .85); backdrop-filter: blur(8px); cursor: pointer;
+  font: 400 1.5rem/1 var(--font-script); color: var(--gold-1); opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .3s, transform .3s, visibility .3s; }
+.totop.show { opacity: 1; visibility: visible; transform: none; }
+.totop .gold { filter: none; }
+
 /* content */
-main { position: relative; z-index: 10; opacity: 0; transition: opacity 1.4s ease .3s; }
+#smooth-wrapper { position: relative; z-index: 10; }
+main { position: relative; opacity: 0; transition: opacity 1.4s ease .3s; }
 html.entered main { opacity: 1; }
 .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; justify-content: center; padding: 110px 16px 4vh; }
 .card { position: relative; width: min(780px, 100%); text-align: center; padding: clamp(24px, 4vw, 40px) clamp(20px, 5vw, 56px); background: rgba(8, 24, 48, .72); backdrop-filter: blur(10px);
@@ -111,7 +127,7 @@ html.entered main { opacity: 1; }
 .cal .pop a:hover { background: rgba(227, 185, 79, .18); }
 
 section.panel { padding: clamp(40px, 8vw, 90px) 16px; }
-.panel .card { text-align: left; }
+.panel .card { text-align: left; margin-inline: auto; }
 .panel h2 { font: 400 clamp(2.8rem, 7vw, 4.4rem)/1.1 var(--font-script); margin: 0 0 14px; text-align: center; padding-bottom: .06em; }
 .panel .orn { display: block; width: 140px; height: 12px; margin: 0 auto 22px; background: radial-gradient(circle, var(--gold-2) 3px, transparent 4px) center / 14px 12px repeat-x; opacity: .85; }
 .panel p { max-width: 62ch; margin: 0 auto 1em; }
@@ -127,7 +143,7 @@ section.panel { padding: clamp(40px, 8vw, 90px) 16px; }
 .frames div { aspect-ratio: 4 / 5; border: 2px solid var(--gold-2); outline: 1px solid rgba(227, 185, 79, .4); outline-offset: 4px; background: linear-gradient(160deg, #1b4678, #0b2142); display: flex; align-items: flex-end; padding: 10px; font-size: .95rem; color: var(--cream-dim); font-style: italic; }
 @media (max-width: 560px) { .frames { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .note { text-align: center; color: var(--cream-dim); font-size: 1rem; margin: 18px auto 0 !important; }
-footer { position: relative; z-index: 10; padding: 30px 16px 60px; text-align: center; color: var(--cream-dim); }
+footer { position: relative; padding: 30px 16px 60px; text-align: center; color: var(--cream-dim); }
 footer .sign { font: 400 clamp(2.4rem, 6vw, 3.4rem)/1.1 var(--font-script); margin: 0 0 6px; }
 footer a { color: var(--gold-1); }
 </style>
@@ -158,6 +174,8 @@ footer a { color: var(--gold-1); }
 <g class="chand"><path d="M800 0 V88" stroke="#c9a14a" stroke-width="5"/><circle cx="800" cy="92" r="12" fill="#c9a14a"/><path d="M800 100 V160" stroke="#c9a14a" stroke-width="8"/><path d="M800 140 C740 150 690 140 650 176 M800 118 C760 112 720 100 704 128" fill="none" stroke="#c9a14a" stroke-width="6" stroke-linecap="round"/><path d="M800 140 C860 150 910 140 950 176 M800 118 C840 112 880 100 896 128" fill="none" stroke="#c9a14a" stroke-width="6" stroke-linecap="round"/><rect x="646" y="150" width="8" height="26" rx="3" fill="#f7efdd"/><path d="M638 176 H662 L658 186 H642 Z" fill="#c9a14a"/><circle class="glow" cx="650" cy="142" r="40" fill="url(#flame)"/><rect x="946" y="150" width="8" height="26" rx="3" fill="#f7efdd"/><path d="M938 176 H962 L958 186 H942 Z" fill="#c9a14a"/><circle class="glow" cx="950" cy="142" r="40" fill="url(#flame)"/><rect x="700" y="102" width="8" height="26" rx="3" fill="#f7efdd"/><path d="M692 128 H716 L712 138 H696 Z" fill="#c9a14a"/><circle class="glow" cx="704" cy="94" r="40" fill="url(#flame)"/><rect x="892" y="102" width="8" height="26" rx="3" fill="#f7efdd"/><path d="M884 128 H908 L904 138 H888 Z" fill="#c9a14a"/><circle class="glow" cx="896" cy="94" r="40" fill="url(#flame)"/><rect x="796" y="82" width="8" height="26" rx="3" fill="#f7efdd"/><path d="M788 108 H812 L808 118 H792 Z" fill="#c9a14a"/><circle class="glow" cx="800" cy="74" r="40" fill="url(#flame)"/><path d="M660 182 v19" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="660" cy="200" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M688 182 v20" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="688" cy="203" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M716 182 v21" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="716" cy="206" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M744 182 v22" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="744" cy="209" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M772 182 v23" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="772" cy="212" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M800 182 v24" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="800" cy="215" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M828 182 v23" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="828" cy="212" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M856 182 v22" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="856" cy="209" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M884 182 v21" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="884" cy="206" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M912 182 v20" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="912" cy="203" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M940 182 v19" stroke="#e8d7a4" stroke-width="1.5" opacity=".7"/><ellipse cx="940" cy="200" rx="4" ry="8" fill="#f4ecd4" opacity=".85"/><path d="M640 186 Q800 214 960 186" fill="none" stroke="#c9a14a" stroke-width="5"/></g>
 </svg></div>
 
+<div class="progress" aria-hidden="true"><i></i></div>
+<button class="totop" id="totop" type="button" aria-label="Back to top"><span class="gold" data-t="totop">Back to top</span> ↑</button>
 <header class="top">
   <a class="mark gold" href="#top" aria-label="Leo &amp; Vanessa">L &amp; V</a>
   <nav class="links" aria-label="Sections">
@@ -170,6 +188,7 @@ footer a { color: var(--gold-1); }
   <button class="lang" id="lang" type="button" aria-label="Language: English. Press to change."><span class="on">EN</span><span>ES</span><span>PT</span></button>
 </header>
 
+<div id="smooth-wrapper"><div id="smooth-content">
 <main id="top">
   <section class="hero">
     <div class="card">
@@ -254,6 +273,7 @@ footer a { color: var(--gold-1); }
   <p class="sign gold" data-t="sign">Con amore, Leo &amp; Vanessa</p>
   <p><span data-t="questions">Questions?</span> <a href="mailto:hello@leoandvanessa.example">hello@leoandvanessa.example</a></p>
 </footer>
+</div></div>
 
 <div id="entry" role="dialog" aria-label="Welcome">
   <div class="stage" id="facade">
@@ -290,6 +310,9 @@ footer a { color: var(--gold-1); }
   <div class="greet"><button type="button" id="enter"><span class="welcome gold">Benvenuti</span><small data-t="open">Tap the door to enter</small></button></div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
 <script>
 (function () {
   var root = document.documentElement;
@@ -306,7 +329,7 @@ footer a { color: var(--gold-1); }
       agenda_h: 'Agenda', a1: 'Welcome', a1p: 'Prosecco in the garden.', a2: 'Ceremony', a2p: 'Under the glass atrium, about 30 minutes.', a3: 'Cocktail hour', a3p: 'On the rooftop, with live music.', a4: 'Dinner', a4p: 'Family style.', a5: 'Cake and toast', a5p: 'Cutting the cake, then a toast.', a6: 'Dancing', a6p: 'Until 11.',
       photos_h: 'Photos', f1: 'Engagement', f2: 'Together', f3: 'Family', f4: 'Travels', f5: 'Home', f6: 'The proposal', photos_note: 'Placeholders. Your own photos drop into these frames.',
       reg_h: 'Registry', reg_p: "Your presence is the gift. If you'd like to give something more, here are a few ideas.", r1k: 'Honeymoon', r1: 'Honeymoon fund', r1p: 'Help send us somewhere new.', r2k: 'Home', r2: 'Our first home', r2p: 'Help us fill our walls and kitchen.', r3k: 'Store', r3: 'Registry store', r3p: "A short list of things we'll use every day.",
-      soon: 'Link coming soon', soon2: 'Link coming soon', soon3: 'Link coming soon', sign: 'Con amore, Leo & Vanessa', questions: 'Questions?' },
+      soon: 'Link coming soon', soon2: 'Link coming soon', soon3: 'Link coming soon', sign: 'Con amore, Leo & Vanessa', questions: 'Questions?', totop: 'Back to top' },
     es: { nav_story: 'Nuestra historia', nav_day: 'El día', nav_agenda: 'Agenda', nav_photos: 'Fotos', nav_registry: 'Lista de regalos',
       open: 'Toca la puerta para entrar', kicker: 'Nos casamos', when: 'Martes, 5 de octubre de 2027 · 4:00 pm', where: 'The Glasshouse, Brooklyn',
       days: 'días', hours: 'horas', minutes: 'minutos', seconds: 'segundos', today: '¡Es hoy!', married: 'Casados. Gracias por celebrar con nosotros.', addcal: 'Añadir a mi calendario',
@@ -315,7 +338,7 @@ footer a { color: var(--gold-1); }
       agenda_h: 'Agenda', a1: 'Bienvenida', a1p: 'Prosecco en el jardín.', a2: 'Ceremonia', a2p: 'Bajo el atrio de cristal, unos 30 minutos.', a3: 'Cóctel', a3p: 'En la azotea, con música en vivo.', a4: 'Cena', a4p: 'Estilo familiar.', a5: 'Pastel y brindis', a5p: 'Cortamos el pastel y brindamos.', a6: 'Baile', a6p: 'Hasta las 11.',
       photos_h: 'Fotos', f1: 'Compromiso', f2: 'Juntos', f3: 'Familia', f4: 'Viajes', f5: 'Hogar', f6: 'La propuesta', photos_note: 'Espacios de ejemplo. Tus propias fotos van en estos marcos.',
       reg_h: 'Lista de regalos', reg_p: 'Tu presencia es el mejor regalo. Si quieres darnos algo más, aquí van algunas ideas.', r1k: 'Luna de miel', r1: 'Fondo de luna de miel', r1p: 'Ayúdanos a llegar a un lugar nuevo.', r2k: 'Hogar', r2: 'Nuestro primer hogar', r2p: 'Ayúdanos a llenar las paredes y la cocina.', r3k: 'Tienda', r3: 'Tienda de regalos', r3p: 'Una lista corta de cosas que usaremos todos los días.',
-      soon: 'Enlace próximamente', soon2: 'Enlace próximamente', soon3: 'Enlace próximamente', sign: 'Con amore, Leo y Vanessa', questions: '¿Preguntas?' },
+      soon: 'Enlace próximamente', soon2: 'Enlace próximamente', soon3: 'Enlace próximamente', sign: 'Con amore, Leo y Vanessa', questions: '¿Preguntas?', totop: 'Volver arriba' },
     pt: { nav_story: 'A nossa história', nav_day: 'O dia', nav_agenda: 'Programa', nav_photos: 'Fotos', nav_registry: 'Lista de presentes',
       open: 'Toque na porta para entrar', kicker: 'Vamos casar', when: 'Terça-feira, 5 de outubro de 2027 · 16h00', where: 'The Glasshouse, Brooklyn',
       days: 'dias', hours: 'horas', minutes: 'minutos', seconds: 'segundos', today: 'É hoje!', married: 'Casados. Obrigado por celebrarem connosco.', addcal: 'Adicionar ao meu calendário',
@@ -324,7 +347,7 @@ footer a { color: var(--gold-1); }
       agenda_h: 'Programa', a1: 'Receção', a1p: 'Prosecco no jardim.', a2: 'Cerimónia', a2p: 'Sob o átrio de vidro, cerca de 30 minutos.', a3: 'Cocktail', a3p: 'No terraço, com música ao vivo.', a4: 'Jantar', a4p: 'Ao estilo familiar.', a5: 'Bolo e brinde', a5p: 'Cortamos o bolo e fazemos um brinde.', a6: 'Baile', a6p: 'Até às 23h.',
       photos_h: 'Fotos', f1: 'Noivado', f2: 'Juntos', f3: 'Família', f4: 'Viagens', f5: 'Casa', f6: 'O pedido', photos_note: 'Espaços de exemplo. As vossas fotos entram nestas molduras.',
       reg_h: 'Lista de presentes', reg_p: 'A vossa presença é o melhor presente. Se quiserem oferecer algo mais, aqui ficam algumas ideias.', r1k: 'Lua de mel', r1: 'Fundo de lua de mel', r1p: 'Ajudem-nos a chegar a um lugar novo.', r2k: 'Casa', r2: 'A nossa primeira casa', r2p: 'Ajudem-nos a encher as paredes e a cozinha.', r3k: 'Loja', r3: 'Loja de presentes', r3p: 'Uma pequena lista de coisas que vamos usar todos os dias.',
-      soon: 'Ligação em breve', soon2: 'Ligação em breve', soon3: 'Ligação em breve', sign: 'Con amore, Leo e Vanessa', questions: 'Dúvidas?' }
+      soon: 'Ligação em breve', soon2: 'Ligação em breve', soon3: 'Ligação em breve', sign: 'Con amore, Leo e Vanessa', questions: 'Dúvidas?', totop: 'Voltar ao topo' }
   };
   var order = ['en', 'es', 'pt'], names = { en: 'English', es: 'Español', pt: 'Português' }, cur = 0;
   var langBtn = document.getElementById('lang');
@@ -333,6 +356,7 @@ footer a { color: var(--gold-1); }
     root.setAttribute('lang', order[i]);
     document.querySelectorAll('[data-t]').forEach(function (el) { var k = el.getAttribute('data-t'); if (d[k] != null) el.textContent = d[k]; });
     [].forEach.call(langBtn.children, function (s, n) { s.classList.toggle('on', n === i); });
+    if (window.gsap && !reduced && root.classList.contains('entered')) { gsap.fromTo('#smooth-content [data-t]', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .55, ease: 'power2.out', stagger: { each: .012, from: 'start' }, clearProps: 'opacity,transform' }); if (window.ScrollTrigger) ScrollTrigger.refresh(); }
     langBtn.setAttribute('aria-label', 'Language: ' + names[order[i]] + '. Press to change to ' + names[order[(i + 1) % 3]] + '.');
   }
   langBtn.addEventListener('click', function () { setLang((cur + 1) % 3); });
@@ -352,18 +376,99 @@ footer a { color: var(--gold-1); }
   }
   tick(); setInterval(tick, 1000);
 
+  /* ---------- anchors and back to top ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1), el = id === 'top' ? document.body : document.getElementById(id);
+      if (!el || !smoother) return;
+      e.preventDefault(); if (id === 'top') smoother.scrollTo(0, true); else smoother.scrollTo(el, true, 'top 84px');
+    });
+  });
+  addEventListener('scroll', function () { if (!window.ScrollTrigger || !useGsap) document.getElementById('totop').classList.toggle('show', scrollY > 700); }, { passive: true });
+  document.getElementById('totop').addEventListener('click', function () { if (smoother) smoother.scrollTo(0, true); else scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
+
   /* ---------- the door ---------- */
-  var entry = document.getElementById('entry'), opened = false;
+  var smoother = null, entry = document.getElementById('entry'), opened = false, useGsap = !!window.gsap && !reduced;
+  if (useGsap) {
+    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+    if (window.ScrollSmoother) gsap.registerPlugin(ScrollSmoother);
+    root.classList.add('gs'); entry.classList.add('gs');
+    gsap.set('#facade', { clearProps: 'transform' });
+    gsap.set('#facade', { xPercent: -50, yPercent: -50, left: '50%', top: '50%', transformOrigin: '50% 62%' });
+    gsap.set('.leaf.l', { transformOrigin: '0% 50%' }); gsap.set('.leaf.r', { transformOrigin: '100% 50%' });
+  }
+  function finish() { entry.classList.add('gone'); root.classList.remove('locked'); root.classList.add('entered'); scrollTo(0, 0); if (useGsap) reveal(); else document.getElementById('totop').classList.remove('show'); }
   function enter() {
     if (opened) return; opened = true;
+    if (useGsap) {
+      gsap.timeline({ onComplete: finish })
+        .to('.greet', { opacity: 0, duration: .4, ease: 'power1.out' }, 0)
+        .to('.leaf.l', { rotationY: -108, duration: 1.7, ease: 'power2.inOut' }, 0.1)
+        .to('.leaf.r', { rotationY: 108, duration: 1.7, ease: 'power2.inOut' }, 0.1)
+        .to('.leaf', { boxShadow: '0 0 60px rgba(255, 214, 130, .8)', duration: 1.2, ease: 'sine.in' }, 0.2)
+        .to('#facade', { scale: 3.2, duration: 2, ease: 'power3.in' }, 1.2)
+        .to('#facade', { opacity: 0, duration: .8, ease: 'power1.in' }, 2.4);
+      return;
+    }
     entry.classList.add('open');
-    function finish() { entry.classList.add('gone'); root.classList.remove('locked'); root.classList.add('entered'); scrollTo(0, 0); }
     if (reduced) return finish();
     setTimeout(function () { entry.classList.add('zoom'); }, 1300);
     setTimeout(finish, 3300);
   }
   document.getElementById('enter').addEventListener('click', enter);
   document.querySelectorAll('[data-door]').forEach(function (d) { d.addEventListener('click', enter); });
+
+  /* ---------- GSAP: entrance, scroll reveals, drifting gold motes ---------- */
+  function reveal() {
+    var wipeFrom = { clipPath: 'inset(-25% 100% -25% -5%)' }, wipeTo = { clipPath: 'inset(-25% -8% -25% -5%)', duration: 1.9, ease: 'power2.inOut', clearProps: 'clipPath' };
+    gsap.set('main', { opacity: 1 });
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .from('.hero .card', { y: 70, opacity: 0, duration: 1.3 }, 0)
+      .from('.hero .kicker', { opacity: 0, y: 14, duration: .9 }, .5)
+      .fromTo('.hero .names', wipeFrom, wipeTo, .6)
+      .from('.hero .when, .hero .where', { opacity: 0, y: 14, duration: .9, stagger: .15 }, 1.6)
+      .from('.hero .count > div, .hero .today', { opacity: 0, y: 18, duration: .9, stagger: .1 }, 1.9)
+      .from('.hero .cal', { opacity: 0, y: 14, duration: .8 }, 2.3)
+      .from('.top', { opacity: 0, y: -20, duration: 1 }, .4);
+    if (window.ScrollTrigger && window.ScrollSmoother) {
+      smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: 1.3, effects: true, smoothTouch: false });
+      // light parallax: ornaments and frames drift against the scroll, cards trail slightly
+      smoother.effects('.panel .orn', { speed: 0.88 });
+      smoother.effects('.panel h2', { speed: 0.94 });
+      smoother.effects('.frames div', { lag: function (i) { return 0.1 + i * 0.07; } });
+      smoother.effects('.rows li', { lag: function (i) { return 0.05 + (i % 6) * 0.03; } });
+      smoother.effects('footer .sign', { speed: 0.9 });
+    }
+    if (window.ScrollTrigger) {
+      // gold progress line, back-to-top button, and a gentle lean on the cards while you scroll fast
+      gsap.to('.progress i', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 } });
+      ScrollTrigger.create({ start: 700, end: 'max', onToggle: function (s) { document.getElementById('totop').classList.toggle('show', s.isActive); } });
+      var lean = gsap.quickSetter('.panel .card', 'skewY', 'deg'), sk = { v: 0 };
+      ScrollTrigger.create({ onUpdate: function (self) { gsap.to(sk, { v: gsap.utils.clamp(-1.8, 1.8, self.getVelocity() / -700), duration: .25, overwrite: true, onUpdate: function () { lean(sk.v); } }); } });
+      ScrollTrigger.addEventListener('scrollEnd', function () { gsap.to(sk, { v: 0, duration: .6, ease: 'power2.out', overwrite: true, onUpdate: function () { lean(sk.v); } }); });
+      document.querySelectorAll('.panel').forEach(function (p) {
+        var card = p.querySelector('.card'), h = p.querySelector('h2'), items = p.querySelectorAll('.rows li, .frames div, .panel .card > p');
+        var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 82%', once: true } });
+        tl.from(card, { y: 80, opacity: 0, duration: 1.1, ease: 'power3.out' })
+          .fromTo(h, wipeFrom, wipeTo, .25)
+          .from(items, { opacity: 0, y: 24, duration: .8, stagger: .09, ease: 'power2.out' }, .55);
+      });
+      // walking further into the villa as you scroll
+      gsap.set('#room', { clearProps: 'transform' });
+      gsap.set('#room', { xPercent: -50, yPercent: -50, left: '50%', top: '50%', transformOrigin: '50% 38%' });
+      gsap.to('#room', { scale: 1.1, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 1 } });
+    }
+    // gold motes drifting in the candlelight
+    var box = document.createElement('div'); box.className = 'motes'; box.setAttribute('aria-hidden', 'true'); document.body.appendChild(box);
+    for (var i = 0; i < 18; i++) {
+      var m = document.createElement('i'); m.className = 'mote'; m.style.left = gsap.utils.random(2, 98) + '%'; m.style.top = gsap.utils.random(6, 94) + '%';
+      var s = gsap.utils.random(.6, 1.8); box.appendChild(m);
+      gsap.set(m, { scale: s });
+      gsap.to(m, { opacity: gsap.utils.random(.35, .9), duration: gsap.utils.random(1.6, 3.4), delay: gsap.utils.random(0, 3), repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to(m, { x: gsap.utils.random(-70, 70), y: gsap.utils.random(-90, 40), duration: gsap.utils.random(6, 12), repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    }
+    gsap.from('.chand', { rotation: 3, transformOrigin: '800px 0px', duration: 5, ease: 'elastic.out(1, .25)' });
+  }
 
   /* ---------- live background: Lake Como at golden hour ---------- */
   var cv = document.getElementById('lake'), cx = cv.getContext('2d'), bg = document.createElement('canvas'), bx = bg.getContext('2d');
