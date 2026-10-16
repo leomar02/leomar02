@@ -26,7 +26,7 @@
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.7 var(--sans); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
@@ -39,9 +39,15 @@ p { margin: 0 0 1em; }
 
 /* nav */
 header.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255, 255, 255, .94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-header.bar .wrap { max-width: 1280px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.mono { font: 400 1.35rem/1 var(--display); letter-spacing: .02em; text-decoration: none; }
-.mono i { font: 400 1.3rem/1 var(--script); font-style: normal; margin-inline: .1em; }
+header.bar .wrap { max-width: 1280px; display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.logo { --s: 32px; display: inline-grid; justify-items: center; gap: calc(var(--s) * .22); text-decoration: none; color: var(--navy); }
+.logo .orn { display: flex; align-items: center; gap: calc(var(--s) * .16); width: calc(var(--s) * 2.7); }
+.logo .orn::before, .logo .orn::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(20, 38, 79, 0), var(--navy) 35%); }
+.logo .orn::after { background: linear-gradient(270deg, rgba(20, 38, 79, 0), var(--navy) 35%); }
+.logo .orn svg { flex: none; width: calc(var(--s) * .3); height: calc(var(--s) * .4); }
+.logo .mk { display: flex; align-items: baseline; font: 400 var(--s)/.9 var(--display); letter-spacing: -.01em; }
+.logo .mk i { font: italic 400 calc(var(--s) * .62)/1 var(--display); margin-inline: calc(var(--s) * -.08) calc(var(--s) * -.06); position: relative; top: calc(var(--s) * -.02); }
+.logo.big { --s: 96px; }
 .links { display: flex; gap: clamp(20px, 3.4vw, 46px); }
 .links a { text-decoration: none; font: 400 .72rem/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--navy); padding: 6px 0; border-bottom: 1px solid transparent; }
 .links a:hover { border-bottom-color: var(--navy); }
@@ -197,7 +203,7 @@ footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
 
 <header class="bar" id="bar">
   <div class="wrap">
-    <a class="mono" href="#top">L<i>&amp;</i>V</a>
+    <a class="logo" href="#top" aria-label="Vanessa and Leo, home"><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span><span class="mk">V<i>&amp;</i>L</span><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span></a>
     <nav class="links" id="links" aria-label="Sections">
       <a href="#top">Home</a>
       <a href="#story">Our story</a>
@@ -344,7 +350,8 @@ footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
 </main>
 
 <footer>
-  <p class="names2">Leo <i>&amp;</i> Vanessa</p>
+  <div class="logo big" role="img" aria-label="V and L"><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span><span class="mk">V<i>&amp;</i>L</span><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span></div>
+  <p class="names2" style="margin-top:26px">Leo <i>&amp;</i> Vanessa</p>
   <p class="caps">October 5, 2027 &nbsp;·&nbsp; Brooklyn, New York</p>
   <p class="caps">Questions? <a href="mailto:hello@leoandvanessa.example">hello@leoandvanessa.example</a></p>
 </footer>
