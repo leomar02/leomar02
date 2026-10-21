@@ -330,35 +330,11 @@ html.entered .hero-photo { animation: fadeph 1.6s ease both; }
         <h1 class="names">Leo<i>&amp;</i>Vanessa</h1>
         <hr class="rule" style="margin-left:0">
         <p class="caps invite">Invite you to celebrate<br>their wedding</p>
-        <a class="btn gold-btn" href="#rsvp">RSVP</a>
       </div>
     </div>
   </section>
 
   <div class="wrap stack" id="details">
-    <section class="card reveal rsvp" id="rsvp">
-      <h2>Kindly RSVP</h2><hr class="rule">
-      <p class="muted" id="rsvp-lead" style="max-width:52ch;margin:0 auto 28px">Please reply by <strong>September 1, 2027</strong> so we can save you a seat.</p>
-      <form id="rsvp-form" novalidate>
-        <div class="fgrid">
-          <div class="fld"><label for="r-name">Full name</label><input id="r-name" type="text" autocomplete="name" required></div>
-          <div class="fld"><label for="r-email">Email</label><input id="r-email" type="email" autocomplete="email" required></div>
-        </div>
-        <fieldset class="fld">
-          <legend>Will you attend?</legend>
-          <div class="choice">
-            <label><input type="radio" name="att" value="yes" checked><span>Joyfully accepts</span></label>
-            <label><input type="radio" name="att" value="no"><span>Regretfully declines</span></label>
-          </div>
-        </fieldset>
-        <div class="fld" id="r-guests-wrap"><label for="r-guests">Guests in your party, including you</label>
-          <select id="r-guests"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
-        <div class="fld"><label for="r-note">Dietary needs or a note for us</label><textarea id="r-note" rows="3"></textarea></div>
-        <p class="ferr" id="r-err" role="alert" hidden>Please add your name and a valid email so we know who replied.</p>
-        <button class="btn" type="submit">Send RSVP</button>
-      </form>
-      <div class="thanks" id="r-thanks" hidden><h3 id="r-thanks-h">Thank you.</h3><p class="muted" id="r-thanks-p"></p></div>
-    </section>
 
     <section class="card info reveal">
       <div class="item">
@@ -475,6 +451,30 @@ html.entered .hero-photo { animation: fadeph 1.6s ease both; }
         <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22L24 8l18 14M10 20v22h28V20M20 42V30h8v12"/></svg><h3>Our first home</h3><p>Help us fill our walls and kitchen.</p><span class="soon">Link coming soon</span></div>
         <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 16h32l-3 24H11zM17 16a7 7 0 0 1 14 0"/></svg><h3>Registry store</h3><p>A short list of things we'll use every day.</p><span class="soon">Link coming soon</span></div>
       </div>
+    </section>
+
+    <section class="card reveal rsvp" id="rsvp">
+      <h2>Kindly RSVP</h2><hr class="rule">
+      <p class="muted" id="rsvp-lead" style="max-width:52ch;margin:0 auto 28px">Please reply by <strong>September 1, 2027</strong> so we can save you a seat.</p>
+      <form id="rsvp-form" novalidate>
+        <div class="fgrid">
+          <div class="fld"><label for="r-name">Full name</label><input id="r-name" type="text" autocomplete="name" required></div>
+          <div class="fld"><label for="r-email">Email</label><input id="r-email" type="email" autocomplete="email" required></div>
+        </div>
+        <fieldset class="fld">
+          <legend>Will you attend?</legend>
+          <div class="choice">
+            <label><input type="radio" name="att" value="yes" checked><span>Joyfully accepts</span></label>
+            <label><input type="radio" name="att" value="no"><span>Regretfully declines</span></label>
+          </div>
+        </fieldset>
+        <div class="fld" id="r-guests-wrap"><label for="r-guests">Guests in your party, including you</label>
+          <select id="r-guests"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+        <div class="fld"><label for="r-note">Dietary needs or a note for us</label><textarea id="r-note" rows="3"></textarea></div>
+        <p class="ferr" id="r-err" role="alert" hidden>Please add your name and a valid email so we know who replied.</p>
+        <button class="btn" type="submit">Send RSVP</button>
+      </form>
+      <div class="thanks" id="r-thanks" hidden><h3 id="r-thanks-h">Thank you.</h3><p class="muted" id="r-thanks-p"></p></div>
     </section>
   </div>
 </main>
