@@ -401,12 +401,30 @@ footer .logo { color: var(--cream); }
 footer .caps, footer a { color: rgba(255, 255, 255, .7); }
 footer a { border-bottom-color: rgba(255, 255, 255, .3); }
 footer .names2 { color: #fff; }
+
+/* new york style: ink-and-wash cartoons with a caption, in the manner of a magazine drawing */
+.toon { margin: 0; padding: clamp(18px, 3vw, 36px) clamp(14px, 3vw, 36px) clamp(22px, 3vw, 34px); background: #fdfcf8; }
+.toon svg { display: block; width: 100%; max-width: 660px; height: auto; margin: 0 auto; }
+.toon figcaption { max-width: 44ch; margin: clamp(14px, 2.4vw, 22px) auto 0; font: italic 400 clamp(1.05rem, 2.1vw, 1.3rem)/1.45 var(--display); color: var(--ink); text-wrap: balance; }
+.dumbo-art { filter: url(#ink); }
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
+    <!-- hand-drawn line: a little wobble for the ink, a looser one for the wash -->
+    <filter id="ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <filter id="wash" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation=".8"/></filter>
+    <g id="pg">
+      <path d="M186 190c30 0 62 14 74 44l30 12-34 8c-14 12-34 16-52 14-24-2-40-16-40-38 0-14 6-28 10-36"/>
+      <circle cx="175" cy="180" r="16"/>
+      <path d="M160 177l-15 6 15 4"/>
+      <circle cx="170" cy="176" r="2.2" fill="#111" stroke="none"/>
+      <path d="M208 214c18-4 40 6 48 26-18 6-38 2-48-26zM222 224c8 2 16 6 22 12"/>
+      <path d="M214 268v15m-7 0h13M236 268v15m-7 0h13"/>
+    </g>
+    <path id="pgw" d="M186 190c30 0 62 14 74 44l30 12-34 8c-14 12-34 16-52 14-24-2-40-16-40-38 0-14 6-28 10-36z"/>
     <!-- duotone: dark tones become deep navy, light tones become white -->
     <filter id="duo" color-interpolation-filters="sRGB">
       <feColorMatrix type="matrix" values=".33 .59 .11 0 0  .33 .59 .11 0 0  .33 .59 .11 0 0  0 0 0 1 0"/>
@@ -544,10 +562,26 @@ footer .names2 { color: #fff; }
       </details>
     </section>
 
-
-
-
-
+    <figure class="card toon reveal">
+      <svg viewBox="0 0 600 360" role="img" aria-label="Ink cartoon: a yellow cab with a bride and groom in the back seat and tin cans trailing behind, the skyline beyond">
+<g filter="url(#wash)"><path d="M20 210v-60h30v-30h24v50h20V90h14l6-34 6 34h14v100h26v-60h34v40h22v-90h30v110h28v-50h36v70h30V110h28v80h34v-40h30v60V292H20z" fill="#111" opacity=".08"/><path d="M150 268h-14c-6 0-8-4-8-10v-22c0-8 6-12 14-14l40-8 28-36c4-6 10-8 18-8h92c8 0 14 2 20 8l34 36 60 8c10 2 16 8 16 16v20c0 6-2 10-8 10h-14z" fill="#d9b24c" opacity=".6" transform="translate(5 4)"/><ellipse cx="300" cy="298" rx="210" ry="8" fill="#111" opacity=".12"/></g>
+<g filter="url(#ink)" fill="none" stroke="#111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="584" height="344"/>
+<path d="M20 210v-60h30v-30h24v50h20V90h14l6-34 6 34h14v100h26v-60h34v40h22v-90h30v110h28v-50h36v70h30V110h28v80h34v-40h30v60" stroke-width="1.1" opacity=".75"/>
+<path d="M20 292h560M60 312h50M170 318h70M330 314h60M470 320h50" />
+<path d="M150 268h-14c-6 0-8-4-8-10v-22c0-8 6-12 14-14l40-8 28-36c4-6 10-8 18-8h92c8 0 14 2 20 8l34 36 60 8c10 2 16 8 16 16v20c0 6-2 10-8 10h-14"/><path d="M214 270h162"/>
+<circle cx="190" cy="270" r="22" fill="#fff"/><circle cx="190" cy="270" r="8"/><circle cx="400" cy="270" r="22" fill="#fff"/><circle cx="400" cy="270" r="8"/>
+<path d="M196 212l22-28c2-3 5-4 9-4h56v32zM295 180h40c5 0 8 1 11 4l26 28h-77zM289 212v52M132 238h340" />
+<path d="M140 238v8M152 238v8M164 238v8M230 238v8M242 238v8M254 238v8M266 238v8M300 238v8M312 238v8M324 238v8M336 238v8M348 238v8M440 238v8M452 238v8"  stroke-width="1.1"/>
+<rect x="262" y="155" width="46" height="15" rx="3" fill="#fff"/><path d="M270 163h30" stroke-width="1.1"/>
+<ellipse cx="466" cy="232" rx="6" ry="9"/><path d="M478 226l22-6M480 234h24M478 242l22 6" stroke-width="1.1"/>
+<circle cx="234" cy="198" r="9" fill="#fff"/><path d="M226 195c2-8 14-9 17-1" /><circle cx="258" cy="200" r="8" fill="#fff"/><path d="M252 194c8-8 20-2 22 16" stroke-width="1.1"/>
+<circle cx="332" cy="198" r="9" fill="#fff"/><path d="M322 192h20l5 3h-28z" fill="#111"/>
+<path d="M128 262c-22 4-38 12-52 22M128 262c-16 10-24 20-30 30"/><rect x="62" y="280" width="14" height="10" rx="2" transform="rotate(-20 69 285)"/><rect x="88" y="288" width="14" height="10" rx="2" transform="rotate(14 95 293)"/>
+<path d="M60 222h44M44 240h56M70 204h30" stroke-width="1.1"/>
+<path d="M246 132c-6-10-20-4-14 8 3 6 9 9 14 14 5-5 11-8 14-14 6-12-8-18-14-8zM292 112c-4-7-13-3-9 5 2 4 6 6 9 9 3-3 7-5 9-9 4-8-5-12-9-5z" fill="#fff"/>
+</g></svg>
+      <figcaption>&ldquo;Celestine, in Dumbo. And take the bridge, please. We&rsquo;d like to make an entrance.&rdquo;</figcaption>
+    </figure>
   </div>
 
   <section class="welcome" id="story">
@@ -574,6 +608,18 @@ footer .names2 { color: #fff; }
   </section>
 
   <div class="wrap stack stack2">
+    <figure class="card toon reveal">
+      <svg viewBox="0 0 600 360" role="img" aria-label="Ink cartoon: two pigeons on a ledge, one in a top hat and bow tie, one in a veil, with the Manhattan Bridge behind">
+<g filter="url(#wash)"><use href="#pgw" transform="translate(440 0) scale(-1 1)" fill="#111" opacity=".16"/><use href="#pgw" transform="translate(160 0)" fill="#111" opacity=".1"/><path d="M500 284V96h56v188z" fill="#111" opacity=".08"/><circle cx="300" cy="120" r="34" fill="#d9b24c" opacity=".45"/><path d="M20 286h560v40H20z" fill="#111" opacity=".07"/></g>
+<g filter="url(#ink)" fill="none" stroke="#111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="584" height="344"/>
+<g stroke-width="1.1" opacity=".7"><path d="M500 284V96h56v188M500 140h56M500 190h56M500 240h56M510 96V80h36v16M528 80C420 180 250 214 20 224M528 80c20 30 40 50 60 62M20 244h480M556 244h24"/><path d="M60 224v20M100 222v22M140 219v25M180 215v29M220 210v34M260 203v41M300 194v50M340 183v61M380 168v76M420 150v94M460 128v116"/></g>
+<path d="M20 286h560M20 300h560M70 300v40M190 300v40M310 300v40M430 300v40M550 300v40" />
+<g transform="translate(440 0) scale(-1 1)"><use href="#pg"/><path d="M160 164h30M165 164v-22h20v22z" fill="#111"/><path d="M178 199l-11-7v14zM178 199l11-7v14z" fill="#111"/></g>
+<g transform="translate(160 0)"><use href="#pg"/><path d="M172 163c24-10 54 4 72 46-20-12-42-16-60-11" fill="#fff" fill-opacity=".85"/><path d="M168 166c-3-5 2-9 5-5 3-4 8 0 5 5-2 3-8 3-10 0z" fill="#fff"/></g>
+<path d="M300 132c-7-12-23-5-17 9 4 8 11 11 17 17 6-6 13-9 17-17 6-14-10-21-17-9z" fill="#fff"/>
+</g></svg>
+      <figcaption>&ldquo;We weren&rsquo;t technically invited, but we never miss a cocktail hour.&rdquo;</figcaption>
+    </figure>
     <section class="card dress reveal">
       <svg class="botanical" viewBox="0 0 420 300" fill="none" stroke="#111111" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
         <path d="M30 290C60 220 90 150 140 70" opacity=".8"/>
@@ -624,6 +670,21 @@ footer .names2 { color: #fff; }
         <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 16h32l-3 24H11zM17 16a7 7 0 0 1 14 0"/></svg><h3>Registry store</h3><p>A short list of things we'll use every day.</p><span class="soon">Link coming soon</span></div>
       </div>
     </section>
+    <figure class="card toon reveal">
+      <svg viewBox="0 0 600 360" role="img" aria-label="Ink cartoon: a corner mailbox on John Street with a sealed envelope in the slot, a pigeon on top and a fire hydrant">
+<g filter="url(#wash)"><path d="M234 280V150c0-34 26-56 66-56s66 22 66 56v130z" fill="#111" opacity=".16" transform="translate(5 3)"/><path d="M452 300v-52c0-12 8-20 18-20s18 8 18 20v52z" fill="#d9b24c" opacity=".65" transform="translate(3 2)"/><ellipse cx="320" cy="306" rx="230" ry="8" fill="#111" opacity=".1"/><use href="#pgw" transform="translate(196 -48) scale(.5)" fill="#111" opacity=".14"/></g>
+<g filter="url(#ink)" fill="none" stroke="#111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="584" height="344"/>
+<path d="M20 300h560M50 320h60M400 322h70"/>
+<path d="M234 280V150c0-34 26-56 66-56s66 22 66 56v130zM246 280v20M354 280v20M240 300h12M348 300h12"/>
+<path d="M252 150h96v26h-96zM290 163h20M262 204h76M262 218h76M262 232h44" />
+<path d="M284 150l10-36 52 13-6 23M294 114l20 22 32-9" fill="#fff"/><path d="M318 127c-2-4-7-2-5 3 1 2 3 3 5 5 2-2 4-3 5-5 2-5-3-7-5-3z" fill="#111"/>
+<use href="#pg" transform="translate(196 -48) scale(.5)" stroke-width="3"/>
+<path d="M452 300v-52c0-12 8-20 18-20s18 8 18 20v52zM446 300h48M452 250h36M458 228c2-9 22-9 24 0M466 220h8v-6h-8zM452 258h-9v14h9M488 258h9v14h-9"/><circle cx="470" cy="270" r="6"/>
+<path d="M120 300V70M114 70h12"/><path d="M126 96h104v28H126z" fill="#fff"/><text x="178" y="116" text-anchor="middle" font-family="Didact Gothic, Helvetica, Arial, sans-serif" font-size="15" letter-spacing="3" fill="#111" stroke="none">JOHN ST</text>
+<path d="M388 120c-5-8-16-3-12 6 3 6 8 8 12 12 4-4 9-6 12-12 4-9-7-14-12-6z" fill="#fff"/>
+</g></svg>
+      <figcaption>&ldquo;Kindly respond by September 1. The pigeons have proven unreliable.&rdquo;</figcaption>
+    </figure>
   </div>
   <section class="rsvp-split rsvp" id="rsvp">
     <div class="rs-pic"><div class="pic bw p-face" role="img" aria-label="Leo and Vanessa smiling together"></div></div>
