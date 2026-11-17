@@ -453,6 +453,31 @@ html.entered .cover { animation: fadeup 1.2s cubic-bezier(.2, .8, .2, 1) .15s bo
 .plate-card figcaption b { font: 400 clamp(1.2rem, 2.4vw, 1.6rem)/1.2 var(--mast); letter-spacing: .06em; text-transform: uppercase; }
 .wash-l { mix-blend-mode: multiply; }
 .plate-card figcaption span { font: italic 400 1.02rem/1.4 var(--display); color: var(--muted); }
+/* rsvp: a pigeon carries the reply away */
+#courier { position: fixed; z-index: 60; left: 0; top: 0; width: clamp(120px, 16vw, 190px); pointer-events: none; display: none; }
+#courier svg { display: block; width: 100%; height: auto; overflow: visible; }
+#courier.fly { display: block; animation: courier 2.2s cubic-bezier(.45, .05, .55, .95) forwards; }
+#courier .c-wing { transform-box: fill-box; transform-origin: 50% 100%; }
+#courier.fly .c-wing { animation: flap .26s ease-in-out infinite alternate; }
+#courier .c-hearts path { opacity: 0; }
+#courier.fly.hearts .c-hearts path { animation: trail .9s ease-out infinite; }
+#courier.fly.hearts .c-hearts path:nth-child(2) { animation-delay: .3s; } #courier.fly.hearts .c-hearts path:nth-child(3) { animation-delay: .6s; }
+@keyframes courier {
+  0% { transform: translate(-20%, 10%) scale(.5) rotate(0deg); opacity: 0; }
+  12% { transform: translate(0, -30%) scale(1) rotate(-10deg); opacity: 1; }
+  45% { transform: translate(22vw, -16vh) scale(1) rotate(-4deg); opacity: 1; }
+  100% { transform: translate(105vw, -75vh) scale(.8) rotate(-18deg); opacity: 1; }
+}
+@keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(-.65); } }
+@keyframes trail { 0% { opacity: 0; transform: translate(0, 0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(-26px, 14px); } }
+.hopper { transform-box: fill-box; transform-origin: 50% 100%; }
+html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
+@keyframes hop { 50% { transform: translateY(-16px) rotate(-6deg); } }
+.thanks:not([hidden]) { animation: fadeup .8s cubic-bezier(.2, .8, .2, 1) both; }
+@media (prefers-reduced-motion: reduce) { #courier.fly, html.rsvp-sent .hopper, .thanks:not([hidden]) { animation: none; } #courier.fly { display: none; } }
+/* rsvp without the photograph: one centred column */
+.rsvp-split { grid-template-columns: minmax(0, 1fr); min-height: 0; border-top: 2px solid var(--ink); }
+.rs-form { justify-self: center; width: 100%; max-width: 680px; }
 </style>
 </head>
 <body>
@@ -994,7 +1019,7 @@ html.entered .cover { animation: fadeup 1.2s cubic-bezier(.2, .8, .2, 1) .15s bo
 <rect x="264" y="316" width="72" height="42" fill="#fbfaf6" stroke-width="1.6"/><path d="M274 330h52M274 340h52M274 350h30" fill="none" stroke-width="1.3"/>
 <path d="M604 412v-58c0-14 9-22 20-22s20 8 20 22v58z" fill="#fbfaf6"/><path d="M598 412h52M604 356h40M610 332c2-10 26-10 28 0" fill="none"/><path d="M620 322h8v-8h-8zM604 366h-10v16h10zM644 366h10v16h-10z" fill="#fbfaf6"/><circle cx="624" cy="382" r="7" fill="#fbfaf6"/>
 </g>
-<use href="#pgc-ink" transform="translate(180 36) scale(.55)"/>
+<g class="hopper"><use href="#pgc-ink" transform="translate(180 36) scale(.55)"/></g>
 <use href="#pgc-ink" transform="translate(790 322) scale(-.42 .42)"/>
 <path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(372 444) rotate(50)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(25 454) rotate(323)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(274 487) rotate(252)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(308 469) rotate(163)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(341 429) rotate(18)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(405 486) rotate(213)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(312 473) rotate(37)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(176 433) rotate(285)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(607 485) rotate(143)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(635 431) rotate(319)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(62 445) rotate(177)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(200 472) rotate(306)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(23 474) rotate(71)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(271 484) rotate(48)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(401 460) rotate(194)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#fbfaf6" stroke="#141414" stroke-width="1.1" transform="translate(339 446) rotate(230)"/>
 </g><g class="wash-l" filter="url(#wash)" transform="translate(4 3)">
@@ -1016,7 +1041,7 @@ html.entered .cover { animation: fadeup 1.2s cubic-bezier(.2, .8, .2, 1) .15s bo
 <rect x="264" y="316" width="72" height="42" fill="#ffffff" stroke-width="1.6"/><path d="M274 330h52M274 340h52M274 350h30" fill="none" stroke-width="1.3"/>
 <path d="M604 412v-58c0-14 9-22 20-22s20 8 20 22v58z" fill="#b4b4b4"/><path d="M598 412h52M604 356h40M610 332c2-10 26-10 28 0" fill="none"/><path d="M620 322h8v-8h-8zM604 366h-10v16h10zM644 366h10v16h-10z" fill="#b4b4b4"/><circle cx="624" cy="382" r="7" fill="#ababab"/>
 </g>
-<use href="#pgc-wash" transform="translate(180 36) scale(.55)"/>
+<g class="hopper"><use href="#pgc-wash" transform="translate(180 36) scale(.55)"/></g>
 <use href="#pgc-wash" transform="translate(790 322) scale(-.42 .42)"/>
 <path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(372 444) rotate(50)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(25 454) rotate(323)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(274 487) rotate(252)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(308 469) rotate(163)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(341 429) rotate(18)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(405 486) rotate(213)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#d4d4d4" stroke="none" stroke-width="1.1" transform="translate(312 473) rotate(37)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(176 433) rotate(285)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#d4d4d4" stroke="none" stroke-width="1.1" transform="translate(607 485) rotate(143)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#d4d4d4" stroke="none" stroke-width="1.1" transform="translate(635 431) rotate(319)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(62 445) rotate(177)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(200 472) rotate(306)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(23 474) rotate(71)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(271 484) rotate(48)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(401 460) rotate(194)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(339 446) rotate(230)"/>
 </g></svg>
@@ -1024,7 +1049,6 @@ html.entered .cover { animation: fadeup 1.2s cubic-bezier(.2, .8, .2, 1) .15s bo
     </figure>
   </div>
   <section class="rsvp-split rsvp" id="rsvp">
-    <div class="rs-pic"><div class="pic bw p-face" role="img" aria-label="Leo and Vanessa smiling together"></div></div>
     <div class="rs-form">
       <p class="eyebrow">RSVP</p>
       <h2>Kindly respond</h2><hr class="rule" style="margin-left:0">
@@ -1064,6 +1088,21 @@ html.entered .cover { animation: fadeup 1.2s cubic-bezier(.2, .8, .2, 1) .15s bo
   <span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="note"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span class="eq"><i></i><i></i><i></i><i></i></span></span>
   <span class="ml"><b id="m-title">Our song: Dakiti</b><small id="m-artist"></small></span>
 </button>
+<div id="courier" aria-hidden="true">
+  <svg viewBox="-40 0 240 130">
+    <g class="c-hearts" stroke="#141414" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.8" fill="#fbfaf6"><path d="M-6 52c-3-5-10-2-7 4 2 4 5 5 7 8 2-3 5-4 7-8 3-6-4-9-7-4z"/><path d="M-24 74c-3-5-10-2-7 4 2 4 5 5 7 8 2-3 5-4 7-8 3-6-4-9-7-4z"/><path d="M-14 96c-3-5-10-2-7 4 2 4 5 5 7 8 2-3 5-4 7-8 3-6-4-9-7-4z"/></g>
+    <g filter="url(#ink)" stroke="#141414" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M44 62L14 52l8 13-12 9 36 2z" fill="#bdbcb6"/>
+      <path d="M40 64c8-18 40-24 64-12 10 5 16 13 13 21-5 13-32 18-54 12-13-4-25-10-23-21z" fill="#dddcd6"/>
+      <circle cx="119" cy="50" r="13" fill="#dddcd6"/>
+      <path d="M131 47l15 6-15 4z" fill="#fbfaf6"/>
+      <circle cx="123" cy="47" r="2.4" fill="#141414" stroke="none"/>
+      <path d="M140 58l32 7-5 23-32-7z" fill="#fbfaf6"/><path d="M140 58l13 15 19-8" fill="none" stroke-width="1.8"/>
+      <path d="M152 77c-2-3-6-1-4 2 1 2 3 3 4 5 1-2 3-3 4-5 2-3-2-5-4-2z" fill="#141414" stroke="none"/>
+      <path class="c-wing" d="M62 62C64 30 88 8 112 4C110 30 102 50 94 64Z" fill="#bdbcb6"/>
+    </g>
+  </svg>
+</div>
 <button class="totop" id="totop" type="button" aria-label="Back to the top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3 8l5-5 5 5"/></svg></button>
 
 <script>
@@ -1146,7 +1185,17 @@ html.entered .cover { animation: fadeup 1.2s cubic-bezier(.2, .8, .2, 1) .15s bo
     var yes = rf.elements.att.value === 'yes';
     document.getElementById('r-thanks-h').textContent = yes ? 'We can\'t wait to see you.' : 'We\'ll miss you.';
     document.getElementById('r-thanks-p').textContent = 'Thank you, ' + name + '. Your reply is in' + (yes ? ' for ' + document.getElementById('r-guests').value + (document.getElementById('r-guests').value === '1' ? ' guest.' : ' guests.') : '.');
-    rf.hidden = true; document.getElementById('rsvp-lead').hidden = true; document.getElementById('r-thanks').hidden = false;
+    var done = false, show = function () { if (done) return; done = true; rf.hidden = true; document.getElementById('rsvp-lead').hidden = true; document.getElementById('r-thanks').hidden = false; };
+    var bird = document.getElementById('courier');
+    if (!bird || matchMedia('(prefers-reduced-motion: reduce)').matches) { show(); return; }
+    // the pigeon takes off from the send button with the reply in its beak
+    var btn = rf.querySelector('button[type=submit]'), r = btn.getBoundingClientRect();
+    btn.disabled = true;
+    bird.style.left = (r.left + r.width / 2 - 40) + 'px'; bird.style.top = (r.top - 30) + 'px';
+    bird.classList.toggle('hearts', yes); bird.classList.add('fly');
+    document.documentElement.classList.add('rsvp-sent');
+    bird.addEventListener('animationend', function (ev) { if (ev.target === bird) { bird.classList.remove('fly'); show(); } });
+    setTimeout(show, 1500); setTimeout(function () { bird.classList.remove('fly'); }, 2600);
   });
 
   // our song. To use a real recording, put the file next to index.html and set src below, e.g. src: 'our-song.mp3'.
