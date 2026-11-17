@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Leo &amp; Vanessa</title>
+<title>Leomar &amp; Vanessa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&display=swap">
@@ -434,7 +434,7 @@ header.bar { border-top-color: var(--pink); border-bottom-color: rgba(29, 29, 27
 .mast span { font: 400 2.5cqw/1 var(--mast); letter-spacing: .12em; text-transform: uppercase; }
 .mast .m-l { text-align: left; } .mast .m-r { text-align: right; }
 .mast em { grid-column: 1 / -1; font: 400 3.2cqw/1 var(--mast); font-style: normal; letter-spacing: .3em; text-transform: uppercase; margin-top: 2.2cqw; }
-.mast h1 { grid-column: 1 / -1; font: 400 12.6cqw/1 var(--mast); letter-spacing: -.01em; text-transform: uppercase; white-space: nowrap; margin-top: .6cqw; }
+.mast h1 { grid-column: 1 / -1; font: 400 9.5cqw/1 var(--mast); letter-spacing: -.01em; text-transform: uppercase; white-space: nowrap; margin-top: .6cqw; }
 .mast h1 i { font-style: normal; font-size: .8em; }
 html.entered .cover { animation: fadeup 1.2s cubic-bezier(.2, .8, .2, 1) .15s both; }
 @media (prefers-reduced-motion: reduce) { html.entered .cover { animation: none; } }
@@ -488,6 +488,30 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
 .std-ph svg { width: 46px; height: 46px; margin-bottom: 8px; }
 .std-ph b { font: 400 .74rem/1.4 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--ink); }
 .std-ph span { font: italic 400 1rem/1.3 var(--display); }
+/* language switch */
+.lang { display: inline-flex; align-items: center; gap: 2px; }
+.lang button { background: none; border: 0; cursor: pointer; padding: 8px 6px; font: 400 .7rem/1 var(--sans); letter-spacing: .16em; color: var(--muted); border-bottom: 1px solid transparent; }
+.lang button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.lang button:hover { color: var(--ink); }
+.lang-env { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: 16px; z-index: 3; }
+.lang-env button { color: rgba(255, 255, 255, .6); font-size: .78rem; padding: 10px 8px; }
+.lang-env button[aria-pressed="true"], .lang-env button:hover { color: #fff; border-bottom-color: #fff; }
+.lang-bar { margin-left: clamp(8px, 1.6vw, 22px); }
+@media (max-width: 760px) { .lang-bar { margin-left: auto; margin-right: 10px; } }
+@media (min-width: 761px) and (max-width: 1180px) {
+  header.bar .links { gap: clamp(10px, 1.5vw, 20px); }
+  header.bar .links a { letter-spacing: .12em; font-size: .68rem; }
+  header.bar .rsvp-link { padding: 9px 10px !important; }
+}
+/* dress code details */
+.dress-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(22px, 4vw, 56px); max-width: 900px; margin: 8px auto 28px; text-align: left; border-top: 1px solid var(--line); padding-top: 26px; }
+.dress-notes h3 { font: 400 1.25rem/1.2 var(--mast); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 12px; }
+.dress-notes dl { margin: 0; }
+.dress-notes dt { font: 400 .68rem/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-top: 14px; }
+.dress-notes dd { margin: 3px 0 0; font-size: 1rem; line-height: 1.5; }
+.dress-notes dt.avoid { color: var(--ink); border-top: 1px solid var(--line); padding-top: 14px; margin-top: 18px; }
+.dress-notes dd.avoid { font-style: italic; color: var(--muted); }
+@media (max-width: 700px) { .dress-notes { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body>
@@ -600,37 +624,39 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
   </defs>
 </svg>
 
-<div id="env" role="dialog" aria-label="Wedding invitation">
+<div data-i18n-aria="a.invite" id="env" role="dialog" aria-label="Wedding invitation">
+  <div class="lang lang-env" role="group" aria-label="Language / Idioma / Língua"><button type="button" data-lang="en" lang="en" aria-label="English">EN</button><button type="button" data-lang="es" lang="es" aria-label="Español">ES</button><button type="button" data-lang="pt" lang="pt" aria-label="Português">PT</button></div>
   <div class="ebox" id="ebox">
     <div class="eback"></div>
     <div class="eliner"></div>
-    <div class="ecard"><small>Together with their families</small><strong>Leo<i>&amp;</i>Vanessa</strong><span>October 10, 2027 &nbsp;·&nbsp; Brooklyn, New York</span></div>
+    <div class="ecard"><small data-i18n="e.fam">Together with their families</small><strong>Leomar<i>&amp;</i>Vanessa</strong><span data-i18n-html="e.date">October 10, 2027 &nbsp;·&nbsp; Brooklyn, New York</span></div>
     <svg class="epocket" viewBox="0 0 725 525" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0L362.5 292 725 0V525H0z" fill="#ffffff" stroke="#c9a95c" stroke-opacity=".9" stroke-width="1.2" vector-effect="non-scaling-stroke"/><path d="M0 525L270 270M725 525L455 270" stroke="#c9a95c" stroke-opacity=".5" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
     <svg class="eflap" viewBox="0 0 725 525" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H725L362.5 292z" fill="#faf6ea" stroke="#c9a95c" stroke-opacity=".95" stroke-width="1.2" vector-effect="non-scaling-stroke"/></svg>
-    <button class="eseal" id="eseal" type="button" aria-label="Enter the password, then open the invitation"><span>V<i>&amp;</i>L</span></button>
+    <button data-i18n-aria="a.seal" class="eseal" id="eseal" type="button" aria-label="Enter the password, then open the invitation"><span>L<i>&amp;</i>V</span></button>
   </div>
   <form class="egate" id="egate" autocomplete="off" novalidate>
-    <label class="ehint" for="epw">Enter the password to open</label>
+    <label data-i18n="e.hint" class="ehint" for="epw">Enter the password to open</label>
     <div class="erow">
-      <input id="epw" name="pw" type="password" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Password" aria-describedby="epw-msg">
-      <button type="submit" class="ego">Open</button>
+      <input data-i18n-ph="e.ph" id="epw" name="pw" type="password" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Password" aria-describedby="epw-msg">
+      <button data-i18n="e.open" type="submit" class="ego">Open</button>
     </div>
-    <p class="emsg" id="epw-msg" role="alert" hidden>That's not quite right. Check your invitation and try again.</p>
+    <p data-i18n="e.err" class="emsg" id="epw-msg" role="alert" hidden>That's not quite right. Check your invitation and try again.</p>
   </form>
 </div>
 
 <header class="bar" id="bar">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Vanessa and Leo, home"><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span><span class="mk">V<i>&amp;</i>L</span><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span></a>
-    <nav class="links" id="links" aria-label="Sections">
-      <a href="#top">Home</a>
-      <a href="#story">Our story</a>
-      <a href="#details">The day</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#photos">Photos</a>
-      <a href="#registry">Registry</a>
-      <a class="rsvp-link" href="#rsvp">RSVP</a>
+    <a class="logo" href="#top" aria-label="Leomar and Vanessa, home"><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span><span class="mk">L<i>&amp;</i>V</span><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span></a>
+    <nav data-i18n-aria="a.sections" class="links" id="links" aria-label="Sections">
+      <a data-i18n="n.home" href="#top">Home</a>
+      <a data-i18n="n.story" href="#story">Our story</a>
+      <a data-i18n="n.day" href="#details">The day</a>
+      <a data-i18n="n.sched" href="#schedule">Schedule</a>
+      <a data-i18n="n.photos" href="#photos">Photos</a>
+      <a data-i18n="n.reg" href="#registry">Registry</a>
+      <a data-i18n="n.rsvp" class="rsvp-link" href="#rsvp">RSVP</a>
     </nav>
+    <div class="lang lang-bar" role="group" aria-label="Language / Idioma / Língua"><button type="button" data-lang="en" lang="en" aria-label="English">EN</button><button type="button" data-lang="es" lang="es" aria-label="Español">ES</button><button type="button" data-lang="pt" lang="pt" aria-label="Português">PT</button></div>
     <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="links">Menu</button>
   </div>
 </header>
@@ -639,16 +665,16 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
   <section class="hero cover-hero">
     <div class="wrap ch-grid">
       <div class="hero-copy">
-        <p class="caps">The wedding issue</p>
-        <p class="lede">Together with their families, Leo <i>and</i> Vanessa invite you to celebrate their wedding.</p>
+        <p data-i18n="h.issue" class="caps">The wedding issue</p>
+        <p data-i18n-html="h.lede" class="lede">Together with their families, Leomar <i>and</i> Vanessa invite you to celebrate their wedding.</p>
         <hr class="rule" style="margin-left:0">
-        <p class="caps when">Sunday, October 10, 2027 &middot; 4:00 pm</p>
+        <p data-i18n-html="h.when" class="caps when">Sunday, October 10, 2027 &middot; 4:00 pm</p>
         <p class="caps where">Celestine &middot; Dumbo, Brooklyn</p>
-        <a class="down" href="#details" aria-label="Scroll down"><svg viewBox="0 0 16 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v17M2 13l6 6 6-6"/></svg></a>
+        <a data-i18n-aria="a.down" class="down" href="#details" aria-label="Scroll down"><svg viewBox="0 0 16 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v17M2 13l6 6 6-6"/></svg></a>
       </div>
       <div class="cover">
         <div class="plate">
-          <svg viewBox="0 -100 600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration: Leo and Vanessa, in a tuxedo and a white wedding dress, stand hand in hand on the cobblestones of Washington Street in Dumbo, the Manhattan Bridge behind them"><g class="ink-l" filter="url(#ink)">
+          <svg data-i18n-aria="a.cover" viewBox="0 -100 600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration: Leomar and Vanessa, in a tuxedo and a white wedding dress, stand hand in hand on the cobblestones of Washington Street in Dumbo, the Manhattan Bridge behind them"><g class="ink-l" filter="url(#ink)">
 <rect y="-100" width="600" height="900" fill="#fbfaf6"/>
 <circle cx="452" cy="212" r="34" fill="#fbfaf6"/>
 <g fill="#fbfaf6"><path d="M262 556V470h10v-16h8v-22h8v-26h6l3-34h6l3 34h6v26h8v22h8v16h10v86z"/><path d="M210 556v-40h22v40zM368 556v-52h22v52z"/></g>
@@ -769,7 +795,7 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
 </g>
 <use href="#vanessa-head-wash" transform="translate(338 550) scale(.5)"/>
 </g></svg>
-          <div class="mast"><span class="m-l">Brooklyn, N.Y.</span><span class="m-r">Oct. 10, 2027</span><em>The wedding of</em><h1>Leo <i>&amp;</i> Vanessa</h1></div>
+          <div class="mast"><span class="m-l">Brooklyn, N.Y.</span><span data-i18n="h.mdate" class="m-r">Oct. 10, 2027</span><em data-i18n="h.of">The wedding of</em><h1>Leomar <i>&amp;</i> Vanessa</h1></div>
         </div>
       </div>
     </div>
@@ -781,10 +807,10 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
       <div class="item">
         <div class="oval"><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="36" height="33" rx="2"/><path d="M6 18h36M15 5v8M33 5v8"/><g fill="#111111" stroke="none"><circle cx="14" cy="25" r=".9"/><circle cx="21" cy="25" r=".9"/><circle cx="28" cy="25" r=".9"/><circle cx="35" cy="25" r=".9"/><circle cx="14" cy="31" r=".9"/><circle cx="21" cy="31" r=".9"/><circle cx="28" cy="31" r=".9"/><circle cx="14" cy="37" r=".9"/><circle cx="21" cy="37" r=".9"/></g></svg></div>
         <div>
-          <p class="caps" style="margin:0">Sunday</p>
-          <p class="big">October 10, 2027</p>
+          <p data-i18n="d.dow" class="caps" style="margin:0">Sunday</p>
+          <p data-i18n="d.date" class="big">October 10, 2027</p>
           <hr class="rule" style="margin:10px 0 12px;width:30px">
-          <p class="caps sub" style="margin:0">Four o'clock in the afternoon</p>
+          <p data-i18n="d.time" class="caps sub" style="margin:0">Four o'clock in the afternoon</p>
         </div>
       </div>
       <div class="vr" aria-hidden="true"></div>
@@ -793,15 +819,15 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
         <div>
           <p class="big" style="font-size:clamp(1.4rem,2.8vw,2rem)">Celestine</p>
           <p class="caps" style="margin:2px 0 0">1 John Street, Brooklyn, NY 11201</p>
-          <p class="sub"><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Celestine+1+John+Street+Brooklyn+NY+11201" target="_blank" rel="noopener">View venue</a></p>
+          <p class="sub"><a data-i18n="d.venue" class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Celestine+1+John+Street+Brooklyn+NY+11201" target="_blank" rel="noopener">View venue</a></p>
         </div>
       </div>
     </section>
 
     <section class="card reveal dumbo" id="neighborhood">
-      <p class="caps tag">Where we're celebrating</p>
+      <p data-i18n="u.where" class="caps tag">Where we're celebrating</p>
       <h2>Dumbo, Brooklyn</h2><hr class="rule">
-      <svg class="dumbo-art" viewBox="0 0 1000 380" role="img" aria-label="Line drawing of Dumbo, Brooklyn: Washington Street cobblestones, brick warehouses with fire escapes, and the Manhattan Bridge framing the Empire State Building"><g class="ink-l" filter="url(#ink)">
+      <svg data-i18n-aria="a.dumbo" class="dumbo-art" viewBox="0 0 1000 380" role="img" aria-label="Line drawing of Dumbo, Brooklyn: Washington Street cobblestones, brick warehouses with fire escapes, and the Manhattan Bridge framing the Empire State Building"><g class="ink-l" filter="url(#ink)">
   <rect width="1000" height="380" fill="#fbfaf6"/>
   <g><rect x="340" y="264" width="30" height="54" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><rect x="370" y="280" width="26" height="38" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M374 308 h18" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="398" y="248" width="18" height="70" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M402 276 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M402 286 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M402 296 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="416" y="280" width="14" height="38" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M420 298 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M420 308 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="430" y="280" width="18" height="38" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M434 298 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M434 308 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="450" y="230" width="18" height="88" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M454 258 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M454 278 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M454 298 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M454 308 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="470" y="280" width="18" height="38" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M474 288 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M474 298 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="492" y="230" width="14" height="88" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M496 248 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M496 258 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M496 288 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="506" y="294" width="22" height="24" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M510 312 h14" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="530" y="230" width="14" height="88" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M534 248 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M534 268 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M534 278 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M534 288 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M534 308 h6" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="544" y="264" width="26" height="54" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M548 292 h18" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="572" y="294" width="22" height="24" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M576 302 h14" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="594" y="230" width="22" height="88" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M598 258 h14" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M598 288 h14" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M598 298 h14" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M598 308 h14" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="616" y="214" width="18" height="104" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M620 242 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M620 252 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M620 282 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M620 292 h10" stroke="#141414" stroke-width=".5" opacity=".35"/><rect x="636" y="280" width="26" height="38" fill="#fbfaf6" stroke="#141414" stroke-width=".9" opacity=".85"/><path d="M640 288 h18" stroke="#141414" stroke-width=".5" opacity=".35"/><path d="M640 308 h18" stroke="#141414" stroke-width=".5" opacity=".35"/></g>
   <g><rect x="480.0" y="260" width="40" height="58" fill="#fbfaf6" stroke="#141414" stroke-width="1.3"/><path d="M484 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M489 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M494 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M499 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M504 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M509 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M514 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M519 318 V260" stroke="#141414" stroke-width=".5" opacity=".5"/><rect x="485.0" y="228" width="30" height="32" fill="#fbfaf6" stroke="#141414" stroke-width="1.3"/><path d="M489 260 V228" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M494 260 V228" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M499 260 V228" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M504 260 V228" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M509 260 V228" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M514 260 V228" stroke="#141414" stroke-width=".5" opacity=".5"/><rect x="489.0" y="202" width="22" height="26" fill="#fbfaf6" stroke="#141414" stroke-width="1.3"/><path d="M493 228 V202" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M498 228 V202" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M503 228 V202" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M508 228 V202" stroke="#141414" stroke-width=".5" opacity=".5"/><rect x="492.5" y="182" width="15" height="20" fill="#fbfaf6" stroke="#141414" stroke-width="1.3"/><path d="M497 202 V182" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M502 202 V182" stroke="#141414" stroke-width=".5" opacity=".5"/><rect x="495.5" y="168" width="9" height="14" fill="#fbfaf6" stroke="#141414" stroke-width="1.3"/><path d="M500 182 V168" stroke="#141414" stroke-width=".5" opacity=".5"/><path d="M500 168 V134" stroke="#141414" stroke-width="1.6"/><path d="M497 156 h6 M498 144 h4" stroke="#141414" stroke-width="1"/><circle class="esb-glow" cx="500" cy="163" r="8" fill="#fbfaf6" opacity=".75"/></g>
@@ -837,9 +863,9 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
   <path d="M238 318 V228 q0 -14 14 -14" stroke="none" stroke-width="2" fill="none"/><path d="M248 214 h14 l-3 12 h-8 z" fill="#ffffff" stroke="none" stroke-width="1.4"/><circle class="lamp-glow" cx="255" cy="224" r="10" fill="#c9c9c9" opacity=".55"/><rect x="233" y="312" width="10" height="6" fill="#ffffff"/><path d="M722 318 V228 q0 -14 14 -14" stroke="none" stroke-width="2" fill="none"/><path d="M732 214 h14 l-3 12 h-8 z" fill="#ffffff" stroke="none" stroke-width="1.4"/><circle class="lamp-glow" cx="739" cy="224" r="10" fill="#c9c9c9" opacity=".55"/><rect x="717" y="312" width="10" height="6" fill="#ffffff"/>
   </g></svg>
       <div class="dumbo-copy">
-        <p class="lead">Down Under the Manhattan Bridge Overpass.</p>
-        <p class="muted">Cobblestone streets, brick warehouses with their fire escapes, and the bridge framing the Empire State Building at the end of Washington Street. Celestine sits right on the water, just under the Manhattan Bridge.</p>
-        <ul class="trains" aria-label="Nearby subway stops">
+        <p data-i18n="u.lead" class="lead">Down Under the Manhattan Bridge Overpass.</p>
+        <p data-i18n="u.body" class="muted">Cobblestone streets, brick warehouses with their fire escapes, and the bridge framing the Empire State Building at the end of Washington Street. Celestine sits right on the water, just under the Manhattan Bridge.</p>
+        <ul data-i18n-aria="a.trains" class="trains" aria-label="Nearby subway stops">
           <li><span class="sub"><b>F</b></span><span>York St</span></li>
           <li><span class="sub"><b>A</b></span><span class="sub"><b>C</b></span><span>High St</span></li>
         </ul>
@@ -847,32 +873,32 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
     </section>
 
 
-    <section class="card reveal" aria-label="Countdown">
-      <h2>Counting down</h2><hr class="rule">
+    <section data-i18n-aria="a.count" class="card reveal" aria-label="Countdown">
+      <h2 data-i18n="c.h">Counting down</h2><hr class="rule">
       <div class="count" id="count">
-        <div><strong id="cd-d">000</strong><small>Days</small></div>
-        <div><strong id="cd-h">00</strong><small>Hours</small></div>
-        <div><strong id="cd-m">00</strong><small>Minutes</small></div>
-        <div><strong id="cd-s">00</strong><small>Seconds</small></div>
+        <div><strong id="cd-d">000</strong><small data-i18n="c.d">Days</small></div>
+        <div><strong id="cd-h">00</strong><small data-i18n="c.hh">Hours</small></div>
+        <div><strong id="cd-m">00</strong><small data-i18n="c.m">Minutes</small></div>
+        <div><strong id="cd-s">00</strong><small data-i18n="c.s">Seconds</small></div>
       </div>
-      <p class="today" id="today" hidden>It's today.</p>
-      <p class="today" id="married" hidden>Married. Thank you.</p>
+      <p data-i18n="c.today" class="today" id="today" hidden>It's today.</p>
+      <p data-i18n="c.married" class="today" id="married" hidden>Married. Thank you.</p>
       <details class="cal">
-        <summary class="btn">Add to my calendar</summary>
+        <summary data-i18n="c.cal" class="btn">Add to my calendar</summary>
         <div class="pop">
-          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Leo+%26+Vanessa%27s+wedding&amp;dates=20271010T200000Z%2F20271011T030000Z&amp;details=Ceremony+at+4%3A00+pm%2C+reception+to+follow.&amp;location=Celestine%2C+1+John+Street%2C+Brooklyn%2C+NY+11201" target="_blank" rel="noopener">Google Calendar</a>
-          <a href="https://outlook.live.com/calendar/0/action/compose?subject=Leo+%26+Vanessa%27s+wedding&amp;startdt=2027-10-10T16%3A00%3A00-04%3A00&amp;enddt=2027-10-10T23%3A00%3A00-04%3A00&amp;location=Celestine%2C+1+John+Street%2C+Brooklyn%2C+NY+11201&amp;body=Ceremony+at+4%3A00+pm%2C+reception+to+follow.&amp;path=%2Fcalendar%2Faction%2Fcompose&amp;rru=addevent" target="_blank" rel="noopener">Outlook</a>
-          <a href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-//Leo%20and%20Vanessa//Wedding//EN%0D%0ABEGIN%3AVEVENT%0D%0AUID%3Aleo-vanessa-wedding-20271010%0D%0ADTSTAMP%3A20261014T000000Z%0D%0ADTSTART%3A20271010T200000Z%0D%0ADTEND%3A20271011T030000Z%0D%0ASUMMARY%3ALeo%20%26%20Vanessa%27s%20wedding%0D%0ALOCATION%3ACelestine%5C%2C%201%20John%20Street%5C%2C%20Brooklyn%5C%2C%20NY%2011201%0D%0ADESCRIPTION%3ACeremony%20at%204%3A00%20pm%2C%20reception%20to%20follow.%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR%0D%0A" download="leo-vanessa-wedding.ics">Apple Calendar (.ics)</a>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Leomar+%26+Vanessa%27s+wedding&amp;dates=20271010T200000Z%2F20271011T030000Z&amp;details=Ceremony+at+4%3A00+pm%2C+reception+to+follow.&amp;location=Celestine%2C+1+John+Street%2C+Brooklyn%2C+NY+11201" target="_blank" rel="noopener">Google Calendar</a>
+          <a href="https://outlook.live.com/calendar/0/action/compose?subject=Leomar+%26+Vanessa%27s+wedding&amp;startdt=2027-10-10T16%3A00%3A00-04%3A00&amp;enddt=2027-10-10T23%3A00%3A00-04%3A00&amp;location=Celestine%2C+1+John+Street%2C+Brooklyn%2C+NY+11201&amp;body=Ceremony+at+4%3A00+pm%2C+reception+to+follow.&amp;path=%2Fcalendar%2Faction%2Fcompose&amp;rru=addevent" target="_blank" rel="noopener">Outlook</a>
+          <a href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-//Leomar%20and%20Vanessa//Wedding//EN%0D%0ABEGIN%3AVEVENT%0D%0AUID%3Aleo-vanessa-wedding-20271010%0D%0ADTSTAMP%3A20261014T000000Z%0D%0ADTSTART%3A20271010T200000Z%0D%0ADTEND%3A20271011T030000Z%0D%0ASUMMARY%3ALeomar%20%26%20Vanessa%27s%20wedding%0D%0ALOCATION%3ACelestine%5C%2C%201%20John%20Street%5C%2C%20Brooklyn%5C%2C%20NY%2011201%0D%0ADESCRIPTION%3ACeremony%20at%204%3A00%20pm%2C%20reception%20to%20follow.%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR%0D%0A" download="leo-vanessa-wedding.ics">Apple Calendar (.ics)</a>
         </div>
       </details>
     </section>
 
     <figure class="card plate-card reveal">
-      <svg viewBox="0 0 800 500" role="img" aria-label="Illustration: through the window of an R train from Bay Ridge, a bride and groom sit close together while the other riders read and look away"><g class="ink-l" filter="url(#ink)">
+      <svg data-i18n-aria="a.train" viewBox="0 0 800 500" role="img" aria-label="Illustration: through the window of an R train from Bay Ridge, a bride and groom sit close together while the other riders read and look away"><g class="ink-l" filter="url(#ink)">
 <defs><clipPath id="sw1"><rect x="40" y="110" width="260" height="160" rx="14"/></clipPath><clipPath id="sw2"><rect x="500" y="110" width="260" height="160" rx="14"/></clipPath></defs>
 <rect width="800" height="500" fill="#141414"/>
 <g stroke="#141414" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-<rect x="-10" y="40" width="820" height="372" fill="#fbfaf6"/><rect x="-10" y="40" width="820" height="34" fill="#fbfaf6"/><rect x="190" y="46" width="420" height="22" rx="3" fill="#141414" stroke-width="1.6"/><text x="400" y="61.500" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="12.500" letter-spacing="2" fill="#fbfaf6" stroke="none">NEXT STOP IS &#9656; FOREVER TOGETHER</text>
+<rect x="-10" y="40" width="820" height="372" fill="#fbfaf6"/><rect x="-10" y="40" width="820" height="34" fill="#fbfaf6"/><rect x="190" y="46" width="420" height="22" rx="3" fill="#141414" stroke-width="1.6"/><text data-i18n="p1.sign" x="400" y="61.500" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="12.500" letter-spacing="2" fill="#fbfaf6" stroke="none">NEXT STOP IS &#9656; FOREVER TOGETHER</text>
 <path d="M-10 300h340M470 300h340M-10 318h340M470 318h340M-10 336h340M470 336h340M-10 354h340M470 354h340M-10 372h340M470 372h340" fill="none" stroke-width="1.2"/>
 <rect x="-10" y="412" width="820" height="30" fill="#fbfaf6"/>
 <rect x="-10" y="442" width="820" height="60" fill="#fbfaf6"/><rect x="-10" y="442" width="820" height="13" fill="#fbfaf6"/>
@@ -931,77 +957,82 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
 <g stroke="none" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" fill="none"><rect x="40" y="110" width="260" height="160" rx="14"/><rect x="500" y="110" width="260" height="160" rx="14"/></g>
 <use href="#pgc-wash" transform="translate(600 348) scale(.4)"/>
 </g></svg>
-      <figcaption><b>&ldquo;Next Stop, Forever Together&rdquo;</b><span>The R from Bay Ridge Av, dressed for the occasion</span></figcaption>
+      <figcaption><b data-i18n="p1.t">&ldquo;Next Stop, Forever Together&rdquo;</b><span data-i18n="p1.s">The R from Bay Ridge Av, dressed for the occasion</span></figcaption>
     </figure>
   </div>
 
   <section class="welcome" id="story">
     <div class="wrap w-grid">
-      <div class="w-pic reveal"><div class="pic p-face" role="img" aria-label="Leo and Vanessa, close together"></div></div>
+      <div class="w-pic reveal"><div data-i18n-aria="a.photo" class="pic p-face" role="img" aria-label="Leomar and Vanessa, close together"></div></div>
       <div class="w-copy reveal">
-        <p class="eyebrow">Welcome</p>
-        <h2>We can&rsquo;t wait to celebrate with you.</h2>
+        <p data-i18n="w.eye" class="eyebrow">Welcome</p>
+        <h2 data-i18n="w.h">We can&rsquo;t wait to celebrate with you.</h2>
         <hr class="rule" style="margin-left:0">
-        <p>We met in New York, two people with two families and two countries close to our hearts. In a city of millions, our paths crossed, and what began there has become a beautiful story we&rsquo;re writing together.</p>
-        <p class="muted">Now our families are coming together too. Join us for an evening of love, laughter and music in Dumbo.</p>
-        <p class="sign" aria-label="Leo and Vanessa">Leo + Vanessa</p>
+        <p data-i18n="w.p1">We met in New York, two people with two families and two countries close to our hearts. In a city of millions, our paths crossed, and what began there has become a beautiful story we&rsquo;re writing together.</p>
+        <p data-i18n="w.p2" class="muted">Now our families are coming together too. Join us for an evening of love, laughter and music in Dumbo.</p>
+        <p data-i18n-aria="a.sign" class="sign" aria-label="Leomar and Vanessa">Leomar + Vanessa</p>
       </div>
     </div>
   </section>
 
   <section class="timeline" id="schedule">
     <div class="wrap">
-      <p class="eyebrow">Sunday, October 10, 2027</p>
-      <h2>The Celebration</h2>
-      <ol class="tl"><li><span class="n">01</span><b>Welcome</b><time>3:30 pm</time></li><li><span class="n">02</span><b>Ceremony</b><time>4:00 pm</time></li><li><span class="n">03</span><b>Cocktail hour</b><time>5:00 pm</time></li><li><span class="n">04</span><b>Dinner</b><time>6:30 pm</time></li><li><span class="n">05</span><b>Cake &amp; toast</b><time>8:00 pm</time></li><li><span class="n">06</span><b>Dancing</b><time>8:30 pm</time></li></ol>
-      <a class="tl-link" href="#rsvp">Kindly respond <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
+      <p data-i18n="t.eye" class="eyebrow">Sunday, October 10, 2027</p>
+      <h2 data-i18n="t.h">The Celebration</h2>
+      <ol class="tl"><li><span class="n">01</span><b data-i18n="t.1">Welcome</b><time data-i18n="tm.330">3:30 pm</time></li><li><span class="n">02</span><b data-i18n="t.2">Ceremony</b><time data-i18n="tm.400">4:00 pm</time></li><li><span class="n">03</span><b data-i18n="t.3">Cocktail hour</b><time data-i18n="tm.500">5:00 pm</time></li><li><span class="n">04</span><b data-i18n="t.4">Dinner</b><time data-i18n="tm.630">6:30 pm</time></li><li><span class="n">05</span><b data-i18n="t.5">Cake &amp; toast</b><time data-i18n="tm.800">8:00 pm</time></li><li><span class="n">06</span><b data-i18n="t.6">Dancing</b><time data-i18n="tm.830">8:30 pm</time></li></ol>
+      <a class="tl-link" href="#rsvp"><span data-i18n="r.kindly">Kindly respond</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></a>
     </div>
   </section>
 
   <div class="wrap stack stack2">
     <section class="card dress reveal">
-      <h2>Dress code</h2><hr class="rule">
-      <p class="tie">Black tie</p>
-      <ul class="dress-styles"><li><svg viewBox="10 -4 100 224" role="img" aria-label="Sketch: classic tuxedo"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M41 104l2 104h14l3-72 3 72h14l2-104z" fill="#141414"/><path d="M40 208h18v6H38zM62 208h18l2 6H62z" fill="#141414"/>
+      <h2 data-i18n="dc.h">Dress code</h2><hr class="rule">
+      <p data-i18n="dc.tie" class="tie">Black tie</p>
+      <ul class="dress-styles"><li><svg viewBox="10 -4 100 224" aria-hidden="true"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M41 104l2 104h14l3-72 3 72h14l2-104z" fill="#141414"/><path d="M40 208h18v6H38zM62 208h18l2 6H62z" fill="#141414"/>
 <path d="M38 46l-9 60c0 5 8 6 9 1l8-52zM82 46l9 60c0 5-8 6-9 1l-8-52z" fill="#141414"/>
 <path d="M38 46c6-5 14-7 22-7s16 2 22 7l3 62H35z" fill="#141414"/>
 <path d="M52 40l8 34 8-34z" fill="#fbfaf6"/>
-<path d="M60 46l-8-4v9zM60 46l8-4v9z" fill="#141414" stroke-width="1.2"/><path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.500" ry="13" fill="#fbfaf6"/><path d="M49.500 20c-1-12 6-16 11-16s12 4 10 16c-4-5-9-7-13-6-3 1-6 3-8 6z" fill="#141414"/></g></svg><b>Classic tuxedo</b><span>Black jacket, black bow tie</span></li><li><svg viewBox="10 -4 100 224" role="img" aria-label="Sketch: ivory dinner jacket"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M41 104l2 104h14l3-72 3 72h14l2-104z" fill="#141414"/><path d="M40 208h18v6H38zM62 208h18l2 6H62z" fill="#141414"/>
-<path d="M38 46l-9 60c0 5 8 6 9 1l8-52zM82 46l9 60c0 5-8 6-9 1l-8-52z" fill="#fbfaf6"/>
-<path d="M38 46c6-5 14-7 22-7s16 2 22 7l3 62H35z" fill="#fbfaf6"/>
-<path d="M52 40l8 34 8-34z" fill="#fbfaf6"/><path d="M52 42l-4 14 12 22M68 42l4 14-12 22M60 78v28" fill="none" stroke-width="1.5"/><circle cx="60" cy="88" r="1.3" fill="#141414" stroke="none"/>
-<path d="M60 46l-8-4v9zM60 46l8-4v9z" fill="#141414" stroke-width="1.2"/><path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.500" ry="13" fill="#fbfaf6"/><path d="M49.500 20c-1-12 6-16 11-16s12 4 10 16c-4-5-9-7-13-6-3 1-6 3-8 6z" fill="#141414"/></g></svg><b>Ivory dinner jacket</b><span>With black trousers</span></li><li><svg viewBox="10 -4 100 224" role="img" aria-label="Sketch: floor-length gown"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M46 86c-9 40-20 88-25 122 27 7 51 7 78 0-5-34-16-82-25-122z" fill="#141414"/>
+<path d="M60 46l-8-4v9zM60 46l8-4v9z" fill="#141414" stroke-width="1.2"/><path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.500" ry="13" fill="#fbfaf6"/><path d="M49.500 20c-1-12 6-16 11-16s12 4 10 16c-4-5-9-7-13-6-3 1-6 3-8 6z" fill="#141414"/></g></svg><b data-i18n="dc.1">Tuxedo</b><span data-i18n="dc.1s">Black or midnight blue</span></li><li><svg viewBox="10 -4 100 224" aria-hidden="true"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M53 136l-2 66M67 136l2 66" fill="none" stroke-width="5"/><path d="M44 206h10l-2-8zM66 198l-2 8h12z" fill="#141414"/>
+<path d="M46 86c-5 18-9 36-10 54 16 5 32 5 48 0-1-18-5-36-10-54z" fill="#cfcec9"/>
+<path d="M45 48c-5 3-7 8-8 14l-5 40c0 4 6 5 7 1l8-40zM75 48c5 3 7 8 8 14l5 40c0 4-6 5-7 1l-8-40z" fill="#fbfaf6"/>
+<path d="M46 52c4 3 9 4 14 4s10-1 14-4l1 36H45z" fill="#cfcec9"/><path d="M48 52l-2-10M72 52l2-10" fill="none"/>
+<path d="M45 86h30" fill="none" stroke-width="3"/>
+<path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.5" ry="13" fill="#fbfaf6"/>
+<path d="M49 30c-3-12-1-22 4-25 4-3 10-3 14 0 5 3 7 13 4 25-1-8-3-14-6-17-3 2-8 2-11 0-3 3-4 9-5 17z" fill="#141414"/>
+</g></svg><b data-i18n="dc.2">Cocktail dress</b><span data-i18n="dc.2s">Sleek, in a formal fabric</span></li><li><svg viewBox="10 -4 100 224" aria-hidden="true"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M46 86c-9 40-20 88-25 122 27 7 51 7 78 0-5-34-16-82-25-122z" fill="#141414"/>
 <path d="M45 48c-5 3-7 8-8 14l-5 40c0 4 6 5 7 1l8-40zM75 48c5 3 7 8 8 14l5 40c0 4-6 5-7 1l-8-40z" fill="#fbfaf6"/>
 <path d="M46 52c4 3 9 4 14 4s10-1 14-4l1 36H45z" fill="#141414"/><path d="M48 52l-2-10M72 52l2-10" fill="none"/>
-<path d="M30 200c20 6 40 6 60 0" fill="none" stroke="#fbfaf6" stroke-width="1.2"/><path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.500" ry="13" fill="#fbfaf6"/><path d="M49.500 24c-2-13 5-19 11-19s12 6 10 19c-3-6-8-9-12-9s-7 3-9 9z" fill="#141414"/><circle cx="60" cy="4" r="5" fill="#141414"/></g></svg><b>Floor-length gown</b><span>Any colour you love</span></li><li><svg viewBox="10 -4 100 224" role="img" aria-label="Sketch: formal jumpsuit"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M45 100l-9 108h20l4-76 4 76h20l-9-108z" fill="#cfcec9"/><path d="M38 208h20v6H36zM62 208h20l2 6H62z" fill="#141414"/>
+<path d="M30 200c20 6 40 6 60 0" fill="none" stroke="#fbfaf6" stroke-width="1.2"/><path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.500" ry="13" fill="#fbfaf6"/><path d="M49.500 24c-2-13 5-19 11-19s12 6 10 19c-3-6-8-9-12-9s-7 3-9 9z" fill="#141414"/><circle cx="60" cy="4" r="5" fill="#141414"/></g></svg><b data-i18n="dc.3">Floor-length gown</b><span data-i18n="dc.3s">Silk, velvet, chiffon or satin</span></li><li><svg viewBox="10 -4 100 224" aria-hidden="true"><g stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M45 100l-9 108h20l4-76 4 76h20l-9-108z" fill="#cfcec9"/><path d="M38 208h20v6H36zM62 208h20l2 6H62z" fill="#141414"/>
 <path d="M45 46c-5 3-7 8-8 14l-5 42c0 4 6 5 7 1l8-42zM75 46c5 3 7 8 8 14l5 42c0 4-6 5-7 1l-8-42z" fill="#fbfaf6"/>
 <path d="M45 46c5-3 10-4 15-4s10 1 15 4l1 56H44z" fill="#cfcec9"/><path d="M50 43l10 26 10-26" fill="#fbfaf6"/>
-<path d="M44 96h32v8H44z" fill="#141414"/><path d="M60 104v30" fill="none" stroke-width="1.4"/><path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.500" ry="13" fill="#fbfaf6"/><path d="M49 44c-3-14-3-26 0-32 3-6 8-8 11-8s8 2 11 8c3 6 3 18 0 32l-4-2c1-8 1-16-1-22-3-4-9-4-12 0-2 6-2 14-1 22z" fill="#cfcec9"/></g></svg><b>Formal jumpsuit</b><span>Or elegant separates</span></li></ul>
-      <em>Any of these is perfect. We can't wait to celebrate with you.</em>
+<path d="M44 96h32v8H44z" fill="#141414"/><path d="M60 104v30" fill="none" stroke-width="1.4"/><path d="M56 34v8h8v-8" fill="#fbfaf6"/><ellipse cx="60" cy="22" rx="10.500" ry="13" fill="#fbfaf6"/><path d="M49 44c-3-14-3-26 0-32 3-6 8-8 11-8s8 2 11 8c3 6 3 18 0 32l-4-2c1-8 1-16-1-22-3-4-9-4-12 0-2 6-2 14-1 22z" fill="#cfcec9"/></g></svg><b data-i18n="dc.4">Evening jumpsuit</b><span data-i18n="dc.4s">Or a dinner suit</span></li></ul>
+      <div class="dress-notes"><div><h3 data-i18n="dm.h">For men</h3><dl><dt data-i18n="dm.1">Jacket</dt><dd data-i18n="dm.d1">A black or midnight blue dinner jacket (tuxedo) with satin or grosgrain lapels, shawl or peak.</dd><dt data-i18n="dm.2">Trousers</dt><dd data-i18n="dm.d2">Matching black or midnight blue trousers with a satin or grosgrain stripe down the outer leg seam, no cuffs.</dd><dt data-i18n="dm.3">Shirt</dt><dd data-i18n="dm.d3">A crisp white formal dress shirt with French cuffs and a bib, Marcella or hidden-placket front, worn with cufflinks and black studs.</dd><dt data-i18n="dm.4">Neckwear</dt><dd data-i18n="dm.d4">A black silk or satin bow tie, preferably self-tied.</dd><dt data-i18n="dm.5">Waist</dt><dd data-i18n="dm.d5">A black satin cummerbund (pleats facing up) or a low-cut evening waistcoat.</dd><dt data-i18n="d.foot">Footwear</dt><dd data-i18n="dm.d6">Polished black patent leather Oxfords or court pumps, with over-the-calf black silk socks.</dd><dt class="avoid" data-i18n="d.avoid">Please avoid</dt><dd class="avoid" data-i18n="dm.d7">Business suits, regular neckties, belts, brown shoes, and coloured or patterned shirts.</dd></dl></div><div><h3 data-i18n="dw.h">For women</h3><dl><dt data-i18n="dw.1">Attire</dt><dd data-i18n="dw.d1">A floor-length evening gown or a sleek, luxe cocktail dress in a formal fabric such as silk, velvet, chiffon or satin. Tailored evening jumpsuits and dinner suits are also welcome.</dd><dt data-i18n="dw.2">Accessories</dt><dd data-i18n="dw.d2">Refined jewelry and a chic clutch or small evening bag.</dd><dt data-i18n="d.foot">Footwear</dt><dd data-i18n="dw.d3">Dressy heels or polished formal flats suited to the venue terrain.</dd><dt class="avoid" data-i18n="d.avoid">Please avoid</dt><dd class="avoid" data-i18n="dw.d4">Casual sundresses, oversized daytime bags and casual footwear.</dd></dl></div></div>
+      <em data-i18n="dc.note">We can't wait to celebrate with you.</em>
     </section>
 
     <section class="card std reveal" id="photos">
       <div class="vert">
         <div class="big" aria-label="Save the date">Save<i>the</i>Date</div>
-        <div class="small">Leo &amp; Vanessa &nbsp;|&nbsp; 10.10.2027</div>
+        <div class="small">Leomar &amp; Vanessa &nbsp;|&nbsp; 10.10.2027</div>
       </div>
-      <div class="std-ph" role="img" aria-label="Placeholder for the save-the-date photo">
+      <div data-i18n-aria="a.stdph" class="std-ph" role="img" aria-label="Placeholder for the save-the-date photo">
         <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="12" width="38" height="27" rx="2"/><path d="M17 12l3-5h8l3 5"/><circle cx="24" cy="25" r="7.500"/></svg>
-        <b>Save-the-date photo</b><span>Coming soon</span>
+        <b data-i18n="s.ph">Save-the-date photo</b><span data-i18n="s.soon">Coming soon</span>
       </div>
     </section>
 
     <section class="card reveal" id="registry">
-      <h2>Registry</h2><hr class="rule">
-      <p class="muted" style="max-width:56ch;margin:0 auto 30px">Your presence is the gift. If you'd like to give something more, here are a few ideas.</p>
+      <h2 data-i18n="g.h">Registry</h2><hr class="rule">
+      <p data-i18n="g.p" class="muted" style="max-width:56ch;margin:0 auto 30px">Your presence is the gift. If you'd like to give something more, here are a few ideas.</p>
       <div class="reg">
-        <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30l36-14-6 22-14-4-6 8-2-10z"/></svg><h3>Honeymoon</h3><p>Help send us somewhere new.</p><span class="soon">Link coming soon</span></div>
-        <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22L24 8l18 14M10 20v22h28V20M20 42V30h8v12"/></svg><h3>Our first home</h3><p>Help us fill our walls and kitchen.</p><span class="soon">Link coming soon</span></div>
-        <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 16h32l-3 24H11zM17 16a7 7 0 0 1 14 0"/></svg><h3>Registry store</h3><p>A short list of things we'll use every day.</p><span class="soon">Link coming soon</span></div>
+        <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30l36-14-6 22-14-4-6 8-2-10z"/></svg><h3 data-i18n="g.1">Honeymoon</h3><p data-i18n="g.1s">Help send us somewhere new.</p><span data-i18n="g.soon" class="soon">Link coming soon</span></div>
+        <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22L24 8l18 14M10 20v22h28V20M20 42V30h8v12"/></svg><h3 data-i18n="g.2">Our first home</h3><p data-i18n="g.2s">Help us fill our walls and kitchen.</p><span data-i18n="g.soon" class="soon">Link coming soon</span></div>
+        <div><svg viewBox="0 0 48 48" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 16h32l-3 24H11zM17 16a7 7 0 0 1 14 0"/></svg><h3 data-i18n="g.3">Registry store</h3><p data-i18n="g.3s">A short list of things we'll use every day.</p><span data-i18n="g.soon" class="soon">Link coming soon</span></div>
       </div>
     </section>
     <figure class="card plate-card reveal">
-      <svg viewBox="0 0 800 500" role="img" aria-label="Illustration: a corner mailbox on a brownstone street with a sealed reply envelope in the slot and a pigeon keeping watch"><g class="ink-l" filter="url(#ink)">
+      <svg data-i18n-aria="a.mail" viewBox="0 0 800 500" role="img" aria-label="Illustration: a corner mailbox on a brownstone street with a sealed reply envelope in the slot and a pigeon keeping watch"><g class="ink-l" filter="url(#ink)">
 <rect width="800" height="500" fill="#fbfaf6"/>
 <g stroke="#141414" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
 <path d="M0 30h800" fill="none" stroke-width="1.4"/><rect x="-5" y="330" width="810" height="72" fill="#fbfaf6"/>
@@ -1046,31 +1077,31 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
 <use href="#pgc-wash" transform="translate(790 322) scale(-.42 .42)"/>
 <path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(372 444) rotate(50)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(25 454) rotate(323)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(274 487) rotate(252)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(308 469) rotate(163)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(341 429) rotate(18)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(405 486) rotate(213)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#d4d4d4" stroke="none" stroke-width="1.1" transform="translate(312 473) rotate(37)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(176 433) rotate(285)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#d4d4d4" stroke="none" stroke-width="1.1" transform="translate(607 485) rotate(143)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#d4d4d4" stroke="none" stroke-width="1.1" transform="translate(635 431) rotate(319)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(62 445) rotate(177)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#b4b4b4" stroke="none" stroke-width="1.1" transform="translate(200 472) rotate(306)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(23 474) rotate(71)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(271 484) rotate(48)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(401 460) rotate(194)"/><path d="M0 0c5-7 14-7 17 0-3 7-12 7-17 0z" fill="#c8c8c8" stroke="none" stroke-width="1.1" transform="translate(339 446) rotate(230)"/>
 </g></svg>
-      <figcaption><b>&ldquo;The Reply&rdquo;</b><span>Kindly respond by September 1. The pigeons are watching.</span></figcaption>
+      <figcaption><b data-i18n="p2.t">&ldquo;The Reply&rdquo;</b><span data-i18n="p2.s">Kindly respond by September 1. The pigeons are watching.</span></figcaption>
     </figure>
   </div>
   <section class="rsvp-split rsvp" id="rsvp">
     <div class="rs-form">
-      <p class="eyebrow">RSVP</p>
-      <h2>Kindly respond</h2><hr class="rule" style="margin-left:0">
-      <p class="muted" id="rsvp-lead">Please reply by <strong>September 1, 2027</strong> so we can save you a seat.</p>
+      <p data-i18n="r.eye" class="eyebrow">RSVP</p>
+      <h2 data-i18n="r.kindly">Kindly respond</h2><hr class="rule" style="margin-left:0">
+      <p data-i18n-html="r.lead" class="muted" id="rsvp-lead">Please reply by <strong>September 1, 2027</strong> so we can save you a seat.</p>
       <form id="rsvp-form" novalidate>
         <div class="fgrid">
-          <div class="fld"><label for="r-name">Full name</label><input id="r-name" type="text" autocomplete="name" required></div>
-          <div class="fld"><label for="r-email">Email</label><input id="r-email" type="email" autocomplete="email" required></div>
+          <div class="fld"><label data-i18n="r.name" for="r-name">Full name</label><input id="r-name" type="text" autocomplete="name" required></div>
+          <div class="fld"><label data-i18n="r.email" for="r-email">Email</label><input id="r-email" type="email" autocomplete="email" required></div>
         </div>
         <fieldset class="fld">
-          <legend>Will you attend?</legend>
+          <legend data-i18n="r.q">Will you attend?</legend>
           <div class="choice">
-            <label><input type="radio" name="att" value="yes" checked><span>Joyfully accepts</span></label>
-            <label><input type="radio" name="att" value="no"><span>Regretfully declines</span></label>
+            <label><input type="radio" name="att" value="yes" checked><span data-i18n="r.yes">Joyfully accepts</span></label>
+            <label><input type="radio" name="att" value="no"><span data-i18n="r.no">Regretfully declines</span></label>
           </div>
         </fieldset>
-        <div class="fld" id="r-guests-wrap"><label for="r-guests">Guests in your party, including you</label>
+        <div class="fld" id="r-guests-wrap"><label data-i18n="r.guests" for="r-guests">Guests in your party, including you</label>
           <select id="r-guests"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
-        <div class="fld"><label for="r-note">Dietary needs or a note for us</label><textarea id="r-note" rows="3"></textarea></div>
-        <p class="ferr" id="r-err" role="alert" hidden>Please add your name and a valid email so we know who replied.</p>
-        <button class="btn" type="submit">Send RSVP</button>
+        <div class="fld"><label data-i18n="r.note" for="r-note">Dietary needs or a note for us</label><textarea id="r-note" rows="3"></textarea></div>
+        <p data-i18n="r.err" class="ferr" id="r-err" role="alert" hidden>Please add your name and a valid email so we know who replied.</p>
+        <button data-i18n="r.send" class="btn" type="submit">Send RSVP</button>
       </form>
       <div class="thanks" id="r-thanks" hidden><h3 id="r-thanks-h">Thank you.</h3><p class="muted" id="r-thanks-p"></p></div>
     </div>
@@ -1079,10 +1110,10 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
 </main>
 
 <footer>
-  <div class="logo big" role="img" aria-label="V and L"><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span><span class="mk">V<i>&amp;</i>L</span><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span></div>
-  <p class="names2" style="margin-top:26px">Leo <i>&amp;</i> Vanessa</p>
-  <p class="caps">October 10, 2027 &nbsp;·&nbsp; Brooklyn, New York</p>
-  <p class="caps">Questions? <a href="mailto:hello@leoandvanessa.example">hello@leoandvanessa.example</a></p>
+  <div class="logo big" role="img" aria-label="L and V"><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span><span class="mk">L<i>&amp;</i>V</span><span class="orn"><svg viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M6 1l5 7-5 7-5-7z"/><path d="M6 5l2 3-2 3-2-3z" fill="currentColor" stroke="none"/></svg></span></div>
+  <p class="names2" style="margin-top:26px">Leomar <i>&amp;</i> Vanessa</p>
+  <p data-i18n-html="e.date" class="caps">October 10, 2027 &nbsp;·&nbsp; Brooklyn, New York</p>
+  <p class="caps"><span data-i18n="f.q">Questions?</span> <a href="mailto:hello@leoandvanessa.example">hello@leoandvanessa.example</a></p>
 </footer>
 
 <button class="music" id="music" type="button" aria-pressed="false" aria-label="Play our song">
@@ -1104,10 +1135,33 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
     </g>
   </svg>
 </div>
-<button class="totop" id="totop" type="button" aria-label="Back to the top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3 8l5-5 5 5"/></svg></button>
+<button data-i18n-aria="a.top" class="totop" id="totop" type="button" aria-label="Back to the top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3 8l5-5 5 5"/></svg></button>
 
 <script>
 (function () {
+  // languages: English lives in the page; Spanish and Portuguese come from this dictionary
+  var I18N = {"es":{"a.invite":"Invitaci\u00f3n de boda","e.fam":"Junto a sus familias","e.date":"10 de octubre de 2027 &nbsp;\u00b7&nbsp; Brooklyn, Nueva York","a.seal":"Introduce la contrase\u00f1a y abre la invitaci\u00f3n","e.hint":"Introduce la contrase\u00f1a para abrir","e.ph":"Contrase\u00f1a","e.open":"Abrir","e.err":"No es correcta. Revisa tu invitaci\u00f3n e int\u00e9ntalo de nuevo.","a.sections":"Secciones","n.home":"Inicio","n.story":"Nuestra historia","n.day":"El d\u00eda","n.sched":"Programa","n.photos":"Fotos","n.reg":"Regalos","n.rsvp":"Confirmar","h.issue":"La edici\u00f3n de la boda","h.lede":"Junto a sus familias, Leomar <i>y</i> Vanessa les invitan a celebrar su boda.","h.when":"Domingo, 10 de octubre de 2027 &middot; 4:00 p. m.","a.down":"Bajar","h.mdate":"10 oct. 2027","h.of":"La boda de","a.cover":"Ilustraci\u00f3n: Leomar y Vanessa, de esmoquin y vestido de novia blanco, tomados de la mano sobre los adoquines de Washington Street en Dumbo, con el puente de Manhattan detr\u00e1s","d.dow":"Domingo","d.date":"10 de octubre de 2027","d.time":"A las cuatro de la tarde","d.venue":"Ver el lugar","u.where":"D\u00f3nde celebramos","a.dumbo":"Dibujo de Dumbo, Brooklyn: los adoquines de Washington Street, almacenes de ladrillo con escaleras de incendios y el puente de Manhattan enmarcando el Empire State","u.lead":"Dumbo: \u00abDown Under the Manhattan Bridge Overpass\u00bb, bajo el puente de Manhattan.","u.body":"Calles adoquinadas, almacenes de ladrillo con sus escaleras de incendios y el puente enmarcando el Empire State al final de Washington Street. Celestine est\u00e1 justo sobre el agua, bajo el puente de Manhattan.","a.trains":"Paradas de metro cercanas","a.count":"Cuenta regresiva","c.h":"Cuenta regresiva","c.d":"D\u00edas","c.hh":"Horas","c.m":"Minutos","c.s":"Segundos","c.today":"\u00a1Es hoy!","c.married":"Casados. Gracias.","c.cal":"A\u00f1adir a mi calendario","a.train":"Ilustraci\u00f3n: por la ventana de un tren R que sale de Bay Ridge, una novia y un novio sentados muy juntos mientras los dem\u00e1s pasajeros leen y miran hacia otro lado","p1.t":"\u00abPr\u00f3xima parada: juntos para siempre\u00bb","p1.s":"El tren R desde Bay Ridge Av, vestidos para la ocasi\u00f3n","p1.sign":"PR\u00d3XIMA PARADA \u25b8 JUNTOS PARA SIEMPRE","a.photo":"Leomar y Vanessa, muy juntos","w.eye":"Bienvenidos","w.h":"Tenemos muchas ganas de celebrar con ustedes.","w.p1":"Nos conocimos en Nueva York: dos personas, dos familias y dos pa\u00edses que llevamos en el coraz\u00f3n. En una ciudad de millones, nuestros caminos se cruzaron, y lo que empez\u00f3 all\u00ed se ha convertido en una hermosa historia que escribimos juntos.","w.p2":"Ahora nuestras familias tambi\u00e9n se unen. Acomp\u00e1\u00f1ennos en una noche de amor, risas y m\u00fasica en Dumbo.","a.sign":"Leomar y Vanessa","t.eye":"Domingo, 10 de octubre de 2027","t.h":"La celebraci\u00f3n","t.1":"Bienvenida","t.2":"Ceremonia","t.3":"C\u00f3ctel","t.4":"Cena","t.5":"Pastel y brindis","t.6":"Baile","tm.330":"3:30 p. m.","tm.400":"4:00 p. m.","tm.500":"5:00 p. m.","tm.630":"6:30 p. m.","tm.800":"8:00 p. m.","tm.830":"8:30 p. m.","r.kindly":"Confirma tu asistencia","dc.h":"C\u00f3digo de vestimenta","dc.tie":"Etiqueta (black tie)","dc.1":"Esmoquin","dc.1s":"Negro o azul medianoche","dc.2":"Vestido de c\u00f3ctel","dc.2s":"Elegante, en tela formal","dc.3":"Vestido largo","dc.3s":"Seda, terciopelo, gasa o sat\u00e9n","dc.4":"Enterizo de noche","dc.4s":"O un traje de gala","dc.note":"Tenemos muchas ganas de celebrar con ustedes.","a.stdph":"Espacio reservado para la foto de \u00abSave the Date\u00bb","s.ph":"Foto de \u00abSave the Date\u00bb","s.soon":"Pr\u00f3ximamente","g.h":"Mesa de regalos","g.p":"Su presencia es nuestro mejor regalo. Si desean regalarnos algo m\u00e1s, aqu\u00ed van algunas ideas.","g.1":"Luna de miel","g.1s":"Ay\u00fadennos a viajar a un lugar nuevo.","g.2":"Nuestro primer hogar","g.2s":"Ay\u00fadennos a llenar nuestras paredes y nuestra cocina.","g.3":"Tienda de regalos","g.3s":"Una lista corta de cosas que usaremos todos los d\u00edas.","g.soon":"Enlace pr\u00f3ximamente","a.mail":"Ilustraci\u00f3n: un buz\u00f3n en la esquina de una calle de casas de piedra rojiza, con un sobre de respuesta sellado en la ranura y una paloma vigilando","p2.t":"\u00abLa respuesta\u00bb","p2.s":"Confirma antes del 1 de septiembre. Las palomas est\u00e1n vigilando.","r.eye":"Confirmaci\u00f3n","r.lead":"Por favor, responde antes del <strong>1 de septiembre de 2027</strong> para reservarte un lugar.","r.name":"Nombre completo","r.email":"Correo electr\u00f3nico","r.q":"\u00bfAsistir\u00e1s?","r.yes":"Acepto con alegr\u00eda","r.no":"No podr\u00e9 asistir","r.guests":"Personas en tu grupo, cont\u00e1ndote a ti","r.note":"Restricciones alimentarias o un mensaje para nosotros","r.err":"Por favor, escribe tu nombre y un correo v\u00e1lido para saber qui\u00e9n respondi\u00f3.","r.send":"Enviar respuesta","f.q":"\u00bfPreguntas?","a.top":"Volver arriba","j.menu":"Men\u00fa","j.close":"Cerrar","j.yes":"\u00a1Qu\u00e9 ganas de verte!","j.no":"Te vamos a extra\u00f1ar.","j.t1":"Gracias, {n}. Recibimos tu respuesta para 1 persona.","j.tn":"Gracias, {n}. Recibimos tu respuesta para {g} personas.","j.t0":"Gracias, {n}. Recibimos tu respuesta.","j.song":"Nuestra canci\u00f3n: Dakiti","j.artist":"Bad Bunny y Jhay Cortez. Melod\u00eda provisional hasta a\u00f1adir la canci\u00f3n.","j.play":"Reproducir nuestra canci\u00f3n","j.pause":"Pausar nuestra canci\u00f3n","dm.h":"Para ellos","dm.1":"Chaqueta","dm.d1":"Esmoquin negro o azul medianoche con solapas de sat\u00e9n o grosgrain, de chal o de pico.","dm.2":"Pantal\u00f3n","dm.d2":"A juego, negro o azul medianoche, con una franja de sat\u00e9n o grosgrain en la costura exterior, sin dobladillo vuelto.","dm.3":"Camisa","dm.d3":"Camisa blanca de vestir con pu\u00f1os franceses y pechera plisada, de piqu\u00e9 o con botonadura oculta, con gemelos y botones negros.","dm.4":"Cuello","dm.d4":"Corbat\u00edn negro de seda o sat\u00e9n, preferiblemente anudado a mano.","dm.5":"Cintura","dm.d5":"Faj\u00edn negro de sat\u00e9n (con los pliegues hacia arriba) o chaleco de gala de escote bajo.","d.foot":"Calzado","dm.d6":"Zapatos Oxford de charol negro bien lustrados o zapatillas de gala, con calcetines largos de seda negra.","d.avoid":"Por favor, eviten","dm.d7":"Trajes de oficina, corbatas normales, cinturones, zapatos marrones y camisas de color o estampadas.","dw.h":"Para ellas","dw.1":"Atuendo","dw.d1":"Vestido largo de noche o un vestido de c\u00f3ctel elegante en telas formales como seda, terciopelo, gasa o sat\u00e9n. Tambi\u00e9n son bienvenidos los enterizos de noche entallados y los trajes de gala.","dw.2":"Accesorios","dw.d2":"Joyer\u00eda fina y un clutch o bolso peque\u00f1o de noche.","dw.d3":"Tacones de vestir o zapatos planos formales, adecuados para el terreno del lugar.","dw.d4":"Vestidos veraniegos informales, bolsos grandes de d\u00eda y calzado informal."},"pt":{"a.invite":"Convite de casamento","e.fam":"Juntamente com as suas fam\u00edlias","e.date":"10 de outubro de 2027 &nbsp;\u00b7&nbsp; Brooklyn, Nova Iorque","a.seal":"Introduza a palavra-passe e abra o convite","e.hint":"Introduza a palavra-passe para abrir","e.ph":"Palavra-passe","e.open":"Abrir","e.err":"N\u00e3o est\u00e1 correta. Verifique o seu convite e tente novamente.","a.sections":"Sec\u00e7\u00f5es","n.home":"In\u00edcio","n.story":"A nossa hist\u00f3ria","n.day":"O dia","n.sched":"Programa","n.photos":"Fotos","n.reg":"Presentes","n.rsvp":"Confirmar","h.issue":"A edi\u00e7\u00e3o do casamento","h.lede":"Juntamente com as suas fam\u00edlias, Leomar <i>e</i> Vanessa convidam-vos a celebrar o seu casamento.","h.when":"Domingo, 10 de outubro de 2027 &middot; 16h00","a.down":"Descer","h.mdate":"10 out. 2027","h.of":"O casamento de","a.cover":"Ilustra\u00e7\u00e3o: Leomar e Vanessa, de smoking e vestido de noiva branco, de m\u00e3os dadas na cal\u00e7ada da Washington Street em Dumbo, com a ponte de Manhattan atr\u00e1s","d.dow":"Domingo","d.date":"10 de outubro de 2027","d.time":"\u00c0s quatro da tarde","d.venue":"Ver o local","u.where":"Onde celebramos","a.dumbo":"Desenho de Dumbo, Brooklyn: a cal\u00e7ada da Washington Street, armaz\u00e9ns de tijolo com escadas de inc\u00eandio e a ponte de Manhattan a emoldurar o Empire State","u.lead":"Dumbo: \u00abDown Under the Manhattan Bridge Overpass\u00bb, debaixo da ponte de Manhattan.","u.body":"Ruas de cal\u00e7ada, armaz\u00e9ns de tijolo com as suas escadas de inc\u00eandio e a ponte a emoldurar o Empire State ao fundo da Washington Street. O Celestine fica mesmo junto \u00e0 \u00e1gua, por baixo da ponte de Manhattan.","a.trains":"Esta\u00e7\u00f5es de metro pr\u00f3ximas","a.count":"Contagem decrescente","c.h":"Contagem decrescente","c.d":"Dias","c.hh":"Horas","c.m":"Minutos","c.s":"Segundos","c.today":"\u00c9 hoje!","c.married":"Casados. Obrigado.","c.cal":"Adicionar ao meu calend\u00e1rio","a.train":"Ilustra\u00e7\u00e3o: pela janela de um comboio R vindo de Bay Ridge, uma noiva e um noivo sentados juntinhos enquanto os outros passageiros leem e olham para o lado","p1.t":"\u00abPr\u00f3xima paragem: juntos para sempre\u00bb","p1.s":"O comboio R de Bay Ridge Av, vestidos a rigor","p1.sign":"PR\u00d3XIMA PARAGEM \u25b8 JUNTOS PARA SEMPRE","a.photo":"Leomar e Vanessa, juntinhos","w.eye":"Bem-vindos","w.h":"Mal podemos esperar para celebrar convosco.","w.p1":"Conhecemo-nos em Nova Iorque: duas pessoas, duas fam\u00edlias e dois pa\u00edses que trazemos no cora\u00e7\u00e3o. Numa cidade de milh\u00f5es, os nossos caminhos cruzaram-se, e o que ali come\u00e7ou tornou-se uma bela hist\u00f3ria que escrevemos juntos.","w.p2":"Agora as nossas fam\u00edlias tamb\u00e9m se juntam. Venham passar connosco uma noite de amor, risos e m\u00fasica em Dumbo.","a.sign":"Leomar e Vanessa","t.eye":"Domingo, 10 de outubro de 2027","t.h":"A celebra\u00e7\u00e3o","t.1":"Rece\u00e7\u00e3o","t.2":"Cerim\u00f3nia","t.3":"Cocktail","t.4":"Jantar","t.5":"Bolo e brinde","t.6":"Baile","tm.330":"15h30","tm.400":"16h00","tm.500":"17h00","tm.630":"18h30","tm.800":"20h00","tm.830":"20h30","r.kindly":"Confirme a sua presen\u00e7a","dc.h":"Traje","dc.tie":"Black tie (traje de cerim\u00f3nia)","dc.1":"Smoking","dc.1s":"Preto ou azul-meia-noite","dc.2":"Vestido de cocktail","dc.2s":"Elegante, em tecido formal","dc.3":"Vestido comprido","dc.3s":"Seda, veludo, chiffon ou cetim","dc.4":"Macac\u00e3o de noite","dc.4s":"Ou um fato de cerim\u00f3nia","dc.note":"Mal podemos esperar para celebrar convosco.","a.stdph":"Espa\u00e7o reservado para a foto do \u00abSave the Date\u00bb","s.ph":"Foto do \u00abSave the Date\u00bb","s.soon":"Em breve","g.h":"Lista de presentes","g.p":"A vossa presen\u00e7a \u00e9 o melhor presente. Se quiserem oferecer algo mais, aqui ficam algumas ideias.","g.1":"Lua de mel","g.1s":"Ajudem-nos a viajar para um lugar novo.","g.2":"A nossa primeira casa","g.2s":"Ajudem-nos a encher as nossas paredes e a nossa cozinha.","g.3":"Loja de presentes","g.3s":"Uma pequena lista de coisas que vamos usar todos os dias.","g.soon":"Liga\u00e7\u00e3o em breve","a.mail":"Ilustra\u00e7\u00e3o: um marco de correio numa rua de casas de arenito, com um envelope de resposta selado na ranhura e um pombo de vigia","p2.t":"\u00abA resposta\u00bb","p2.s":"Responda at\u00e9 1 de setembro. Os pombos est\u00e3o a ver.","r.eye":"Confirma\u00e7\u00e3o","r.lead":"Por favor, responda at\u00e9 <strong>1 de setembro de 2027</strong> para lhe guardarmos um lugar.","r.name":"Nome completo","r.email":"Email","r.q":"Vai estar presente?","r.yes":"Aceito com alegria","r.no":"N\u00e3o poderei ir","r.guests":"N\u00famero de pessoas, contando consigo","r.note":"Restri\u00e7\u00f5es alimentares ou uma mensagem para n\u00f3s","r.err":"Por favor, indique o seu nome e um email v\u00e1lido para sabermos quem respondeu.","r.send":"Enviar resposta","f.q":"D\u00favidas?","a.top":"Voltar ao topo","j.menu":"Menu","j.close":"Fechar","j.yes":"Mal podemos esperar por esse dia!","j.no":"Vamos sentir a sua falta.","j.t1":"Obrigado, {n}. Recebemos a sua resposta para 1 pessoa.","j.tn":"Obrigado, {n}. Recebemos a sua resposta para {g} pessoas.","j.t0":"Obrigado, {n}. Recebemos a sua resposta.","j.song":"A nossa m\u00fasica: Dakiti","j.artist":"Bad Bunny e Jhay Cortez. Melodia provis\u00f3ria at\u00e9 adicionarmos a m\u00fasica.","j.play":"Tocar a nossa m\u00fasica","j.pause":"Pausar a nossa m\u00fasica","dm.h":"Para eles","dm.1":"Casaco","dm.d1":"Smoking preto ou azul-meia-noite com lapelas de cetim ou gorgor\u00e3o, de xaile ou de bico.","dm.2":"Cal\u00e7as","dm.d2":"A condizer, pretas ou azul-meia-noite, com uma lista de cetim ou gorgor\u00e3o na costura exterior, sem dobra.","dm.3":"Camisa","dm.d3":"Camisa branca de cerim\u00f3nia com punhos franceses e peitilho, frente em piqu\u00e9 ou carcela escondida, com bot\u00f5es de punho e bot\u00f5es pretos.","dm.4":"Pesco\u00e7o","dm.d4":"La\u00e7o preto de seda ou cetim, de prefer\u00eancia atado \u00e0 m\u00e3o.","dm.5":"Cintura","dm.d5":"Faixa preta de cetim (com as pregas para cima) ou colete de cerim\u00f3nia decotado.","d.foot":"Cal\u00e7ado","dm.d6":"Sapatos Oxford de verniz preto bem engraxados ou sapatos de cerim\u00f3nia, com meias pretas de seda at\u00e9 ao joelho.","d.avoid":"Por favor, evitem","dm.d7":"Fatos de trabalho, gravatas normais, cintos, sapatos castanhos e camisas de cor ou com padr\u00e3o.","dw.h":"Para elas","dw.1":"Traje","dw.d1":"Vestido comprido de noite ou um vestido de cocktail elegante em tecidos formais como seda, veludo, chiffon ou cetim. Macac\u00f5es de noite bem cortados e fatos de cerim\u00f3nia tamb\u00e9m s\u00e3o bem-vindos.","dw.2":"Acess\u00f3rios","dw.d2":"Joias discretas e uma clutch ou pequena mala de noite.","dw.d3":"Saltos elegantes ou sapatos rasos formais, adequados ao piso do local.","dw.d4":"Vestidos de ver\u00e3o informais, malas grandes de dia e cal\u00e7ado informal."},"en":{"j.menu":"Menu","j.close":"Close","j.yes":"We can't wait to see you.","j.no":"We'll miss you.","j.t1":"Thank you, {n}. Your reply is in for 1 guest.","j.tn":"Thank you, {n}. Your reply is in for {g} guests.","j.t0":"Thank you, {n}. Your reply is in.","j.song":"Our song: Dakiti","j.artist":"Bad Bunny & Jhay Cortez. Placeholder tune until the track is added.","j.play":"Play our song","j.pause":"Pause our song"}};
+  var EN = {}, lang = 'en';
+  function q(sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); }
+  q('[data-i18n]', function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
+  q('[data-i18n-html]', function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
+  q('[data-i18n-aria]', function (el) { EN[el.getAttribute('data-i18n-aria')] = el.getAttribute('aria-label'); });
+  q('[data-i18n-ph]', function (el) { EN[el.getAttribute('data-i18n-ph')] = el.getAttribute('placeholder'); });
+  function t(k) { var d = I18N[lang] || {}; return d[k] != null ? d[k] : (EN[k] != null ? EN[k] : I18N.en[k]); }
+  var afterLang = [];
+  function setLang(l, save) {
+    lang = I18N[l] ? l : 'en';
+    document.documentElement.lang = lang;
+    q('[data-i18n]', function (el) { el.textContent = t(el.getAttribute('data-i18n')); if (el.removeAttribute && el.namespaceURI === 'http://www.w3.org/2000/svg') { el.removeAttribute('textLength'); if (el.getComputedTextLength && el.getComputedTextLength() > 396) { el.setAttribute('textLength', '396'); el.setAttribute('lengthAdjust', 'spacingAndGlyphs'); } } });
+    q('[data-i18n-html]', function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+    q('[data-i18n-aria]', function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
+    q('[data-i18n-ph]', function (el) { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
+    q('.lang button', function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang); });
+    afterLang.forEach(function (f) { f(); });
+    if (save) { try { localStorage.setItem('lv-lang', lang); } catch (e) {} }
+  }
+  q('.lang button', function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang'), true); }); });
+
   // countdown to 4:00 pm on October 10, 2027
   var target = new Date(2027, 9, 10, 16, 0, 0).getTime(), mode = null, pad = function (n) { return String(n).padStart(2, '0'); };
   function phase() { var n = new Date(), day = n.getFullYear() * 10000 + (n.getMonth() + 1) * 100 + n.getDate(); return day < 20271010 ? 'count' : day === 20271010 ? 'today' : 'married'; }
@@ -1125,7 +1179,8 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
 
   // small-screen menu
   var bar = document.getElementById('bar'), menu = document.getElementById('menu');
-  function setMenu(open) { bar.classList.toggle('open', open); menu.setAttribute('aria-expanded', open); menu.textContent = open ? 'Close' : 'Menu'; }
+  function setMenu(open) { bar.classList.toggle('open', open); menu.setAttribute('aria-expanded', open); menu.textContent = t(open ? 'j.close' : 'j.menu'); }
+  afterLang.push(function () { menu.textContent = t(bar.classList.contains('open') ? 'j.close' : 'j.menu'); });
   menu.addEventListener('click', function () { setMenu(!bar.classList.contains('open')); });
   document.querySelectorAll('#links a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
@@ -1184,8 +1239,9 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
     document.getElementById('r-err').hidden = !!ok;
     if (!ok) return;
     var yes = rf.elements.att.value === 'yes';
-    document.getElementById('r-thanks-h').textContent = yes ? 'We can\'t wait to see you.' : 'We\'ll miss you.';
-    document.getElementById('r-thanks-p').textContent = 'Thank you, ' + name + '. Your reply is in' + (yes ? ' for ' + document.getElementById('r-guests').value + (document.getElementById('r-guests').value === '1' ? ' guest.' : ' guests.') : '.');
+    document.getElementById('r-thanks-h').textContent = t(yes ? 'j.yes' : 'j.no');
+    var gN = document.getElementById('r-guests').value;
+    document.getElementById('r-thanks-p').textContent = t(!yes ? 'j.t0' : gN === '1' ? 'j.t1' : 'j.tn').replace('{n}', name).replace('{g}', gN);
     var done = false, show = function () { if (done) return; done = true; rf.hidden = true; document.getElementById('rsvp-lead').hidden = true; document.getElementById('r-thanks').hidden = false; };
     var bird = document.getElementById('courier');
     if (!bird || matchMedia('(prefers-reduced-motion: reduce)').matches) { show(); return; }
@@ -1203,7 +1259,8 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
   // With no src, a soft placeholder melody is synthesized so the control works.
   var SONG = { src: '', title: 'Our song: Dakiti', artist: 'Bad Bunny & Jhay Cortez. Placeholder tune until the track is added.' };
   var mBtn = document.getElementById('music'), playing = false, audio = null, actx = null, master = null, timer = null, step = 0;
-  document.getElementById('m-title').textContent = SONG.title; document.getElementById('m-artist').textContent = SONG.artist;
+  function songText() { document.getElementById('m-title').textContent = SONG.src ? SONG.title : t('j.song'); document.getElementById('m-artist').textContent = SONG.src ? SONG.artist : t('j.artist'); mBtn.setAttribute('aria-label', t(playing ? 'j.pause' : 'j.play')); }
+  afterLang.push(songText);
   var NOTES = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880, 698.46, 493.88, 587.33, 783.99, 587.33, 523.25, 659.25, 783.99, 1046.5];
   var BASS = [130.81, 130.81, 174.61, 174.61, 123.47, 123.47, 130.81, 130.81];
   function tone(freq, t, dur, vol, type) {
@@ -1235,7 +1292,7 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
     if (actx) { master.gain.setTargetAtTime(0, actx.currentTime, .15); clearInterval(timer); timer = null; }
     setUI(false);
   }
-  function setUI(on) { playing = on; mBtn.setAttribute('aria-pressed', on); mBtn.setAttribute('aria-label', on ? 'Pause our song' : 'Play our song'); }
+  function setUI(on) { playing = on; mBtn.setAttribute('aria-pressed', on); mBtn.setAttribute('aria-label', t(on ? 'j.pause' : 'j.play')); }
   mBtn.addEventListener('click', function () { if (playing) { stop(); try { sessionStorage.setItem('muted', '1'); } catch (e) {} } else { start(); try { sessionStorage.removeItem('muted'); } catch (e) {} } });
   function autoStart() { var m = false; try { m = sessionStorage.getItem('muted') === '1'; } catch (e) {} if (!m && !reduced) start(); }
 
@@ -1243,6 +1300,10 @@ html.rsvp-sent .hopper { animation: hop .5s ease-in-out 3; }
   var totop = document.getElementById('totop');
   addEventListener('scroll', function () { totop.classList.toggle('show', scrollY > 700); }, { passive: true });
   totop.addEventListener('click', function () { scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
+  var startLang = 'en';
+  try { startLang = localStorage.getItem('lv-lang') || ''; } catch (e) { startLang = ''; }
+  if (!startLang) { var nl = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en']); for (var li = 0; li < nl.length; li++) { var c = String(nl[li]).slice(0, 2).toLowerCase(); if (c === 'es' || c === 'pt' || c === 'en') { startLang = c; break; } } }
+  setLang(startLang || 'en', false);
 })();
 </script>
 </body>
